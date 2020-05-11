@@ -274,5 +274,28 @@ public class DataLoader {
 	public void setBackgroundMap(int[][] backgroundMap) {
 		this.backgroundMap = backgroundMap;
 	}
-	
+
+	public Hashtable<String, FrameImage> getFrameImages() {
+		return frameImages;
+	}
+
+	public void setFrameImages(Hashtable<String, FrameImage> frameImages) {
+		this.frameImages = frameImages;
+	}
+
+	public Hashtable<String, Animation> getAnimations() {
+		return animations;
+	}
+
+	public void setAnimations(Hashtable<String, Animation> animations) {
+		this.animations = animations;
+	}
+
+	public Hashtable<String, AudioClip> getSounds() {
+		return sounds;
+	}
+
+	public void setSounds(Hashtable<String, AudioClip> sounds) {
+		this.sounds = sounds;
+	}
 }

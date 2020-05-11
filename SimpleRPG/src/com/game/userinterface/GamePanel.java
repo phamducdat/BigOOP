@@ -7,6 +7,8 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
+import com.game.gameobject.BackgroundMap;
+import com.game.state.GameState;
 import com.game.state.MenuState;
 import com.game.state.State;
 
@@ -14,7 +16,7 @@ import com.game.state.State;
 // Con ham paint va ham run chua hoan thien
 
 public class GamePanel extends JPanel implements KeyListener, Runnable {
-
+	
 	State gameState;
 	
 	KeyEventManager keyEventManager;
@@ -31,7 +33,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.GRAY);
+		g.setColor(Color.RED);
 		g.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
 	}
 	

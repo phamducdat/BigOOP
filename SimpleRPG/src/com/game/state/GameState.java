@@ -1,14 +1,22 @@
 package com.game.state;
 
 import com.game.gameinteface.GameWorldState;
+import com.game.gameobject.Camera;
+import com.game.gameobject.Hero;
 import com.game.userinterface.GamePanel;
 
 
 public class GameState extends State implements GameWorldState {
-
+	
+	public Hero megaman;
+	public Camera camera;
+	
 	public GameState(GamePanel gamePanel) {
 		super(gamePanel);
-		// TODO Auto-generated constructor stub
+		
+		megaman = new  Hero(0, 0, 0, 0, 0, 0, 0, this);
+		camera = new Camera(0, 0, 0, 0, this);
+		
 	}
 
 	@Override

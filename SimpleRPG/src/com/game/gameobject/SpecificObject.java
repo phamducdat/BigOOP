@@ -7,7 +7,7 @@ import com.game.gameinteface.Profile;
 import com.game.gameinteface.Vulnerable;
 import com.game.state.GameState;
 
-// Status: Con PT isOutOfCameraView va Update
+// Status: Con PT Update
 
 public abstract class SpecificObject extends GameObject implements Profile, Vulnerable  {
 
@@ -43,8 +43,13 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	}
 	
 	public boolean isOutOfCameraView() {
-		// Can Camera
-		return false;
+		if(getPosX() - getGameState().camera.getPosX() > getGameState().camera.getWidth()
+				|| getPosX() - getGameState().camera.getPosX() < -50
+				|| getPosY() - getGameState().camera.getPosY() > getGameState().camera.getHeight()
+				|| getPosY() - getGameState().camera.getPosY() < -50)
+			return true;
+		
+		else return false;
 	}
 	
 	public void beHurt (int damageRecieved) {
