@@ -1,5 +1,7 @@
 package com.game.gameinteface;
 
+import com.game.gameobject.BackgroundMap;
+
 public interface GameWorldState {
 
 	public static final int FINAL_BOSS = 100; 
@@ -15,4 +17,5 @@ public interface GameWorldState {
 	public static final int INTROGAME = 0;
 	public static final int MEET_FINAL_BOSS = 1;
 	
+
 }

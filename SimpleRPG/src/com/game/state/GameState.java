@@ -1,5 +1,8 @@
 package com.game.state;
 
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+
 import com.game.gameinteface.GameWorldState;
 import com.game.gameobject.Camera;
 import com.game.gameobject.Hero;
@@ -10,6 +13,7 @@ public class GameState extends State implements GameWorldState {
 	
 	public Hero megaman;
 	public Camera camera;
+	private BufferedImage bufferedImage;
 	
 	public GameState(GamePanel gamePanel) {
 		super(gamePanel);

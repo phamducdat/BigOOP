@@ -43,6 +43,11 @@ public class DataLoader {
 		return instance;
 	}
 	
+	public Animation getAnimation(String name) {
+		Animation animation = new Animation(instance.animations.get(name));
+		return animation;
+	}
+	
 	public void LoadData() throws IOException {
 		LoadFrame();
 		LoadAnimation();
