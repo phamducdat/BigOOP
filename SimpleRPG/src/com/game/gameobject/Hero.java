@@ -10,8 +10,7 @@ public class Hero extends HumanoidObject{
 	
 	public static final int RUNSPEED = 3;
 	
-	private Animation runForwardAnim, runBackAnim, runShootingForwarAnim, runShootingBackAnim;
-	private Animation idleForwarAnim, idleBackAnim, idleShooting
+
 
 	public Hero(float posX, float posY, float width, float height, float mass, int healthPoint, int manaPoint,
 			GameState gameState) {
