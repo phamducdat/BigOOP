@@ -7,7 +7,7 @@ import com.game.gameinteface.Profile;
 import com.game.gameinteface.Vulnerable;
 import com.game.state.GameState;
 
-// Status: Con PT Update
+// Status: Completed
 
 public abstract class SpecificObject extends GameObject implements Profile, Vulnerable  {
 
