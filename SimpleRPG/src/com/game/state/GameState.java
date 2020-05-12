@@ -8,6 +8,8 @@ import com.game.gameobject.BackgroundMap;
 import com.game.gameobject.Camera;
 import com.game.gameobject.Hero;
 import com.game.gameobject.PhysicalMap;
+import com.game.gameobject.SpecificObject;
+import com.game.objectmanager.SpecificObjectManager;
 import com.game.userinterface.GamePanel;
 
 public class GameState extends State implements GameWorldState {
@@ -18,6 +20,7 @@ public class GameState extends State implements GameWorldState {
 	public PhysicalMap physicalMap;
 	public BackgroundMap backgroundMap;
 	
+	public SpecificObjectManager specificObjectManager;
 	
 	
 	private BufferedImage bufferedImage;
@@ -30,6 +33,8 @@ public class GameState extends State implements GameWorldState {
 		
 		physicalMap = new PhysicalMap(0, 0, this);
 		backgroundMap =  new BackgroundMap(0, 0, this);
+		
+		specificObjectManager = new SpecificObjectManager(this);
 		
 	}
 

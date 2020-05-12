@@ -54,7 +54,6 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	
 	public void beHurt (int damageRecieved) {
 		setHealthPoint(getHealthPoint() - damageRecieved);
-		state = BEHURT;
 	}
 	
 	public Rectangle getBoundForCollisionWithMap() {
@@ -77,7 +76,16 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 		
 		case ALIVE: 
 			
-			// Cho SpecificObjectManager
+			SpecificObject object = getGameState().specificObjectManager.getObjectCollideWithThisObject(this);
+			
+			if(object != null) {
+				
+				if(object.getDamage() > 0) {
+					beHurt(object.getDamage());
+					setState(BEHURT);
+				}
+				
+			}
 			
 			break;
 			
