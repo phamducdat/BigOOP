@@ -70,6 +70,9 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 
 	@Override
 	public void Update() {
+		
+		// Update State cua nhan vat
+		
 		switch(state) {
 		
 		case ALIVE: 

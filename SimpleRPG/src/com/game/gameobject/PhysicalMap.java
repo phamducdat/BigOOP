@@ -29,7 +29,7 @@ public class PhysicalMap extends GameObject {
 	@Override
 	public void draw(Graphics g) {}
 
-	public Rectangle haveCollisionWithLand(Rectangle rect) {
+	public Rectangle haveCollisionWithTop(Rectangle rect) {
 		
 		int x1 = rect.x / tileSize;
 		if(x1 >= 1) x1 -=1;
@@ -56,7 +56,7 @@ public class PhysicalMap extends GameObject {
 		return null;
 	}
 	
-	public Rectangle haveCollisionWithLand1(Rectangle rect) {
+	public Rectangle haveCollisionWithLand(Rectangle rect) {
 		
 		int x1 = rect.x / tileSize;
 		if(x1 >= 1) x1 -= 1;
