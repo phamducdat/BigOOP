@@ -8,6 +8,8 @@ import com.game.state.GameState;
 
 public class Camera extends GameObject{
 
+	// Doi tuong de cac doi tuong khac lay lam he quy chieu de xac dinh vi tri
+	
 	private float width;
 	private float height;
 	
@@ -23,6 +25,8 @@ public class Camera extends GameObject{
 	
 	@Override
 	public void Update() {
+		// Camera se di chuyen theo nhan vat chinh
+		
 		Hero megaman = getGameState().megaman;
 		
 		if(megaman.getPosX() - getPosX() > 400) setPosX(megaman.getPosX() - 400);

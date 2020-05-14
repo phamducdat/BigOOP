@@ -13,13 +13,14 @@ import com.game.state.GameState;
 
 public class SpecificObjectManager {
 
+	// Nguyen tac da hinh Polymophism
 	protected List<SpecificObject> specificObjects;
 	
 	private GameState gameWorld;
 	
 	public SpecificObjectManager(GameState gameWorld) {
 		
-		// LinkedList la kieu danh sach lien ket doi, khong dong bo va la mang tinh
+		// LinkedList la kieu danh sach lien ket doi, khong dong bo
 		// Bat dong bo se nhanh hon dong bo do dong bo can nhieu thao tac voi du lieu
 		// Vi vay, bat dong bo phu hop voi thao tac them, sua, xoa tren du lieu, con dong bo phu voi sap xep, truy cap du lieu
 		
@@ -44,7 +45,7 @@ public class SpecificObjectManager {
 				SpecificObject objectInList = specificObjects.get(i);
 				
 				if(objectInList == object)
-					// Dung dau == la do object la mang tinh nen no duoc luu tren vung nho STACK
+					// Dau == xay ra khi objectInList va object tro den cùng 1 vi tri khi do 2 object trung nhau
 					specificObjects.remove(i);
 				
 			}

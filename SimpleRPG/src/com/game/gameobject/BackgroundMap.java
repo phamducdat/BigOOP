@@ -10,8 +10,9 @@ import com.game.userinterface.GameFrame;
 
 public class BackgroundMap extends GameObject{
 
+	// Ban do duoc luu bang mang 2 chieu
 	private int[][] backgroundMap;
-	private int tileSize;
+	private int tileSize; 			//Kich thuoc 1 o trong ban do
 	
 	public BackgroundMap(float x, float y, GameState gameState) {
 		super(x, y, gameState);
@@ -26,6 +27,8 @@ public class BackgroundMap extends GameObject{
 
 	@Override
 	public void draw(Graphics g) {
+		
+		// Tien hanh ve ban do len man hinh
 		
 		g.drawImage(DataLoader.getInstance().getFrameImages().get("background").getImage(), 0, 0, null);
 		

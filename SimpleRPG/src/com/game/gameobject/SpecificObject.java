@@ -17,12 +17,12 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	
 	private float width;
 	private float height;
-	private float speedX;
-	private float speedY;
-	private float mass;
+	private float speedX;		// Van toc theo phuong ngang
+	private float speedY;		// Van toc theo phuong thang dung
+	private float mass; 		// De tao gia toc huong tam Trai Dat
 	
-	private int healthPoint;;
-	private int manaPoint;
+	private int healthPoint; 	// Mau
+	private int manaPoint;		// Nang luong
 	private int damage;
 	
 	private long beginTimeToNoBeHurt;
@@ -57,6 +57,7 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	}
 	
 	public Rectangle getBoundForCollisionWithMap() {
+		// Lay bien de kiem tra va cham voi ban do vat ly
 		Rectangle rect = new Rectangle();
 		
 		rect.x = (int) (getPosX() - getWidth()/2);
@@ -70,11 +71,12 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	@Override
 	public void Update() {
 		
-		// Update State cua nhan vat
+		// Update trang thai cua nhan vat
 		
 		switch(state) {
 		
 		case ALIVE: 
+			// Trang thai con song
 			
 			SpecificObject object = getGameState().specificObjectManager.getObjectCollideWithThisObject(this);
 			
@@ -90,35 +92,38 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 			break;
 			
 		case BEHURT:
+			// Trang thai bi thuong
 			
 			if(beHurtBackward == null) {
+				// Nhan vat khong co hoat anh bi thuong
 				state = CANTBEHURT;
 				beginTimeToNoBeHurt = System.nanoTime();
 				if(getHealthPoint() == 0) {
 					state = FEY;
 				}
 			} else {
+				// Neu co thi cho chay Animation bi thuong
 				beHurtForward.Update(System.nanoTime());
 				if(beHurtForward.isLastFrame()) {
 					beHurtForward.reset();
 					state = CANTBEHURT;
-					if(getHealthPoint() == 0) {
+					if(getHealthPoint() == 0) 
 						state = FEY;
-						beginTimeToNoBeHurt = System.nanoTime();
-					}
+					beginTimeToNoBeHurt = System.nanoTime();
+
 				}
 			}
 			
 			break;
 			
 		case FEY:
-			
+			// Trang thai hap hoi
 			state = DEATH;
 			
 			break;
 			
 		case CANTBEHURT:
-			
+			// Trang thai khong the bi thuong
 			if(System.nanoTime() - beginTimeToNoBeHurt > timeForNoBeHurt) {
 				state = ALIVE;
 			}
@@ -126,6 +131,7 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 			break;
 			
 		case DEATH:
+			// Trang thai chet
 			break;
 		
 		}
