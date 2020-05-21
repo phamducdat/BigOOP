@@ -1,5 +1,5 @@
 package com.game.gameobject;
-
+//thieu yellow bullet nen phan attack t comment lai
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
