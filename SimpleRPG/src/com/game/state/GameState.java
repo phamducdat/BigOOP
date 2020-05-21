@@ -33,7 +33,7 @@ public class GameState extends State implements GameWorldState {
 	public GameState(GamePanel gamePanel) {
 		super(gamePanel);
 		
-		megaman = new  Hero(0, 0, 0, 0, 0, 0, 0, this);
+		megaman = new  Hero(0, 0, this);
 		camera = new Camera(0, 0, 0, 0, this);
 		
 		physicalMap = new PhysicalMap(0, 0, this);

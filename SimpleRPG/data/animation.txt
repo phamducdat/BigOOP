@@ -11,7 +11,7 @@ run1 100000000 run2 100000000 run3 100000000 run4 100000000 run5 100000000 run6 
 runshoot
 runshoot1 1 runshoot2 1 runshoot3 1 runshoot4 1 runshoot5 5 runshoot6 1 runshoot7 1 runshoot8 1 runshoot9 1 runshoot10 1
 
-dick
+kneel
 dick1 70000000 dick3 70000000 dick4 70000000 dick3 70000000 dick1 1500000000
 
 flyingup

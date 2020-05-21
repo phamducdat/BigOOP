@@ -12,8 +12,9 @@ import com.game.state.GameState;
 
 public class PhysicalMap extends GameObject {
 
+	// Ban do duoc the hien bang mang 2 chieu
 	private int[][] physicalMap;
-	private int tileSize;
+	private int tileSize; 		// Kich thuoc 1 o tren ban do
 	
 	public PhysicalMap(float x, float y, GameState gameState) {
 		super(x, y, gameState);
@@ -29,7 +30,10 @@ public class PhysicalMap extends GameObject {
 	@Override
 	public void draw(Graphics g) {}
 
+	// 4 Phuong thuc de kiem tra va cham cua mo su vat voi ban do vat ly
+	
 	public Rectangle haveCollisionWithTop(Rectangle rect) {
+		
 		
 		int x1 = rect.x / tileSize;
 		if(x1 >= 1) x1 -=1;

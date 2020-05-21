@@ -29,6 +29,7 @@ public abstract class HumanoidObject extends SpecificObject implements Actable{
 		
 		super.Update();
 		
+		// Chi Update nhan vat trong tuong tac voi ban do vat ly khi nhan vat o trang thai ALIVE hoac CANTBEHURT
 		if(getState() == ALIVE || getState() == CANTBEHURT) {
 			
 			if(!isLanding) {
@@ -52,27 +53,29 @@ public abstract class HumanoidObject extends SpecificObject implements Actable{
 				
 				// Kiem tra va cham voi mat dat va tran nha dong thoi cai dat vi tri theo phuong thang dung
 				
-				Rectangle futureBound =  getBoundForCollisionWithMap();
 				
+				Rectangle futureBound =  getBoundForCollisionWithMap();
 				futureBound.y += (getSpeedY() == 0)? 2 : getSpeedY();
+				// Kiem tra va cham theo phuong thang dung trong tuong lai de dung nhan vat lai truoc
+				//==> Tranh tinh trang nhan vat bi giat khi tiep xuc voi dat
 				
 				Rectangle rectLand = getGameState().physicalMap.haveCollisionWithLand(futureBound);
 				Rectangle rectTop = getGameState().physicalMap.haveCollisionWithTop(rectLand);
 				
 				if(rectLand != null) {
-					
+					// Nhan vat cham dat
 					setJumping(false);
 					if(getSpeedY() != 0) setLanding(true);
 					setSpeedY(0);
 					setPosY(rectLand.y - getHeight() / 2);
 					
 				}else if(rectTop != null) {
-					
+					// Nhan vat cham tran
 					setSpeedY(0);
 					setPosY(rectTop.y + rectTop.height + getHeight() / 2); 
 					
 				}else {
-					
+					// Neu khong bi can boi tran va dat
 					setJumping(true);
 					setSpeedY(getSpeedY() + getMass());
 					setPosY(getPosY() + getSpeedY());

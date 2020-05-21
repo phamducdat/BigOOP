@@ -5,12 +5,15 @@ import com.game.state.GameState;
 
 // Status: Completed
 
+// Class chunh nhat cho moi doi tuong trong Game de ke thua
+
 public abstract class GameObject implements Changeable {
 
+	
 	private float posX;
 	private float posY;
 	
-	GameState gameState;
+	GameState gameState;	// Dong vai tro nhu con tro tro ve khong gian cua no
 	
 	public GameObject() {
 		posX = 0;
