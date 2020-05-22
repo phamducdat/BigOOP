@@ -1,5 +1,5 @@
 
-134
+176
 
 idle1
 image data/megasprite.png
@@ -975,6 +975,140 @@ x 35
 y 1388
 w 30
 h 30
+
+
+boss_transfiguration1
+image data/enemysprite2.png
+x 255
+y 489
+w 108
+h 148
+
+boss_transfiguration2
+image data/enemysprite2.png
+x 366
+y 489
+w 96
+h 156
+
+boss_transfiguration3
+image data/enemysprite2.png
+x 471
+y 489
+w 116
+h 147
+
+boss_transfiguration4
+image data/enemysprite2.png
+x 594
+y 464
+w 100
+h 148
+
+boss_transfiguration5
+image data/enemysprite2.png
+x 698
+y 473
+w 85
+h 164
+
+boss_transfiguration6
+image data/enemysprite2.png
+x 791
+y 500
+w 155
+h 134
+
+boss_ready1
+image data/enemysprite2.png
+x 511
+y 765
+w 110
+h 115
+
+boss_ready2
+image data/enemysprite2.png
+x 633
+y 765
+w 101
+h 138
+
+
+boss_ultifirst1
+image data/enemysprite2.png
+x 182
+y 276
+w 138
+h 155
+
+boss_ultifirst2
+image data/enemysprite2.png
+x 323
+y 285
+w 141
+h 162
+
+boss_ultifirst3
+image data/enemysprite2.png
+x 486
+y 301
+w 100
+h 147
+
+boss_ultifirst4
+image data/enemysprite2.png
+x 604
+y 280
+w 107
+h 176
+
+boss_ultifirst5
+image data/enemysprite2.png
+x 720
+y 273
+w 125
+h 192
+
+boss_utillast6
+image data/enemysprite2.png
+x 855
+y 307
+w 135
+h 155
+
+
+
+boss_bullet1
+image data/megasprite.png
+x 7
+y 1252
+w 61
+h 66
+
+boss_bullet2
+image data/megasprite.png
+x 71
+y 1246
+w 131
+h 90
+
+boss_bullet3
+image data/megasprite.png
+x 204
+y 1246
+w 139
+h 81
+
+boss_bullet4
+image data/megasprite.png
+x 348
+y 1258
+w 135
+h 70
+
+
+
+
 
 gamewin
 image data/textgame.png
