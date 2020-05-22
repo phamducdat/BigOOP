@@ -7,6 +7,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+
 // Status: Completed
 
 public class Animation {
@@ -165,6 +166,30 @@ public class Animation {
 			frameImages.get(i).setImage(image);
 			
 		}
+	}
+	
+	public void reverse() {
+
+		ArrayList<FrameImage> a = new ArrayList<FrameImage>();
+
+		for (int i = frameImages.size() - 1; i >= 0; i--) {
+			a.add(new FrameImage(frameImages.get(i)));
+		}
+
+		for (int i = 0; i < frameImages.size(); i++) {
+			BufferedImage image = a.get(i).getImage();
+			frameImages.get(i).setImage(image);
+		}
+
+	}
+	
+	public long time() {
+		long a = 0;
+		for (int i = 0; i < delayTimes.size(); i++) {
+			a = (long) (a + delayTimes.get(i));
+		}
+		a = (a-1000)/1000000;
+		return a;
 	}
 	
 	public void draw(Graphics g, int x, int y) {

@@ -1,4 +1,4 @@
-27
+32
 idle
 idle1 70000000 idle2 70000000 idle3 70000000 idle2 70000000 idle1 1500000000
 
@@ -80,3 +80,18 @@ boss_shooting1 500000000 boss_shooting2 500000000
 
 boss_slide
 boss_slide1 500000000 boss_slide2 500000000 boss_slide3 500000000 boss_slide4 500000000 
+
+boss_ready
+boss_ready1 300000000 boss_ready2 300000000
+
+boss_ultifirst
+boss_ultifirst1 50000000 boss_ultifirst2 50000000 boss_ultifirst3 50000000 boss_ultifirst4 50000000 boss_ultifirst5 50000000
+
+boss_ultilast
+boss_utillast6 2000
+
+boss_bullet
+boss_bullet1 500000000 boss_bullet2 500000000 boss_bullet3 500000000 boss_bullet4 500000000
+
+boss_transfiguration
+boss_transfiguration1 100000000 boss_transfiguration2 100000000 boss_transfiguration3 100000000 boss_transfiguration4 100000000 boss_transfiguration5 100000000 boss_transfiguration6 100000000
