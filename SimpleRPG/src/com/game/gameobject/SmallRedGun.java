@@ -27,17 +27,17 @@ public class SmallRedGun extends SpecificObject{
 
 	@Override
 	public void attack() {
-//		Bullet bullet = new YellowFlowerBullet(getPosX(),getPosY(), getGameState());
-//		bullet.setSpeedX(-3);
-//		bullet.setSpeedY(3);
-//		bullet.setTeamType(getTeamType());
-//		getGameState().bulletManager.addObject(bullet);
-//		
-//		bullet= new YellowFlowerBullet(getPosX(),getPosY(), getGameState());
-//		bullet.setSpeedX(3);
-//		bullet.setSpeedY(3);
-//		bullet.setTeamType(getTeamType());
-//		getGameState().bulletManager.addObject(bullet);
+		Bullet bullet = new YellowFlowerBullet(getPosX(),getPosY(), getGameState());
+		bullet.setSpeedX(-3);
+		bullet.setSpeedY(3);
+		bullet.setTeamType(getTeamType());
+		getGameState().bulletManager.addObject(bullet);
+		
+		bullet= new YellowFlowerBullet(getPosX(),getPosY(), getGameState());
+		bullet.setSpeedX(3);
+		bullet.setSpeedY(3);
+		bullet.setTeamType(getTeamType());
+		getGameState().bulletManager.addObject(bullet);
 	}
 
 	@Override

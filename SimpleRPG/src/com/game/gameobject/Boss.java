@@ -114,14 +114,14 @@ public class Boss extends HumanoidObject{
 					setSpeedX(-5);
 			}
 			if (attackType.get(attackIndex).equals("ultilast")) {
-				Bullet bullet = new BossBullet(getPosX(), getPosY() - 50, getGameState());
-				if (getDirection() == RIGHT_DIR) {
-					bullet.setSpeedX(4);
-				} else {
-					bullet.setSpeedX(-4);
-				}
-				bullet.setTeamType(getTeamType());
-				getGameState().bulletManager.addObject(bullet);
+//				Bullet bullet = new BossBullet(getPosX(), getPosY() - 50, getGameState());
+//				if (getDirection() == RIGHT_DIR) {
+//					bullet.setSpeedX(4);
+//				} else {
+//					bullet.setSpeedX(-4);
+//				}
+//				bullet.setTeamType(getTeamType());
+//				getGameState().bulletManager.addObject(bullet);
 
 			}
 
