@@ -28,8 +28,7 @@ public class Boss extends HumanoidObject{
 	protected int attackIndex = 0;
 
 
-	public Boss(float posX, float posY, float width, float height, float mass, int healthPoint, int manaPoint,
-			GameState gameState) {
+	public Boss(float posX, float posY, GameState gameState) {
 		super(posX, posX, 110, 150, 0.1f, 100, 0, gameState);
 		idleback = DataLoader.getInstance().getAnimation("boss_idle");
 		idleforward = DataLoader.getInstance().getAnimation("boss_idle");

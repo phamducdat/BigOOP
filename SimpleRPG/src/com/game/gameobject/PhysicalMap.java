@@ -135,4 +135,20 @@ public class PhysicalMap extends GameObject {
 		}
 		return null;
 	}
+
+	public int[][] getPhysicalMap() {
+		return physicalMap;
+	}
+
+	public void setPhysicalMap(int[][] physicalMap) {
+		this.physicalMap = physicalMap;
+	}
+
+	public int getTileSize() {
+		return tileSize;
+	}
+
+	public void setTileSize(int tileSize) {
+		this.tileSize = tileSize;
+	}
 }

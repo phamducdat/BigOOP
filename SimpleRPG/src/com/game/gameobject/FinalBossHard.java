@@ -10,7 +10,7 @@ public class FinalBossHard extends Boss{
 
 	public FinalBossHard(float posX, float posY, float width, float height, float mass, int healthPoint, int manaPoint,
 			GameState gameState) {
-		super(posX, posY, 110, 150, 0.1f, 100, 0, gameState);
+		super(posX, posY, gameState);
 		attackType.add("NONE");
 		attackType.add("ready");
 		attackType.add("shooting");

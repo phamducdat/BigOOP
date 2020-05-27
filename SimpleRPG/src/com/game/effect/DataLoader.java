@@ -48,6 +48,11 @@ public class DataLoader {
 		return animation;
 	}
 	
+	public FrameImage getFrameImage(String name) {
+		FrameImage frame = new FrameImage(instance.frameImages.get(name));
+		return frame;
+	}
+	
 	public void LoadData() throws IOException {
 		LoadFrame();
 		LoadAnimation();

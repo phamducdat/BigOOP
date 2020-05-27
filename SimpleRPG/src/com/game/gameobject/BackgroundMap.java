@@ -46,8 +46,21 @@ public class BackgroundMap extends GameObject{
 				}
 			}
 		}
-		
-		
 	}
 
+	public int[][] getBackgroundMap() {
+		return backgroundMap;
+	}
+
+	public void setBackgroundMap(int[][] backgroundMap) {
+		this.backgroundMap = backgroundMap;
+	}
+
+	public int getTileSize() {
+		return tileSize;
+	}
+
+	public void setTileSize(int tileSize) {
+		this.tileSize = tileSize;
+	}
 }

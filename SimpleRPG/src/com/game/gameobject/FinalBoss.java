@@ -9,7 +9,7 @@ import com.game.state.GameState;
 public class FinalBoss extends Boss {
 
 	public FinalBoss(float x, float y, GameState GameState) {
-		super(x, y, 110, 150, 0.1f, 100, 0, GameState);
+		super(x, y, GameState);
 
 		attackType.add("NONE");
 		attackType.add("ready");

@@ -4,8 +4,11 @@ import com.game.userinterface.GamePanel;
 
 public abstract class State {
 
+	GamePanel gamePanel;
+	
 	public State(GamePanel gamePanel) {
 		// TODO Auto-generated constructor stub
+		this.gamePanel = gamePanel;
 	}
 	
 	public abstract void Update();
