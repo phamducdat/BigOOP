@@ -1,5 +1,7 @@
 package com.game.userinterface;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 
 import javax.swing.JFrame;
@@ -17,27 +19,28 @@ public class GameFrame extends JFrame {
 	
 	public GameFrame() {
 		
-		gamePanel = new GamePanel();
-		
-		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-		setLocationRelativeTo(null);
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		try {
-			DataLoader.getInstance().LoadData();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		add(gamePanel);
-		addKeyListener(gamePanel);
+		 super("Mega Man java game");
+	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        Toolkit toolkit = this.getToolkit();
+	        Dimension solution = toolkit.getScreenSize();
+
+	        try {
+	        	DataLoader.getInstance().LoadData();
+	        } catch (IOException ex) {
+	            ex.printStackTrace();
+	        }
+
+	        this.setBounds((solution.width - SCREEN_WIDTH)/2, (solution.height - SCREEN_HEIGHT)/2, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+	        gamePanel = new GamePanel();
+	        addKeyListener(gamePanel);
+	        add(gamePanel);
 		
 	}
 	
 	public void startGame() {
 		gamePanel.startGame();
+		this.setVisible(true);
 	}
 	
 	public static void main(String[] args) {
