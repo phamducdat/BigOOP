@@ -14,298 +14,284 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
-// Status: Completed
+// Done
 
 // Singletone
 public class DataLoader {
 
-	private static DataLoader instance;
-	
-	private String framefile = "data/frame.txt";
-	private String animationfile = "data/animation.txt";
-	private String backgroundfile = "data/backgroundmap.txt";
-	private String physicalfile = "data/physicalmap.txt";
-	private String soundfile = "data/sounds.txt";
-	
-	private Hashtable<String, FrameImage> frameImages;
-	private Hashtable<String, Animation> animations;
-	private Hashtable<String, AudioClip> sounds;
-	
-	private int[][] physicalMap;
-	private int[][] backgroundMap;
-	
-	private DataLoader() {}
-	
-	public static DataLoader getInstance() {
-		if(instance == null) {
-			instance = new DataLoader();
-		}
-		return instance;
-	}
-	
-	public Animation getAnimation(String name) {
-		Animation animation = new Animation(instance.animations.get(name));
-		return animation;
-	}
-	
-	public FrameImage getFrameImage(String name) {
-		FrameImage frame = new FrameImage(instance.frameImages.get(name));
-		return frame;
-	}
-	
-	public void LoadData() throws IOException {
-		LoadFrame();
-		LoadAnimation();
-		LoadBackgroundMap();
-		LoadPhysicalMap();
-		LoadSound();
-	}
-	
-	public void LoadFrame() throws IOException {
-		
-		frameImages = new Hashtable<String, FrameImage>();
-		
-		FileReader fr = new FileReader(framefile);
-		BufferedReader br = new BufferedReader(fr);
-		
-		String line = null;
-		
-		if(br.readLine() == null) {
-			System.out.println("No data to load");
-			throw new IOException();
-		}else {
-			fr = new FileReader(framefile);
-			br = new BufferedReader(br);
-			
-			while((line = br.readLine()).equals(""));
-			
-			int n = Integer.parseInt(line);
-			
-			for(int i = 0; i < n; i++) {
-				
-				while((line = br.readLine()).equals(""));
-				String name = line;
-				
-				while((line = br.readLine()).equals(""));
-				String[] str = line.split(" ");
-				String path = str[1];
-				
-				while((line = br.readLine()).equals(""));
-				str = line.split(" ");
-				int x = Integer.parseInt(str[1]);
-				
-				while((line = br.readLine()).equals(""));
-				str = line.split(" ");
-				int y = Integer.parseInt(str[1]);
-				
-				while((line = br.readLine()).equals(""));
-				str = line.split(" ");
-				int w = Integer.parseInt(str[1]);
-				
-				while((line = br.readLine()).equals(""));
-				str = line.split(" ");
-				int h = Integer.parseInt(str[1]);
-				
-				
-				BufferedImage image = ImageIO.read(new File(path));
-				BufferedImage subImage = image.getSubimage(x, y, w, h);
-				
-				FrameImage frameImage = new FrameImage(name, subImage);
-				
-				instance.frameImages.put(name, frameImage);
-			}
-		}
-		
-		br.close();
-		
-	}
-	
-	public void LoadAnimation() throws IOException {
-		
-		animations = new Hashtable<String, Animation>();
-		
-		FileReader fr = new FileReader(animationfile);
-		BufferedReader br = new BufferedReader(fr);
-		
-		String line = null;
-		
-		
-		if(br.readLine() == null) {
-			System.out.println("No data to load");
-			throw new IOException();
-		}else {
-			fr = new FileReader(animationfile);
-			br = new BufferedReader(fr);
-			
-			while((line = br.readLine()).equals(""));
-			int n = Integer.parseInt(line);
-			
-			for(int i = 0; i < n; i++) {
-				
-				while((line = br.readLine()).equals(""));
-				String name = line;
-				
-				while((line = br.readLine()).equals(""));
-				String[] str = line.split(" ");
-				
-				Animation animation = new Animation();
-				animation.setName(name);
-				
-				for(int j = 0; j < str.length/2; j++) {
-					animation.add(instance.frameImages.get(str[2*j]), Double.parseDouble(str[2*j+1]));
-				}
-				
-				instance.animations.put(name, animation);
-			}
-		}
-		
-		br.close();
-	}
-	
-	public void LoadPhysicalMap() throws IOException{
-		
-		FileReader fr = new FileReader(physicalfile);
-		BufferedReader br = new BufferedReader(fr);
-		
-		String line = null;
-		
-		line = br.readLine();
-		int row = Integer.parseInt(line);
-		line = br.readLine();
-		int col = Integer.parseInt(line);
-		
-		instance.physicalMap = new int[row][col];
-		
-		for(int i = 0; i < row; i++) {
-			line = br.readLine();
-			String[] str = line.split(" ");
-			
-			for(int j = 0; j < col; j++) {
-				instance.physicalMap[i][j] = Integer.parseInt(str[j]);
-			}
-		}
-		
-		for(int i = 0; i < row; i++) {
-			for(int j = 0; j < col; j++) {
-				System.out.print(" " + instance.physicalMap[i][j]);
-			}
-			System.out.println();
-		}
-		
-		br.close();
-	}
-	
-	public void LoadBackgroundMap() throws IOException {
-		
-		FileReader fr = new FileReader(backgroundfile);
-		BufferedReader br = new BufferedReader(fr);
-		
-		String line = null;
-		
-		line = br.readLine();
-		int row = Integer.parseInt(line);
-		
-		line = br.readLine();
-		int col = Integer.parseInt(line);
-		
-		instance.backgroundMap = new int[row][col];
-		
-		for(int i = 0; i < row; i++) {
-			line = br.readLine();
-			String[] str = line.split(" ");
-			
-			for(int j = 0; j < col; j++) {
-				instance.backgroundMap[i][j] = Integer.parseInt(str[j]);
-			}
-		}
-		
-		for(int i = 0; i < row; i++) {
-			for(int j = 0; j < col; j++) {
-				System.out.print(" " + instance.backgroundMap[i][j]);
-			}
-			System.out.println();
-		}
-		
-		br.close();
-	}
-	
-	public void LoadSound() throws IOException {
-		
-		FileReader fr = new FileReader(soundfile);
-		BufferedReader br = new BufferedReader(fr);
-		
-		sounds = new Hashtable<String, AudioClip>();
-		
-		String line = null;
-		
-		if(br.readLine() == null) {
-			System.out.println("No data to load");
-			throw new IOException();
-		}else {
-			fr = new FileReader(soundfile);
-			br = new BufferedReader(fr);
-			
-			while((line = br.readLine()).equals(""));
-			
-			int n = Integer.parseInt(line);
-			
-			for(int i = 0; i < n; i++) {
-				
-				while((line = br.readLine()).equals(""));
-				
-				String[] str = line.split(" ");
-				String name = str[0];
-				String path = str[1];
-				
-				AudioClip audioClip = null;
-				try {
-					audioClip = Applet.newAudioClip(new URL("file", "", str[1]));
-				}catch(MalformedURLException ex) {};
-				
-				instance.sounds.put(name, audioClip);
-			}
-		}
-		
-		br.close();
-	}
+    private static DataLoader instance = null;
+    
+    private String framefile = "data/frame.txt";
+    private String animationfile = "data/animation.txt";
+    private String physmapfile = "data/phys_map.txt";
+    private String backgroundmapfile = "data/background_map.txt";
+    private String soundfile = "data/sounds.txt";
+    
+    private Hashtable<String, FrameImage> frameImages; 
+    private Hashtable<String, Animation> animations;
+    private Hashtable<String, AudioClip> sounds;
+    
+    private int[][] phys_map;
+    private int[][] background_map;
+    
+    private DataLoader() {}
 
-	public int[][] getPhysicalMap() {
-		return physicalMap;
-	}
+    public static DataLoader getInstance(){
+        if(instance == null)
+            instance  = new DataLoader();
+        return instance;
+    }
+    
+    public AudioClip getSound(String name){
+        return instance.sounds.get(name);
+    }
+    
+    public Animation getAnimation(String name){
+        
+        Animation animation = new Animation(instance.animations.get(name));
+        return animation;
+        
+    }
+    
+    public FrameImage getFrameImage(String name){
 
-	public void setPhysicalMap(int[][] physicalMap) {
-		this.physicalMap = physicalMap;
-	}
+        FrameImage frameImage = new FrameImage(instance.frameImages.get(name));
+        return frameImage;
 
-	public int[][] getBackgroundMap() {
-		return backgroundMap;
-	}
+    }
+    
+    public int[][] getPhysicalMap(){
+        return instance.phys_map;
+    }
+    
+    public int[][] getBackgroundMap(){
+        return instance.background_map;
+    }
+    
+    public void LoadData()throws IOException{
+        
+        LoadFrame();
+        LoadAnimation();
+        LoadPhysMap();
+        LoadBackgroundMap();
+        LoadSounds();
+        
+    }
+    
+    public void LoadSounds() throws IOException{
+        sounds = new Hashtable<String, AudioClip>();
+        
+        FileReader fr = new FileReader(soundfile);
+        BufferedReader br = new BufferedReader(fr);
+        
+        String line = null;
+        
+        if(br.readLine()==null) { // no line = "" or something like that
+            System.out.println("No data");
+            throw new IOException();
+        }
+        else {
+            
+            fr = new FileReader(soundfile);
+            br = new BufferedReader(fr);
+            
+            while((line = br.readLine()).equals(""));
+            
+            int n = Integer.parseInt(line);
+            
+            for(int i = 0;i < n; i ++){
+                
+                AudioClip audioClip = null;
+                while((line = br.readLine()).equals(""));
 
-	public void setBackgroundMap(int[][] backgroundMap) {
-		this.backgroundMap = backgroundMap;
-	}
+                String[] str = line.split(" ");
+                String name = str[0];
+                
+                String path = str[1];
 
-	public Hashtable<String, FrameImage> getFrameImages() {
-		return frameImages;
-	}
+                try {
+                   audioClip =  Applet.newAudioClip(new URL("file","",str[1]));
 
-	public void setFrameImages(Hashtable<String, FrameImage> frameImages) {
-		this.frameImages = frameImages;
-	}
-
-	public Hashtable<String, Animation> getAnimations() {
-		return animations;
-	}
-
-	public void setAnimations(Hashtable<String, Animation> animations) {
-		this.animations = animations;
-	}
-
-	public Hashtable<String, AudioClip> getSounds() {
-		return sounds;
-	}
-
-	public void setSounds(Hashtable<String, AudioClip> sounds) {
-		this.sounds = sounds;
-	}
+                } catch (MalformedURLException ex) {}
+                
+                instance.sounds.put(name, audioClip);
+            }
+            
+        }
+        
+        br.close();
+        
+    }
+    
+    public void LoadBackgroundMap() throws IOException{
+        
+        FileReader fr = new FileReader(backgroundmapfile);
+        BufferedReader br = new BufferedReader(fr);
+        
+        String line = null;
+        
+        line = br.readLine();
+        int numberOfRows = Integer.parseInt(line);
+        line = br.readLine();
+        int numberOfColumns = Integer.parseInt(line);
+            
+        
+        instance.background_map = new int[numberOfRows][numberOfColumns];
+        
+        for(int i = 0;i < numberOfRows;i++){
+            line = br.readLine();
+            String [] str = line.split(" |  ");
+            for(int j = 0;j<numberOfColumns;j++)
+                instance.background_map[i][j] = Integer.parseInt(str[j]);
+        }
+        
+        for(int i = 0;i < numberOfRows;i++){
+            
+            for(int j = 0;j<numberOfColumns;j++)
+                System.out.print(" "+instance.background_map[i][j]);
+            
+            System.out.println();
+        }
+        
+        br.close();
+        
+    }
+    
+    public void LoadPhysMap() throws IOException{
+        
+        FileReader fr = new FileReader(physmapfile);
+        BufferedReader br = new BufferedReader(fr);
+        
+        String line = null;
+        
+        line = br.readLine();
+        int numberOfRows = Integer.parseInt(line);
+        line = br.readLine();
+        int numberOfColumns = Integer.parseInt(line);
+            
+        
+        instance.phys_map = new int[numberOfRows][numberOfColumns];
+        
+        for(int i = 0;i < numberOfRows;i++){
+            line = br.readLine();
+            String [] str = line.split(" ");
+            for(int j = 0;j<numberOfColumns;j++)
+                instance.phys_map[i][j] = Integer.parseInt(str[j]);
+        }
+        
+        for(int i = 0;i < numberOfRows;i++){
+            
+            for(int j = 0;j<numberOfColumns;j++)
+                System.out.print(" "+instance.phys_map[i][j]);
+            
+            System.out.println();
+        }
+        
+        br.close();
+        
+    }
+    public void LoadAnimation() throws IOException {
+        
+        animations = new Hashtable<String, Animation>();
+        
+        FileReader fr = new FileReader(animationfile);
+        BufferedReader br = new BufferedReader(fr);
+        
+        String line = null;
+        
+        if(br.readLine()==null) {
+            System.out.println("No data");
+            throw new IOException();
+        }
+        else {
+            
+            fr = new FileReader(animationfile);
+            br = new BufferedReader(fr);
+            
+            while((line = br.readLine()).equals(""));
+            int n = Integer.parseInt(line);
+            
+            for(int i = 0;i < n; i ++){
+                
+                Animation animation = new Animation();
+                
+                while((line = br.readLine()).equals(""));
+                animation.setName(line);
+                
+                while((line = br.readLine()).equals(""));
+                String[] str = line.split(" ");
+                
+                for(int j = 0;j<str.length;j+=2)
+                    animation.add(getFrameImage(str[j]), Double.parseDouble(str[j+1]));
+                
+                instance.animations.put(animation.getName(), animation);
+                
+            }
+            
+        }
+        
+        br.close();
+    }
+    
+    public void LoadFrame() throws IOException{
+        
+        frameImages = new Hashtable<String, FrameImage>();
+        
+        FileReader fr = new FileReader(framefile);
+        BufferedReader br = new BufferedReader(fr);
+        
+        String line = null;
+        
+        if(br.readLine()==null) {
+            System.out.println("No data");
+            throw new IOException();
+        }
+        else {
+            
+            fr = new FileReader(framefile);
+            br = new BufferedReader(fr);
+            
+            while((line = br.readLine()).equals(""));
+            
+            int n = Integer.parseInt(line);
+            
+            for(int i = 0;i < n; i ++){
+                
+                FrameImage frame = new FrameImage();
+                while((line = br.readLine()).equals(""));
+                frame.setName(line);
+                
+                while((line = br.readLine()).equals(""));
+                String[] str = line.split(" ");
+                String path = str[1];
+                
+                while((line = br.readLine()).equals(""));
+                str = line.split(" ");
+                int x = Integer.parseInt(str[1]);
+                
+                while((line = br.readLine()).equals(""));
+                str = line.split(" ");
+                int y = Integer.parseInt(str[1]);
+                
+                while((line = br.readLine()).equals(""));
+                str = line.split(" ");
+                int w = Integer.parseInt(str[1]);
+                
+                while((line = br.readLine()).equals(""));
+                str = line.split(" ");
+                int h = Integer.parseInt(str[1]);
+                
+                BufferedImage imageData = ImageIO.read(new File(path));
+                BufferedImage image = imageData.getSubimage(x, y, w, h);
+                frame.setImage(image);
+                
+                instance.frameImages.put(frame.getName(), frame);
+            }
+            
+        }
+        
+        br.close();
+        
+    }
+    
 }

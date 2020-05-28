@@ -1,154 +1,156 @@
 package com.game.gameobject;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
 
-import org.w3c.dom.css.Rect;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
 import com.game.effect.DataLoader;
 import com.game.state.GameState;
 
-// Status: Completed
+// Done
 
 public class PhysicalMap extends GameObject {
 
-	// Ban do duoc the hien bang mang 2 chieu
-	private int[][] physicalMap;
-	private int tileSize; 		// Kich thuoc 1 o tren ban do
-	
-	public PhysicalMap(float x, float y, GameState gameState) {
-		super(x, y, gameState);
-		
-		physicalMap = DataLoader.getInstance().getPhysicalMap();
-		tileSize = 128;
-		
-	}
-	
-	@Override
-	public void Update() {}
+    public int[][] phys_map;
+    private int tileSize;
+    
+    public PhysicalMap(float x, float y, GameState gameWorld) {
+        super(x, y, gameWorld);
+        this.tileSize = 30;
+        phys_map = DataLoader.getInstance().getPhysicalMap();
+    }
+    
+    public int getTileSize(){
+        return tileSize;
+    }
+    
+    @Override
+    public void Update() {}
 
-	@Override
-	public void draw(Graphics g) {}
+    
+    public Rectangle haveCollisionWithTop(Rectangle rect){
 
-	// 4 Phuong thuc de kiem tra va cham cua mo su vat voi ban do vat ly
-	
-	public Rectangle haveCollisionWithTop(Rectangle rect) {
-		
-		
-		int x1 = rect.x / tileSize;
-		if(x1 >= 1) x1 -=1;
-		else x1 = 0;
-		
-		int x2 = (rect.x +  rect.width) / tileSize + 1;
-		if(x2 <= physicalMap[0].length - 3) x2 += 2;
-		else x2 = physicalMap[0].length - 1;
-		
-		int y = (int) (rect.y / tileSize);
-		
-		for(int j = x1; j<= x2; j++) {
-				
-			if(physicalMap[y][j] == 1) {
-				Rectangle rectangle = new Rectangle((int) getPosX() + j * tileSize, (int) getPosY() + y * tileSize, tileSize, tileSize);
-						
-					if(rect.intersects(rectangle)) 
-						return rectangle;
-						
-			}
-		}
+        int posX1 = rect.x/tileSize;
+        posX1 -= 2;
+        int posX2 = (rect.x + rect.width)/tileSize;
+        posX2 += 2;
 
-		
-		return null;
-	}
-	
-	public Rectangle haveCollisionWithLand(Rectangle rect) {
-		
-		int x1 = rect.x / tileSize;
-		if(x1 >= 1) x1 -= 1;
-		else x1 = 0;
-		
-		int x2 = (rect.x + rect.width) / tileSize;
-		if(x2 <= physicalMap[0].length - 3) x2 +=2;
-		else x2 = physicalMap[0].length - 1;
-		
-		int y = (rect.y + rect.height) / tileSize;
-		
-		for(int j = x1; j <= x2; j++) {
-				
-			if(physicalMap[y][j] == 1) {
-					
-				Rectangle rectangle = new Rectangle((int) getPosX() + j * tileSize, (int) getPosY() + y * tileSize, tileSize, tileSize);
-					
-				if(rect.intersects(rectangle)) {
-					return rectangle;
-				}	
-			}	
-		}
-		return null;
-	}
-	
-	public Rectangle haveCollisionWithRightWall(Rectangle rect) {
-		
-		int y1 = rect.y / tileSize;
-		if(y1 >= 1) y1 -= 1;
-		else y1 = 0;
-		
-		int y2 = (rect.y + rect.height) / tileSize;
-		if(y2 <= physicalMap.length - 3) y2 += 2;
-		else y2 = physicalMap.length - 1;
-		
-		int x = (rect.x + rect.width) / tileSize;
-		
-		for(int  i = y1; i <= y2 ; i++) {
-			
-			if(physicalMap[i][x] == 1) {
-					
-				Rectangle rectangle = new Rectangle((int) getPosX() + x * tileSize, (int) getPosY() + i * tileSize, tileSize, tileSize);
-				
-				if(rect.intersects(rectangle))
-					return rectangle;		
-			}
-		}
-		return null;
-	}
-	
-	public Rectangle haveCollisionWithLeftWall(Rectangle rect) {
-		
-		int y1 = rect.y / tileSize;
-		if(y1 >= 1) y1 --;
-		else y1 = 0;
-		
-		int y2 = (rect.y + rect.height) / tileSize;
-		if(y2 < physicalMap.length - 3) y2 += 2;
-		else y2 = physicalMap.length - 1;
-		
-		int  x = rect.x / tileSize;
-		
-		for(int i = y1; i <= y2; i++) {
-			
-			if(physicalMap[i][x] == 1) {
-				
-				Rectangle rectangle = new Rectangle((int) getPosX() + x * tileSize, (int) getPosY() + i * tileSize, tileSize, tileSize);
-				
-				if(rect.intersects(rectangle))
-					return rectangle;
-			}
-		}
-		return null;
-	}
+        //int posY = (rect.y + rect.height)/tileSize;
+        int posY = rect.y/tileSize;
 
-	public int[][] getPhysicalMap() {
-		return physicalMap;
-	}
+        if(posX1 < 0) posX1 = 0;
+        
+        if(posX2 >= phys_map[0].length) posX2 = phys_map[0].length - 1;
+        
+        for(int y = posY; y >= 0; y--){
+            for(int x = posX1; x <= posX2; x++){
+                
+                if(phys_map[y][x] == 1){
+                    Rectangle r = new Rectangle((int) getPosX() + x * tileSize, (int) getPosY() + y * tileSize, tileSize, tileSize);
+                    if(rect.intersects(r))
+                        return r;
+                }
+            }
+        }
+        return null;
+    }
+    
+    
+    public Rectangle haveCollisionWithLand(Rectangle rect){
 
-	public void setPhysicalMap(int[][] physicalMap) {
-		this.physicalMap = physicalMap;
-	}
+        int posX1 = rect.x/tileSize;
+        posX1 -= 2;
+        int posX2 = (rect.x + rect.width)/tileSize;
+        posX2 += 2;
 
-	public int getTileSize() {
-		return tileSize;
-	}
+        int posY = (rect.y + rect.height)/tileSize;
 
-	public void setTileSize(int tileSize) {
-		this.tileSize = tileSize;
-	}
+        if(posX1 < 0) posX1 = 0;
+        
+        if(posX2 >= phys_map[0].length) posX2 = phys_map[0].length - 1;
+        for(int y = posY; y < phys_map.length;y++){
+            for(int x = posX1; x <= posX2; x++){
+                
+                if(phys_map[y][x] == 1){
+                    Rectangle r = new Rectangle((int) getPosX() + x * tileSize, (int) getPosY() + y * tileSize, tileSize, tileSize);
+                    if(rect.intersects(r))
+                        return r;
+                }
+            }
+        }
+        return null;
+    }
+    
+    public Rectangle haveCollisionWithRightWall(Rectangle rect){
+   
+        
+        int posY1 = rect.y/tileSize;
+        posY1-=2;
+        int posY2 = (rect.y + rect.height)/tileSize;
+        posY2+=2;
+        
+        int posX1 = (rect.x + rect.width)/tileSize;
+        int posX2 = posX1 + 3;
+        if(posX2 >= phys_map[0].length) posX2 = phys_map[0].length - 1;
+        
+        if(posY1 < 0) posY1 = 0;
+        if(posY2 >= phys_map.length) posY2 = phys_map.length - 1;
+        
+        
+        for(int x = posX1; x <= posX2; x++){
+            for(int y = posY1; y <= posY2;y++){
+                if(phys_map[y][x] == 1){
+                    Rectangle r = new Rectangle((int) getPosX() + x * tileSize, (int) getPosY() + y * tileSize, tileSize, tileSize);
+                    if(r.y < rect.y + rect.height - 1 && rect.intersects(r))
+                        return r;
+                }
+            }
+        }
+        return null;
+        
+    }
+    
+    public Rectangle haveCollisionWithLeftWall(Rectangle rect){
+        
+   
+        
+        int posY1 = rect.y/tileSize;
+        posY1-=2;
+        int posY2 = (rect.y + rect.height)/tileSize;
+        posY2+=2;
+        
+        int posX1 = (rect.x + rect.width)/tileSize;
+        int posX2 = posX1 - 3;
+        if(posX2 < 0) posX2 = 0;
+        
+        if(posY1 < 0) posY1 = 0;
+        if(posY2 >= phys_map.length) posY2 = phys_map.length - 1;
+        
+        
+        for(int x = posX1; x >= posX2; x--){
+            for(int y = posY1; y <= posY2;y++){
+                if(phys_map[y][x] == 1){
+                    Rectangle r = new Rectangle((int) getPosX() + x * tileSize, (int) getPosY() + y * tileSize, tileSize, tileSize);
+                    if(r.y < rect.y + rect.height - 1 && rect.intersects(r))
+                        return r;
+                }
+            }
+        }
+        return null;
+        
+    }
+    
+    public void draw(Graphics2D g2){
+        
+        Camera camera = getGameState().camera;
+        
+        g2.setColor(Color.GRAY);
+        for(int i = 0;i< phys_map.length;i++)
+            for(int j = 0;j<phys_map[0].length;j++)
+                if(phys_map[i][j]!=0) g2.fillRect((int) getPosX() + j*tileSize - (int) camera.getPosX(), 
+                        (int) getPosY() + i*tileSize - (int) camera.getPosY(), tileSize, tileSize);
+        
+    }
+    
 }

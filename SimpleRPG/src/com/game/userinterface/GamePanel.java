@@ -12,8 +12,7 @@ import com.game.state.GameState;
 import com.game.state.MenuState;
 import com.game.state.State;
 
-// Status: unfinished
-// Con ham paint va ham run chua hoan thien
+// Done
 
 public class GamePanel extends JPanel implements KeyListener, Runnable {
 	
@@ -33,8 +32,11 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 
 	@Override
 	public void paint(Graphics g) {
-		g.setColor(Color.RED);
-		g.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
+//		g.setColor(Color.RED);
+//		g.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
+		
+		g.drawImage(gameState.getBufferedImage(), 0, 0, this);
+		
 	}
 	
 	public void startGame() {
@@ -78,8 +80,8 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 		long currentTime;
 		
 		while(isRunning) {
-			//Update
-			//Render
+			gameState.Update();
+			gameState.Render();
 			
 			repaint();
 			currentTime = System.nanoTime();

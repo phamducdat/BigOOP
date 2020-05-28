@@ -1,5 +1,7 @@
 package com.game.gameobject;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import com.game.effect.Animation;
@@ -7,7 +9,7 @@ import com.game.gameinteface.Profile;
 import com.game.gameinteface.Vulnerable;
 import com.game.state.GameState;
 
-// Status: Completed
+// Done
 
 public abstract class SpecificObject extends GameObject implements Profile, Vulnerable  {
 
@@ -21,8 +23,8 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	private float speedY;		// Van toc theo phuong thang dung
 	private float mass; 		// De tao gia toc huong tam Trai Dat
 	
-	private int healthPoint; 	// Mau
-	private int manaPoint;		// Nang luong
+	private int blood; 			// Mau
+	private int mana;			// Nang luong
 	private int damage;
 	
 	private long beginTimeToNoBeHurt;
@@ -30,218 +32,217 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	
 	protected Animation beHurtForward, beHurtBackward;;
 	
-	public SpecificObject(float posX, float posY, float width, float height, float mass, int healthPoint, int manaPoint, GameState gameState) {
-		super(posX, posY, gameState);
-		setWidth(width);
-		setHeight(height);
-		setMass(mass);
-		setHealthPoint(healthPoint);
-		setManaPoint(manaPoint);
-		
-		direction = RIGHT_DIR;
-		
-	}
-	
-	public boolean isOutOfCameraView() {
-		if(getPosX() - getGameState().camera.getPosX() > getGameState().camera.getWidth()
-				|| getPosX() - getGameState().camera.getPosX() < -50
-				|| getPosY() - getGameState().camera.getPosY() > getGameState().camera.getHeight()
-				|| getPosY() - getGameState().camera.getPosY() < -50)
-			return true;
-		
-		else return false;
-	}
-	
-	public void beHurt (int damageRecieved) {
-		setHealthPoint(getHealthPoint() - damageRecieved);
-	}
-	
-	public Rectangle getBoundForCollisionWithMap() {
-		// Lay bien de kiem tra va cham voi ban do vat ly
-		Rectangle rect = new Rectangle();
-		
-		rect.x = (int) (getPosX() - getWidth()/2);
-		rect.y = (int) (getPosY() - getHeight()/2);
-		rect.width = (int) getWidth();
-		rect.height = (int) getHeight();
-		
-		return rect;
-	}
+	public SpecificObject(float x, float y, float width, float height, float mass, int blood, GameState gameState){
 
-	@Override
-	public void Update() {
-		
-		// Update trang thai cua nhan vat
-		
-		switch(state) {
-		
-		case ALIVE: 
-			// Trang thai con song
-			
-			SpecificObject object = getGameState().specificObjectManager.getObjectCollideWithThisObject(this);
-			
-			if(object != null) {
-				
-				if(object.getDamage() > 0) {
-					beHurt(object.getDamage());
-					setState(BEHURT);
-				}
-				
-			}
-			
-			break;
-			
-		case BEHURT:
-			// Trang thai bi thuong
-			
-			if(beHurtBackward == null) {
-				// Nhan vat khong co hoat anh bi thuong
-				state = CANTBEHURT;
-				beginTimeToNoBeHurt = System.nanoTime();
-				if(getHealthPoint() == 0) {
-					state = FEY;
-				}
-			} else {
-				// Neu co thi cho chay Animation bi thuong
-				beHurtForward.Update(System.nanoTime());
-				if(beHurtForward.isLastFrame()) {
-					beHurtForward.reset();
-					state = CANTBEHURT;
-					if(getHealthPoint() == 0) 
-						state = FEY;
-					beginTimeToNoBeHurt = System.nanoTime();
+        // posX and posY are the middle coordinate of the object
+        super(x, y, gameState);
+        setWidth(width);
+        setHeight(height);
+        setMass(mass);
+        setBlood(blood);
+        
+        direction = RIGHT_DIR;
 
-				}
-			}
-			
-			break;
-			
-		case FEY:
-			// Trang thai hap hoi
-			state = DEATH;
-			
-			break;
-			
-		case CANTBEHURT:
-			// Trang thai khong the bi thuong
-			if(System.nanoTime() - beginTimeToNoBeHurt > timeForNoBeHurt) {
-				state = ALIVE;
-			}
-			
-			break;
-			
-		case DEATH:
-			// Trang thai chet
-			break;
-		
-		}
-	}
-	
-	public int getState() {
-		return state;
-	}
+    }
+    
+    public void setTimeForNoBehurt(long time){
+        timeForNoBeHurt = time;
+    }
+    
+    public long getTimeForNoBeHurt(){
+        return timeForNoBeHurt;
+    }
+    
+    public void setState(int state){
+        this.state = state;
+    }
+    
+    public int getState(){
+        return state;
+    }
+    
+    public void setDamage(int damage){
+            this.damage = damage;
+    }
 
-	public void setState(int state) {
-		this.state = state;
-	}
+    public int getDamage(){
+            return damage;
+    }
 
-	public int getTeamType() {
-		return teamType;
-	}
+    
+    public void setTeamType(int team){
+        teamType = team;
+    }
+    
+    public int getTeamType(){
+        return teamType;
+    }
+    
+    public void setMass(float mass){
+        this.mass = mass;
+    }
 
-	public void setTeamType(int teamType) {
-		this.teamType = teamType;
-	}
+    public float getMass(){
+            return mass;
+    }
 
-	public int getDirection() {
-		return direction;
-	}
+    public void setSpeedX(float speedX){
+        this.speedX = speedX;
+    }
 
-	public void setDirection(int direction) {
-		this.direction = direction;
-	}
+    public float getSpeedX(){
+        return speedX;
+    }
 
-	public float getWidth() {
-		return width;
-	}
+    public void setSpeedY(float speedY){
+        this.speedY = speedY;
+    }
 
-	public void setWidth(float width) {
-		this.width = width;
-	}
+    public float getSpeedY(){
+        return speedY;
+    }
 
-	public float getHeight() {
-		return height;
-	}
+    public void setBlood(int blood){
+        if(blood>=0)
+                this.blood = blood;
+        else this.blood = 0;
+    }
 
-	public void setHeight(float height) {
-		this.height = height;
-	}
+    public int getBlood(){
+        return blood;
+    }
 
-	public float getSpeedX() {
-		return speedX;
-	}
+    public void setWidth(float width){
+        this.width = width;
+    }
 
-	public void setSpeedX(float speedX) {
-		this.speedX = speedX;
-	}
+    public float getWidth(){
+        return width;
+    }
 
-	public float getSpeedY() {
-		return speedY;
-	}
+    public void setHeight(float height){
+        this.height = height;
+    }
 
-	public void setSpeedY(float speedY) {
-		this.speedY = speedY;
-	}
+    public float getHeight(){
+        return height;
+    }
+    
+    public void setDirection(int dir){
+        direction = dir;
+    }
+    
+    public int getDirection(){
+        return direction;
+    }
+    
+    public abstract void attack();
+    
+    
+    public boolean isObjectOutOfCameraView(){
+        if(getPosX() - getGameState().camera.getPosX() > getGameState().camera.getWidthView() ||
+                getPosX() - getGameState().camera.getPosX() < -50
+            ||getPosY() - getGameState().camera.getPosY() > getGameState().camera.getHeightView()
+                    ||getPosY() - getGameState().camera.getPosY() < -50)
+            return true;
+        else return false;
+    }
+    
+    public Rectangle getBoundForCollisionWithMap(){
+        Rectangle bound = new Rectangle();
+        bound.x = (int) (getPosX() - (getWidth()/2));
+        bound.y = (int) (getPosY() - (getHeight()/2));
+        bound.width = (int) getWidth();
+        bound.height = (int) getHeight();
+        return bound;
+    }
 
-	public float getMass() {
-		return mass;
-	}
+    public void beHurt(int damgeEat){
+        setBlood(getBlood() - damgeEat);
+        state = BEHURT;
+        hurtingCallback();
+    }
 
-	public void setMass(float mass) {
-		this.mass = mass;
-	}
+    @Override
+    public void Update(){
+        switch(state){
+            case ALIVE:
+                
+                // note: SET DAMAGE FOR OBJECT NO DAMAGE
+                SpecificObject object = getGameState().specificObjectManager.getCollisionWidthEnemyObject(this);
+                if(object!=null){
+                    
+                    
+                    if(object.getDamage() > 0){
 
-	public int getHealthPoint() {
-		return healthPoint;
-	}
+                        // switch state to fey if object die
+                        
+                        
+                        System.out.println("eat damage.... from collision with enemy........ "+object.getDamage());
+                        beHurt(object.getDamage());
+                    }
+                    
+                }
+                
+                
+                
+                break;
+                
+            case BEHURT:
+                if(beHurtBackward == null){
+                    state = CANTBEHURT;
+                    beginTimeToNoBeHurt = System.nanoTime();
+                    if(getBlood() == 0)
+                            state = FEY;
+                    
+                } else {
+                    beHurtForward.Update(System.nanoTime());
+                    if(beHurtForward.isLastFrame()){
+                    	beHurtForward.reset();
+                        state = CANTBEHURT;
+                        if(getBlood() == 0)
+                            state = FEY;
+                        beginTimeToNoBeHurt = System.nanoTime();
+                    }
+                }
+                
+                break;
+                
+            case FEY:
+                
+                state = DEATH;
+                
+                break;
+            
+            case DEATH:
+                
+                
+                break;
+                
+            case CANTBEHURT:
+                System.out.println("state = nobehurt");
+                if(System.nanoTime() - beginTimeToNoBeHurt > timeForNoBeHurt)
+                    state = ALIVE;
+                break;
+        }
+        
+    }
 
-	public void setHealthPoint(int healthPoint) {
-		if(healthPoint >= 0)
-			this.healthPoint = healthPoint;
-		else this.healthPoint = 0;
-	}
+    public void drawBoundForCollisionWithMap(Graphics2D g2){
+        Rectangle rect = getBoundForCollisionWithMap();
+        g2.setColor(Color.BLUE);
+        g2.drawRect(rect.x - (int) getGameState().camera.getPosX(), rect.y - (int) getGameState().camera.getPosY(), rect.width, rect.height);
+    }
 
-	public int getManaPoint() {
-		return manaPoint;
-	}
+    public void drawBoundForCollisionWithEnemy(Graphics2D g2){
+        Rectangle rect = getBoundForCollisionWithEnemy();
+        g2.setColor(Color.RED);
+        g2.drawRect(rect.x - (int) getGameState().camera.getPosX(), rect.y - (int) getGameState().camera.getPosY(), rect.width, rect.height);
+    }
 
-	public void setManaPoint(int manaPoint) {
-		if(manaPoint >= 0)
-			this.manaPoint = manaPoint;
-		else this.manaPoint = 0;
-	}
+    public abstract Rectangle getBoundForCollisionWithEnemy();
 
-	public int getDamage() {
-		return damage;
-	}
-
-	public void setDamage(int damage) {
-		this.damage = damage;
-	}
-
-	public long getBeginTimeToBeHurt() {
-		return beginTimeToNoBeHurt;
-	}
-
-	public void setBeginTimeToBeHurt(long beginTimeToBeHurt) {
-		this.beginTimeToNoBeHurt = beginTimeToBeHurt;
-	}
-
-	public long getTimeForNoBeHurt() {
-		return timeForNoBeHurt;
-	}
-
-	public void setTimeForNoBeHurt(long timeForNoBeHurt) {
-		this.timeForNoBeHurt = timeForNoBeHurt;
-	}
+    public abstract void draw(Graphics2D g2);
+    
+    public void hurtingCallback(){};
 }

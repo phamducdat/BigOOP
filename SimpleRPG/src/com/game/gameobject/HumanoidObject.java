@@ -8,108 +8,110 @@ import org.w3c.dom.css.Rect;
 import com.game.gameinteface.Actable;
 import com.game.state.GameState;
 
-// Status: Completed
+// Done
 
 public abstract class HumanoidObject extends SpecificObject implements Actable{
-	
+
 	private boolean isJumping;
-	private boolean isKneeling;
-	private boolean isLanding;
+    private boolean isDicking;
+    private boolean isLanding;
 
-	public HumanoidObject(float posX, float posY, float width, float height, float mass, int healthPoint, int manaPoint,
-			GameState gameState) {
-		super(posX, posY, width, height, mass, healthPoint, manaPoint, gameState);
-		setState(ALIVE);
-	}
-	
-	@Override
-	public void Update() {
-		
-		// Thuc hien Update ve vi tri nhan vat va tuong tac voi PhysicalMap
-		
-		super.Update();
-		
-		// Chi Update nhan vat trong tuong tac voi ban do vat ly khi nhan vat o trang thai ALIVE hoac CANTBEHURT
-		if(getState() == ALIVE || getState() == CANTBEHURT) {
-			
-			if(!isLanding) {
-				
-				// Cap nhat vi tri theo phuoong ngang cua nhan vat
-				
-				setPosX(getPosX() + getSpeedX());
-				
-				// Kiem tra va cham voi tuong trai va phai sau do thiet lap lai vi tri object
-				
-				if(getDirection() == LEFT_DIR && getGameState().physicalMap.haveCollisionWithLeftWall(getBoundForCollisionWithMap()) != null) {
-					Rectangle rectLeft = getGameState().physicalMap.haveCollisionWithLeftWall(getBoundForCollisionWithMap());
-					
-					setPosX(rectLeft.x + rectLeft.width + getWidth() / 2);
-					
-				} else if(getDirection() == RIGHT_DIR && getGameState().physicalMap.haveCollisionWithRightWall(getBoundForCollisionWithMap()) != null) {
-					Rectangle rectRight = getGameState().physicalMap.haveCollisionWithRightWall(getBoundForCollisionWithMap());;
-					
-					setPosX(rectRight.x - getWidth() / 2);
-				}
-				
-				// Kiem tra va cham voi mat dat va tran nha dong thoi cai dat vi tri theo phuong thang dung
-				
-				
-				Rectangle futureBound =  getBoundForCollisionWithMap();
-				futureBound.y += (getSpeedY() == 0)? 2 : getSpeedY();
-				// Kiem tra va cham theo phuong thang dung trong tuong lai de dung nhan vat lai truoc
-				//==> Tranh tinh trang nhan vat bi giat khi tiep xuc voi dat
-				
-				Rectangle rectLand = getGameState().physicalMap.haveCollisionWithLand(futureBound);
-				Rectangle rectTop = getGameState().physicalMap.haveCollisionWithTop(rectLand);
-				
-				if(rectLand != null) {
-					// Nhan vat cham dat
-					setJumping(false);
-					if(getSpeedY() != 0) setLanding(true);
-					setSpeedY(0);
-					setPosY(rectLand.y - getHeight() / 2);
-					
-				}else if(rectTop != null) {
-					// Nhan vat cham tran
-					setSpeedY(0);
-					setPosY(rectTop.y + rectTop.height + getHeight() / 2); 
-					
-				}else {
-					// Neu khong bi can boi tran va dat
-					setJumping(true);
-					setSpeedY(getSpeedY() + getMass());
-					setPosY(getPosY() + getSpeedY());
-					
-				}
-				
-			}
-			
-		}
-		
-		
-	}
+    public HumanoidObject(float x, float y, float width, float height, float mass, int blood, GameState gameState) {
+        super(x, y, width, height, mass, blood, gameState);
+        setState(ALIVE);
+    }
 
-	public boolean isJumping() {
-		return isJumping;
-	}
+    public abstract void run();
+    
+    public abstract void jump();
+    
+    public abstract void dick();
+    
+    public abstract void standUp();
+    
+    public abstract void stopRun();
 
-	public void setJumping(boolean isJumping) {
-		this.isJumping = isJumping;
-	}
+    public boolean getIsJumping() {
+        return isJumping;
+    }
+    
+    public void setIsLanding(boolean b){
+        isLanding = b;
+    }
+    
+    public boolean getIsLanding(){
+        return isLanding;
+    }
+    
+    public void setIsJumping(boolean isJumping) {
+        this.isJumping = isJumping;
+    }
 
-	public boolean isKneeling() {
-		return isKneeling;
-	}
+    public boolean getIsDicking() {
+        return isDicking;
+    }
 
-	public void setKneeling(boolean isKneeling) {
-		this.isKneeling = isKneeling;
-	}
+    public void setIsDicking(boolean isDicking) {
+        this.isDicking = isDicking;
+    }
+    
+    @Override
+    public void Update(){
+        
+        super.Update();
+        
+        if(getState() == ALIVE || getState() == CANTBEHURT){
+        
+            if(!isLanding){
 
-	public boolean isLanding() {
-		return isLanding;
-	}
+                setPosX(getPosX() + getSpeedX());
 
-	public void setLanding(boolean isLanding) {
-		this.isLanding = isLanding;
-	}
+
+                if(getDirection() == LEFT_DIR && 
+                        getGameState().physicalMap.haveCollisionWithLeftWall(getBoundForCollisionWithMap())!=null){
+
+                    Rectangle rectLeftWall = getGameState().physicalMap.haveCollisionWithLeftWall(getBoundForCollisionWithMap());
+                    setPosX(rectLeftWall.x + rectLeftWall.width + getWidth()/2);
+
+                }
+                if(getDirection() == RIGHT_DIR && 
+                		getGameState().physicalMap.haveCollisionWithRightWall(getBoundForCollisionWithMap())!=null){
+
+                    Rectangle rectRightWall = getGameState().physicalMap.haveCollisionWithRightWall(getBoundForCollisionWithMap());
+                    setPosX(rectRightWall.x - getWidth()/2);
+
+                }
+
+
+
+                /**
+                 * Codes below check the posY of megaMan
+                 */
+                // plus (+2) because we must check below the character when he's speedY = 0
+
+                Rectangle boundForCollisionWithMapFuture = getBoundForCollisionWithMap();
+                boundForCollisionWithMapFuture.y += (getSpeedY()!=0?getSpeedY(): 2);
+                Rectangle rectLand = getGameState().physicalMap.haveCollisionWithLand(boundForCollisionWithMapFuture);
+                
+                Rectangle rectTop = getGameState().physicalMap.haveCollisionWithTop(boundForCollisionWithMapFuture);
+                
+                if(rectTop !=null){
+                    
+                    setSpeedY(0);
+                    setPosY(rectTop.y + getGameState().physicalMap.getTileSize() + getHeight()/2);
+                    
+                }else if(rectLand != null){
+                    setIsJumping(false);
+                    if(getSpeedY() > 0) setIsLanding(true);
+                    setSpeedY(0);
+                    setPosY(rectLand.y - getHeight()/2 - 1);
+                }else{
+                    setIsJumping(true);
+                    setSpeedY(getSpeedY() + getMass());
+                    setPosY(getPosY() + getSpeedY());
+                }
+            }
+        }
+    }
+    
 }

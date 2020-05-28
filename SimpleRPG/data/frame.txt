@@ -1,5 +1,5 @@
 
-152
+158
 
 idle1
 image data/megasprite.png
@@ -544,191 +544,356 @@ h 105
 
 
 
-tile0
-image data/0.png
-x 0
-y 0
-w 128
-h 128
 
-tile1
-image data/1.png
-x 0
-y 0
-w 128
-h 128
+tiled1
+image data/tiled.png
+x 15
+y 154
+w 30
+h 30
 
-tile2
-image data/2.png
-x 0
-y 0
-w 128
-h 128
+tiled2
+image data/tiled.png
+x 45
+y 154
+w 30
+h 30
 
-tile3
-image data/3.png
-x 0
-y 0
-w 128
-h 128
+tiled3
+image data/tiled.png
+x 75
+y 154
+w 30
+h 30
 
-tile4
-image data/4.png
-x 0
-y 0
-w 128
-h 128
+tiled4
+image data/tiled.png
+x 15
+y 184
+w 30
+h 30
 
-tile5
-image data/5.png
-x 0
-y 0
-w 128
-h 128
+tiled5
+image data/tiled.png
+x 45
+y 184
+w 30
+h 30
 
-tile6
-image data/6.png
-x 0
-y 0
-w 128
-h 128
+tiled6
+image data/tiled.png
+x 75
+y 184
+w 30
+h 30
 
-tile7
-image data/7.png
-x 0
-y 0
-w 128
-h 128
+tiled7
+image data/tiled.png
+x 15
+y 119
+w 30
+h 30
 
-tile8
-image data/8.png
-x 0
-y 0
-w 128
-h 128
+tiled8
+image data/tiled.png
+x 45
+y 119
+w 30
+h 30
 
-tile9
-image data/9.png
-x 0
-y 0
-w 128
-h 128
+tiled9
+image data/tiled.png
+x 75
+y 119
+w 30
+h 30
 
-tile10
-image data/10.png
-x 0
-y 0
-w 128
-h 128
+tiled10
+image data/tiled.png
+x 15
+y 81
+w 30
+h 30
 
-tile11
-image data/11.png
-x 0
-y 0
-w 128
-h 128
+tiled11
+image data/tiled.png
+x 45
+y 81
+w 30
+h 30
 
-tile12
-image data/12.png
-x 0
-y 0
-w 128
-h 128
+tiled12
+image data/tiled.png
+x 75
+y 81
+w 30
+h 30
 
-tile13
-image data/13.png
-x 0
-y 0
-w 128
-h 128
+tiled13
+image data/tiled.png
+x 119
+y 81
+w 30
+h 30
 
-tile14
-image data/14.png
-x 0
-y 0
-w 128
-h 128
+tiled14
+image data/tiled.png
+x 119
+y 111
+w 30
+h 30
 
-tile15
-image data/15.png
-x 0
-y 0
-w 128
-h 128
+tiled15
+image data/tiled.png
+x 15
+y 39
+w 30
+h 30
 
-tile16
-image data/16.png
-x 0
-y 0
-w 128
-h 128
+tiled16
+image data/tiled.png
+x 45
+y 39
+w 30
+h 30
 
-tile17
-image data/17.png
-x 0
-y 0
-w 128
-h 128
+tiled17
+image data/tiled.png
+x 75
+y 39
+w 30
+h 30
 
-tile18
-image data/18.png
-x 0
-y 0
-w 128
-h 128
+tiled18
+image data/tiled.png
+x 118
+y 154
+w 30
+h 30
 
-tile19
-image data/19.png
-x 0
-y 0
-w 384
-h 384
+tiled19
+image data/tiled.png
+x 148
+y 154
+w 30
+h 30
 
-tile20
-image data/20.png
-x 0
-y 0
-w 128
-h 128
+tiled20
+image data/tiled.png
+x 178
+y 154
+w 30
+h 30
 
-tile21
-image data/21.png
-x 0
-y 0
-w 128
-h 128
+tiled21
+image data/tiled.png
+x 208
+y 154
+w 30
+h 30
 
-tile22
-image data/22.png
-x 0
-y 0
-w 128
-h 128
+tiled22
+image data/tiled.png
+x 238
+y 154
+w 30
+h 30
 
-tile23
-image data/23.png
-x 0
-y 0
-w 256
-h 256
+tiled23
+image data/tiled.png
+x 268
+y 154
+w 30
+h 30
 
-tile24
-image data/24.png
-x 0
-y 0
-w 128
-h 128
+tiled24
+image data/tiled.png
+x 118
+y 184
+w 30
+h 30
 
+tiled25
+image data/tiled.png
+x 148
+y 184
+w 30
+h 30
 
+tiled26
+image data/tiled.png
+x 178
+y 184
+w 30
+h 30
 
-background
-image data/BG.png
-x 0
-y 0
-w 1000
-h 750
+tiled27
+image data/tiled.png
+x 208
+y 184
+w 30
+h 30
 
+tiled28
+image data/tiled.png
+x 238
+y 184
+w 30
+h 30
 
+tiled29
+image data/tiled.png
+x 268
+y 184
+w 30
+h 30
+
+tiled30
+image data/tiled.png
+x 118
+y 214
+w 30
+h 30
+
+tiled31
+image data/tiled.png
+x 148
+y 214
+w 30
+h 30
+
+tiled32
+image data/tiled.png
+x 178
+y 214
+w 30
+h 30
+
+tiled33
+image data/tiled.png
+x 208
+y 214
+w 30
+h 30
+
+tiled34
+image data/tiled.png
+x 238
+y 214
+w 30
+h 30
+
+tiled35
+image data/tiled.png
+x 268
+y 214
+w 30
+h 30
+
+tiled36
+image data/tiled.png
+x 118
+y 244
+w 30
+h 30
+
+tiled37
+image data/tiled.png
+x 148
+y 244
+w 30
+h 30
+
+tiled38
+image data/tiled.png
+x 178
+y 244
+w 30
+h 30
+
+tiled39
+image data/tiled.png
+x 208
+y 244
+w 30
+h 30
+
+tiled40
+image data/tiled.png
+x 238
+y 244
+w 30
+h 30
+
+tiled41
+image data/tiled.png
+x 268
+y 244
+w 30
+h 30
+
+tiled42
+image data/tiled.png
+x 159
+y 51
+w 30
+h 30
+
+tiled43
+image data/tiled.png
+x 159
+y 81
+w 30
+h 30
+
+tiled44
+image data/tiled.png
+x 159
+y 111
+w 30
+h 30
+
+tiled45
+image data/tiled.png
+x 198
+y 80
+w 30
+h 30
+
+tiled46
+image data/tiled.png
+x 198
+y 110
+w 30
+h 30
+
+tiled47
+image data/tiled.png
+x 236
+y 110
+w 30
+h 30
+
+tiled48
+image data/tiled.png
+x 236
+y 81
+w 30
+h 30
+
+tiled49
+image data/tiled.png
+x 16
+y 220
+w 30
+h 30
+
+tiled50
+image data/tiled.png
+x 16
+y 250
+w 30
+h 30
 
 clim_wall
 image data/megasprite.png
@@ -736,6 +901,7 @@ x 236
 y 111
 w 74
 h 110
+
 
 redeye1
 image data/enemysprite2.png
@@ -982,133 +1148,3 @@ x 80
 y 60
 w 440
 h 60
-
-boss_ultifirst1
-image data/enemysprite2.png
-x 182
-y 276
-w 138
-h 155
-
-boss_ultifirst2
-image data/enemysprite2.png
-x 323
-y 285
-w 141
-h 162
-
-boss_ultifirst3
-image data/enemysprite2.png
-x 486
-y 301
-w 100
-h 147
-
-boss_ultifirst4
-image data/enemysprite2.png
-x 604
-y 280
-w 107
-h 176
-
-boss_ultifirst5
-image data/enemysprite2.png
-x 720
-y 273
-w 125
-h 192
-
-boss_utillast6
-image data/enemysprite2.png
-x 855
-y 307
-w 135
-h 155
-
-
-
-
-
-boss_bullet1
-image data/megasprite.png
-x 7
-y 1252
-w 61
-h 66
-
-boss_bullet2
-image data/megasprite.png
-x 71
-y 1246
-w 131
-h 90
-
-boss_bullet3
-image data/megasprite.png
-x 204
-y 1246
-w 139
-h 81
-
-boss_bullet4
-image data/megasprite.png
-x 348
-y 1258
-w 135
-h 70
-
-boss_transfiguration1
-image data/enemysprite2.png
-x 255
-y 489
-w 108
-h 148
-
-boss_transfiguration2
-image data/enemysprite2.png
-x 366
-y 489
-w 96
-h 156
-
-boss_transfiguration3
-image data/enemysprite2.png
-x 471
-y 489
-w 116
-h 147
-
-boss_transfiguration4
-image data/enemysprite2.png
-x 594
-y 464
-w 100
-h 148
-
-boss_transfiguration5
-image data/enemysprite2.png
-x 698
-y 473
-w 85
-h 164
-
-boss_transfiguration6
-image data/enemysprite2.png
-x 791
-y 500
-w 155
-h 134
-
-boss_ready1
-image data/enemysprite2.png
-x 511
-y 765
-w 110
-h 115
-
-boss_ready2
-image data/enemysprite2.png
-x 633
-y 765
-w 101
-h 138

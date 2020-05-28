@@ -9,13 +9,14 @@ import com.game.state.GameState;
 
 // Done
 
-public class RedEyeBullet extends Bullet {
+public class DarkRaiseBullet extends Bullet{
+	
     private Animation forwardBulletAnim, backBulletAnim;
     
-    public RedEyeBullet(float x, float y, GameState gameState) {
+    public DarkRaiseBullet(float x, float y, GameState gameState) {
             super(x, y, 30, 30, 1.0f, 10, gameState);
-            forwardBulletAnim = DataLoader.getInstance().getAnimation("redeyebullet");
-            backBulletAnim = DataLoader.getInstance().getAnimation("redeyebullet");
+            forwardBulletAnim = DataLoader.getInstance().getAnimation("darkraisebullet");
+            backBulletAnim = DataLoader.getInstance().getAnimation("darkraisebullet");
             backBulletAnim.flipAllImage();
     }
 
@@ -48,5 +49,6 @@ public class RedEyeBullet extends Bullet {
 
     @Override
     public void attack() {}
+
 	
 }

@@ -1,6 +1,7 @@
 package com.game.objectmanager;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,92 +10,88 @@ import com.game.gameinteface.Profile;
 import com.game.gameobject.SpecificObject;
 import com.game.state.GameState;
 
-// Status: Completed
+// Done
 
 public class SpecificObjectManager {
 
 	// Nguyen tac da hinh Polymophism
-	protected List<SpecificObject> specificObjects;
-	
-	private GameState gameWorld;
-	
-	public SpecificObjectManager(GameState gameWorld) {
-		
-		// LinkedList la kieu danh sach lien ket doi, khong dong bo
-		// Bat dong bo se nhanh hon dong bo do dong bo can nhieu thao tac voi du lieu
-		// Vi vay, bat dong bo phu hop voi thao tac them, sua, xoa tren du lieu, con dong bo phu voi sap xep, truy cap du lieu
-		
-		specificObjects = Collections.synchronizedList(new LinkedList<SpecificObject>()); 	
-		this.gameWorld = gameWorld;
-	}
-	
-	public void addObject(SpecificObject object) {
-		
-		synchronized (specificObjects) {
-			specificObjects.add(object);
-		}
-		
-	}
-	
-	public void removeObject(SpecificObject object) {
-		
-		synchronized (specificObjects) {
-			
-			for(int i = 0; i < specificObjects.size(); i++) {
-				
-				SpecificObject objectInList = specificObjects.get(i);
-				
-				if(objectInList == object)
-					// Dau == xay ra khi objectInList va object tro den cùng 1 vi tri khi do 2 object trung nhau
-					specificObjects.remove(i);
-				
-			}
-			
-		}
-		
-	}
-	
-	public void UpdateObjects() {
-		
-		synchronized (specificObjects) {
-			for(int i = 0; i < specificObjects.size(); i++) {
-				
-				SpecificObject object = specificObjects.get(i);
-				
-				if(!object.isOutOfCameraView()) object.Update();
-				
-				if(object.getState() == Profile.DEATH) specificObjects.remove(i);
-				
-			}
-		}
-	}
-	
-	public SpecificObject getObjectCollideWithThisObject(SpecificObject object) {
-		
-		synchronized (specificObjects) {
-		
-			for(int i = 0; i < specificObjects.size(); i++) {
-				SpecificObject objectInList = specificObjects.get(i);
-				
-				if(objectInList.getTeamType() != object.getTeamType()
-						&& object.getBoundForCollisionWithEnemy().intersects(objectInList.getBoundForCollisionWithEnemy()))
-						
-						return objectInList;
-			}
-		}
-		return null;
-	}
-	
-	public void draw(Graphics g) {
-		synchronized (specificObjects) {
-			
-			for(int i = 0; i < specificObjects.size(); i++) {
-				SpecificObject object = specificObjects.get(i);
-				
-				if(!object.isOutOfCameraView()) object.draw(g);
-			}
-			
-		}
-	}
+    protected List<SpecificObject> specificObjects;
+
+    private GameState gameState;
+    
+    public SpecificObjectManager(GameState gameState){
+        
+    	specificObjects = Collections.synchronizedList(new LinkedList<SpecificObject>());
+        this.gameState = gameState;
+        
+    }
+    
+    public GameState getGameState(){
+        return gameState;
+    }
+    
+    public void addObject(SpecificObject particularObject){
+        
+        
+        synchronized(specificObjects){
+        	specificObjects.add(particularObject);
+        }
+        
+    }
+    
+    public void RemoveObject(SpecificObject particularObject){
+        synchronized(specificObjects){
+        
+            for(int id = 0; id < specificObjects.size(); id++){
+                
+            	SpecificObject object = specificObjects.get(id);
+                if(object == particularObject)
+                	specificObjects.remove(id);
+
+            }
+        }
+    }
+    
+    public SpecificObject getCollisionWidthEnemyObject(SpecificObject object){
+        synchronized(specificObjects){
+            for(int id = 0; id < specificObjects.size(); id++){
+                
+            	SpecificObject objectInList = specificObjects.get(id);
+
+                if(object.getTeamType() != objectInList.getTeamType() && 
+                        object.getBoundForCollisionWithEnemy().intersects(objectInList.getBoundForCollisionWithEnemy())){
+                    return objectInList;
+                }
+            }
+        }
+        return null;
+    }
+    
+    public void UpdateObjects(){
+        
+        synchronized(specificObjects){
+            for(int id = 0; id < specificObjects.size(); id++){
+                
+            	SpecificObject object = specificObjects.get(id);
+                
+                
+                if(!object.isObjectOutOfCameraView()) object.Update();
+                
+                if(object.getState() == SpecificObject.DEATH){
+                	specificObjects.remove(id);
+                }
+            }
+        }
+
+        //System.out.println("Camerawidth  = "+camera.getWidth());
+        
+    }
+    
+    public void draw(Graphics2D g2){
+        synchronized(specificObjects){
+            for(SpecificObject object: specificObjects)
+                if(!object.isObjectOutOfCameraView()) object.draw(g2);
+        }
+    }
 	
 }

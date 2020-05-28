@@ -1,6 +1,6 @@
 package com.game.gameobject;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import com.game.effect.Animation;
@@ -9,40 +9,43 @@ import com.game.state.GameState;
 
 public class YellowFlowerBullet extends Bullet {
 
-	private Animation forward, backward;
-	
-	public YellowFlowerBullet(float posX, float posY, GameState gameState) {
-		super(posX, posY, 30, 30, 1.0f, 10, 0, gameState);
-		forward = DataLoader.getInstance().getAnimation("yellow_flower_bullet");
-		backward = DataLoader.getInstance().getAnimation("yellow_flower_bullet");
-		backward.flipAllImages();
-	}
+    private Animation forwardBulletAnim, backBulletAnim;
+    
+    public YellowFlowerBullet(float x, float y, GameState gameState) {
+            super(x, y, 30, 30, 1.0f, 10, gameState);
+            forwardBulletAnim = DataLoader.getInstance().getAnimation("yellow_flower_bullet");
+            backBulletAnim = DataLoader.getInstance().getAnimation("yellow_flower_bullet");
+            backBulletAnim.flipAllImage();
+    }
 
-	@Override
-	public void attack() {}
+    
+    
+    @Override
+    public Rectangle getBoundForCollisionWithEnemy() {
+            // TODO Auto-generated method stub
+            return getBoundForCollisionWithMap();
+    }
 
-	@Override
-	public Rectangle getBoundForCollisionWithEnemy() {
-		// TODO Auto-generated method stub
-		return getBoundForCollisionWithMap();
-	}
+    @Override
+    public void draw(Graphics2D g2) {
+            // TODO Auto-generated method stub
+        if(getSpeedX() > 0){          
+            forwardBulletAnim.Update(System.nanoTime());
+            forwardBulletAnim.draw((int) (getPosX() - getGameState().camera.getPosX()), (int) getPosY() - (int) getGameState().camera.getPosY(), g2);
+        }else{
+            backBulletAnim.Update(System.nanoTime());
+            backBulletAnim.draw((int) (getPosX() - getGameState().camera.getPosX()), (int) getPosY() - (int) getGameState().camera.getPosY(), g2);
+        }
+        //drawBoundForCollisionWithEnemy(g2);
+    }
 
-	@Override
-	public void draw(Graphics g) {
-		if(getSpeedX() >= 0) {
-			forward.Update(System.nanoTime());
-			forward.draw(g, (int) (getPosX() - getGameState().camera.getPosX()), (int) (getPosY() - getGameState().camera.getPosY()));
-		}else {
-			backward.Update(System.nanoTime());
-			backward.draw(g, (int) (getPosX() - getGameState().camera.getPosX()), (int) (getPosY() - getGameState().camera.getPosY()));
-		}
-		
-	}
+    @Override
+    public void Update() {
+            // TODO Auto-generated method stub
+        super.Update();
+    }
 
-	@Override
-	public void Update() {
-		super.Update();
-	}
-	
-	
+    @Override
+    public void attack() {}
+
 }

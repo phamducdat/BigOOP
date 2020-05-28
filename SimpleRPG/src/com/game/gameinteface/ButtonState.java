@@ -8,7 +8,7 @@ public interface ButtonState {
 	public static final int PRESS = 1;
 	public static final int HOVER = 2;
 	
-	public abstract boolean isInButton();
+	public abstract boolean isInButton(int x, int y);
 	
 	public abstract void draw(Graphics g);
 	

@@ -1,6 +1,10 @@
 package com.game.state;
 
+import java.awt.image.BufferedImage;
+
 import com.game.userinterface.GamePanel;
+
+//  Done
 
 public abstract class State {
 
@@ -18,5 +22,7 @@ public abstract class State {
 	public abstract void processPressButton(int keyEvent);
 	
 	public abstract void processReleaseButton(int keyEvent);
+	
+	public abstract BufferedImage getBufferedImage();
 	
 }

@@ -6,7 +6,7 @@ public interface Actable {
 	
 	public abstract void jump();
 	
-	public abstract void kneel();
+	public abstract void dick();
 	
 	public abstract void standUp();
 	
