@@ -1,5 +1,5 @@
 package com.game.gameobject;
-//thieu  bullet nen phan attack t comment lai
+
 import java.applet.AudioClip;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,7 +10,7 @@ import com.game.effect.DataLoader;
 import com.game.gameinteface.Profile;
 import com.game.state.GameState;
 
-// Done
+// Done, da bay duoc toi hero
 
 public class RobotR extends SpecificObject{
 	
@@ -59,18 +59,19 @@ public class RobotR extends SpecificObject{
     public void Update(){
         super.Update();
         
-        if(getPosX() - getGameState().megaMan.getPosX() > 0) setDirection(Profile.RIGHT_DIR);
-        else setDirection(Profile.LEFT_DIR);
+        if(getPosX() - getGameState().megaMan.getPosX() > 0) setDirection(SpecificObject.RIGHT_DIR);
         
-        if(getPosX() < x1)
+        else setDirection(SpecificObject.LEFT_DIR);
+        
+        if(getPosX()-getGameState().megaMan.getPosX() < 5)   
             setSpeedX(1);
-        else if(getPosX() > x2)
+        else if(getPosX()-getGameState().megaMan.getPosX() > 5)
             setSpeedX(-1);
         setPosX(getPosX() + getSpeedX());
         
-        if(getPosY() < y1)
+        if(getPosY()-getGameState().megaMan.getPosY() < 5)
             setSpeedY(1);
-        else if(getPosY() > y2)
+        else if(getPosY()-getGameState().megaMan.getPosY()  > 5)
             setSpeedY(-1);
         setPosY(getPosY() + getSpeedY());
         
@@ -78,7 +79,9 @@ public class RobotR extends SpecificObject{
             attack();
             startTimeToShoot = System.nanoTime();
         }
+
     }
+    
     
     @Override
     public Rectangle getBoundForCollisionWithEnemy() {

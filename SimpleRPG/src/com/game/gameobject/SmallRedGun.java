@@ -16,6 +16,8 @@ public class SmallRedGun extends SpecificObject{
     
     private long startTimeToShoot;
     
+    private float x1, x2;
+    
     public SmallRedGun(float x, float y, GameState gameState) {
         super(x, y, 127, 89, 0, 100, gameState);
         backAnim = DataLoader.getInstance().getAnimation("smallredgun");
@@ -23,6 +25,10 @@ public class SmallRedGun extends SpecificObject{
         forwardAnim.flipAllImage();
         startTimeToShoot = 0;
         setTimeForNoBehurt(300000000);
+        
+        x1 = x - 20;
+        x2 = x + 20;
+        setSpeedX(1);
     }
 
     @Override
@@ -44,6 +50,12 @@ public class SmallRedGun extends SpecificObject{
     
     public void Update(){
         super.Update();
+        if(getPosX() < x1)
+            setSpeedX(1);
+        else if(getPosX() > x2)
+            setSpeedX(-1);
+        setPosX(getPosX() + getSpeedX());
+        
         if(System.nanoTime() - startTimeToShoot > 1000*10000000*2.0){
             attack();
             System.out.println("Red Eye attack");
