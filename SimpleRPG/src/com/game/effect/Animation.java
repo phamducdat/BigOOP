@@ -7,6 +7,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+
 // Done
 
 public class Animation {
@@ -174,6 +175,32 @@ public class Animation {
         }
         
     }
+    
+    public long time() { // tính thời gian animation
+		long a = 0;
+		for (int i = 0; i < delayFrames.size(); i++) {
+			a = (long) (a + delayFrames.get(i));
+		}
+		a = (a-1000)/1000000;
+		return a;
+	}
+    
+    
+    
+    public void reverse() { // Đảo đầu cuối vị trí ảnh
+
+		ArrayList<FrameImage> a = new ArrayList<FrameImage>();
+
+		for (int i = frameImages.size() - 1; i >= 0; i--) {
+			a.add(new FrameImage(frameImages.get(i)));
+		}
+
+		for (int i = 0; i < frameImages.size(); i++) {
+			BufferedImage image = a.get(i).getImage();
+			frameImages.get(i).setImage(image);
+		}
+
+	}
     
     public void draw(int x, int y, Graphics2D g2){
         
