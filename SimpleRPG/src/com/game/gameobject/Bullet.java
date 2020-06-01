@@ -15,8 +15,6 @@ public abstract class Bullet extends SpecificObject {
         setDamage(damage);
 }
 
-    public abstract void draw(Graphics2D g2d);
-
     public void Update(){
 	    super.Update();
 	    setPosX(getPosX() + getSpeedX());

@@ -18,7 +18,7 @@ public class FrameImage {
     
     public FrameImage(FrameImage frameImage){
         image = new BufferedImage(frameImage.getWidthImage(), 
-                frameImage.getHeightImage(), frameImage.image.getType());
+                frameImage.getHeightImage(), BufferedImage.TYPE_INT_ARGB);
         Graphics g = image.getGraphics();
         g.drawImage(frameImage.image, 0, 0, null);
         name = frameImage.name;

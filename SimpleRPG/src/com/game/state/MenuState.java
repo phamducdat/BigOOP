@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 
 import com.game.control.Button;
 import com.game.control.RectangleButton;
+import com.game.effect.DataLoader;
 import com.game.userinterface.GameFrame;
 import com.game.userinterface.GamePanel;
 
@@ -27,7 +28,7 @@ public class MenuState extends State{
         bufferedImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         
         buttons = new Button[NUMBER_OF_BUTTON];
-        buttons[0] = new RectangleButton("NEW GAME", 300, 100, 100, 40, 15, 25, Color.ORANGE);
+        buttons[0] = new RectangleButton("NEW GAME", 450, 400, 100, 40, 15, 25, Color.ORANGE);
 		buttons[0].setHoverBgColor(Color.BLUE);
 		buttons[0].setPressedBgColor(Color.GREEN);
 
@@ -36,7 +37,7 @@ public class MenuState extends State{
 //		buttons[1].setPressedBgColor(Color.GREEN);
 		
 
-		buttons[1] = new RectangleButton("EXIT", 300, 160, 100, 40, 15, 25, Color.ORANGE);
+		buttons[1] = new RectangleButton("EXIT", 450, 500, 100, 40, 15, 25, Color.ORANGE);
 		buttons[1].setHoverBgColor(Color.BLUE);
 		buttons[1].setPressedBgColor(Color.GREEN);
     }
@@ -64,7 +65,7 @@ public class MenuState extends State{
             return;
         }
         graphicsPaint.setColor(Color.CYAN);
-		graphicsPaint.fillRect(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight());
+		graphicsPaint.drawImage(DataLoader.getInstance().getFrameImage("openscene").getImage(), 0, 0, null);
 		for (Button bt : buttons) {
 			bt.draw(graphicsPaint);
 		}

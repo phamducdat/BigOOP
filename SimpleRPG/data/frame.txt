@@ -1,5 +1,198 @@
 
-158
+185
+
+openscene
+image data/openscene.png
+x 147
+y 384
+w 1000
+h 750
+
+tile0
+image data/0.png
+x 0
+y 0
+w 128
+h 128
+
+tile1
+image data/1.png
+x 0
+y 0
+w 128
+h 128
+
+tile2
+image data/2.png
+x 0
+y 0
+w 128
+h 128
+
+tile3
+image data/3.png
+x 0
+y 0
+w 128
+h 128
+
+tile4
+image data/4.png
+x 0
+y 0
+w 128
+h 128
+
+tile5
+image data/5.png
+x 0
+y 0
+w 128
+h 128
+
+tile6
+image data/6.png
+x 0
+y 0
+w 128
+h 128
+
+tile7
+image data/7.png
+x 0
+y 0
+w 128
+h 128
+
+tile8
+image data/8.png
+x 0
+y 0
+w 128
+h 128
+
+tile9
+image data/9.png
+x 0
+y 0
+w 128
+h 128
+
+tile10
+image data/10.png
+x 0
+y 0
+w 128
+h 128
+
+tile11
+image data/11.png
+x 0
+y 0
+w 128
+h 128
+
+tile12
+image data/12.png
+x 0
+y 0
+w 128
+h 128
+
+tile13
+image data/13.png
+x 0
+y 0
+w 128
+h 128
+
+tile14
+image data/14.png
+x 0
+y 0
+w 128
+h 128
+
+tile15
+image data/15.png
+x 0
+y 0
+w 128
+h 128
+
+tile16
+image data/16.png
+x 0
+y 0
+w 128
+h 128
+
+tile17
+image data/17.png
+x 0
+y 0
+w 128
+h 128
+
+tile18
+image data/18.png
+x 0
+y 0
+w 128
+h 128
+
+tile19
+image data/19.png
+x 0
+y 0
+w 384
+h 384
+
+tile20
+image data/20.png
+x 0
+y 0
+w 128
+h 128
+
+tile21
+image data/21.png
+x 0
+y 0
+w 128
+h 128
+
+tile22
+image data/22.png
+x 0
+y 0
+w 128
+h 128
+
+tile23
+image data/23.png
+x 0
+y 0
+w 256
+h 256
+
+tile24
+image data/24.png
+x 0
+y 0
+w 128
+h 128
+
+
+
+background
+image data/BG.png
+x 0
+y 0
+w 1000
+h 750
+
+
 
 idle1
 image data/megasprite.png

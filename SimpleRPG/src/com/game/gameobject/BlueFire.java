@@ -1,5 +1,6 @@
 package com.game.gameobject;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -66,5 +67,6 @@ private Animation forwardBulletAnim, backBulletAnim;
 
     @Override
     public void attack() {}
+
 
 }

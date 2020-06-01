@@ -12,7 +12,6 @@ import com.game.effect.FrameImage;
 import com.game.gameinteface.GameWorldState;
 import com.game.gameinteface.Profile;
 import com.game.gameobject.BackgroundMap;
-import com.game.gameobject.FinalBoss;
 import com.game.gameobject.Camera;
 import com.game.gameobject.Hero;
 import com.game.gameobject.PhysicalMap;
@@ -284,7 +283,7 @@ public class GameState extends State implements GameWorldState {
                     storyTutorial = 0;
                     openIntroGameY = 550;
                     
-                    boss = new FinalBoss(finalBossX + 700, 460, this);
+//                    boss = new FinalBoss(finalBossX + 700, 460, this);
                     boss.setTeamType(Profile.ENEMY_TEAM);
                     boss.setDirection(Profile.LEFT_DIR);
                     specificObjectManager.addObject(boss);
@@ -432,6 +431,9 @@ public class GameState extends State implements GameWorldState {
                     if(tutorialState == GameWorldState.MEET_FINAL_BOSS){
                         switchState(GameWorldState.GAMEPLAY);
                     }
+                }
+                if(state == PAUSEGAME) {
+                	state = GAMEPLAY;
                 }
                 break;
                 

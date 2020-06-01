@@ -17,7 +17,7 @@ public class PhysicalMap extends GameObject {
     
     public PhysicalMap(float x, float y, GameState gameWorld) {
         super(x, y, gameWorld);
-        this.tileSize = 30;
+        this.tileSize = 128;
         phys_map = DataLoader.getInstance().getPhysicalMap();
     }
     
@@ -152,5 +152,16 @@ public class PhysicalMap extends GameObject {
                         (int) getPosY() + i*tileSize - (int) camera.getPosY(), tileSize, tileSize);
         
     }
-    
+
+	public int[][] getPhys_map() {
+		return phys_map;
+	}
+
+	public void setPhys_map(int[][] phys_map) {
+		this.phys_map = phys_map;
+	}
+
+	public void setTileSize(int tileSize) {
+		this.tileSize = tileSize;
+	}
 }

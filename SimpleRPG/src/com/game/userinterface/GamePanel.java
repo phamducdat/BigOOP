@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
+import com.game.effect.DataLoader;
 import com.game.gameobject.BackgroundMap;
 import com.game.state.GameState;
 import com.game.state.MenuState;
@@ -36,7 +37,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 //		g.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
 		
 		g.drawImage(gameState.getBufferedImage(), 0, 0, this);
-		
+//		g.drawImage(DataLoader.getInstance().getFrameImage("background").getImage(), 0, 0, this);
 	}
 	
 	public void startGame() {
@@ -72,7 +73,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		long FPS = 80;
+		long FPS = 60;
 		long period = 1000000000 / FPS;
 		
 		long previousTime = System.nanoTime();

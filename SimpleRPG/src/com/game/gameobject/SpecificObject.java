@@ -241,8 +241,6 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
     }
 
     public abstract Rectangle getBoundForCollisionWithEnemy();
-
-    public abstract void draw(Graphics2D g2);
     
     public void hurtingCallback(){};
 }

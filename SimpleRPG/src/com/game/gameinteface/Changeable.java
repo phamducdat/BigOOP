@@ -1,5 +1,6 @@
 package com.game.gameinteface;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 // Status: Completed

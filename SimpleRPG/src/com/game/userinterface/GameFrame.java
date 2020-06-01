@@ -13,7 +13,7 @@ import com.game.effect.DataLoader;
 public class GameFrame extends JFrame {
 	
 	public static final int SCREEN_WIDTH = 1000;
-	public static final int SCREEN_HEIGHT = 600;
+	public static final int SCREEN_HEIGHT = 750;
 	
 	GamePanel gamePanel;
 	

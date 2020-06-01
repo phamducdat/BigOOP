@@ -3,6 +3,7 @@ package com.game.gameobject;
 import java.awt.Graphics2D;
 
 import com.game.state.GameState;
+import com.game.userinterface.GameFrame;
 
 // Done
 
@@ -38,12 +39,31 @@ public class Camera extends GameObject{
         if(!isLocked){
         
             Hero mainCharacter = getGameState().megaMan;
+            int[][] mapClone = getGameState().physicalMap.getPhys_map();
+            int tileSize = getGameState().physicalMap.getTileSize();
 
-            if(mainCharacter.getPosX() - getPosX() > 400) setPosX(mainCharacter.getPosX() - 400);
-            if(mainCharacter.getPosX() - getPosX() < 200) setPosX(mainCharacter.getPosX() - 200);
+            if(mainCharacter.getPosX() - getPosX() > 400) {
+            	if(mainCharacter.getPosX() - 400 + GameFrame.SCREEN_WIDTH <= mapClone[0].length * tileSize)
+            		setPosX(mainCharacter.getPosX() - 400);
+            	else setPosX(mapClone[0].length + tileSize - GameFrame.SCREEN_WIDTH);
+            }
+            if(mainCharacter.getPosX() - getPosX() < 200) {
+            	if(mainCharacter.getPosX() - 200 >= 0)
+            		setPosX(mainCharacter.getPosX() - 200);
+            	else setPosX(0);
+            }
 
-            if(mainCharacter.getPosY() - getPosY() > 400) setPosY(mainCharacter.getPosY() - 400); // bottom
-            else if(mainCharacter.getPosY() - getPosY() < 250) setPosY(mainCharacter.getPosY() - 250);// top 
+            if(mainCharacter.getPosY() - getPosY() > 400) {
+            	if(mainCharacter.getPosY() - 400 + GameFrame.SCREEN_HEIGHT <= mapClone.length * tileSize)
+            		setPosY(mainCharacter.getPosY() - 400); // bottom
+            	
+            	else setPosY(mapClone.length * tileSize - GameFrame.SCREEN_HEIGHT);
+            }
+            else if(mainCharacter.getPosY() - getPosY() < 250) {
+            	if(mainCharacter.getPosY() - 250 >= 0)
+            		setPosY(mainCharacter.getPosY() - 250);// top 
+            	else setPosY(0);
+            }
         }
     
     }

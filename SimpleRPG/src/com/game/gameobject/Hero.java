@@ -11,12 +11,14 @@ import javax.xml.crypto.Data;
 import com.game.effect.Animation;
 import com.game.effect.DataLoader;
 import com.game.state.GameState;
+import com.game.userinterface.GameFrame;
 
 // Done
 
 public class Hero extends HumanoidObject{
 
-    public static final int RUNSPEED = 3;
+    public static final float RUNSPEED = 5.0f;
+    public static final float JUMPSPEED = 10.0f;
     
     private Animation runForwardAnim, runBackAnim, runShootingForwarAnim, runShootingBackAnim;
     private Animation idleForwardAnim, idleBackAnim, idleShootingForwardAnim, idleShootingBackAnim;
@@ -33,7 +35,7 @@ public class Hero extends HumanoidObject{
     private AudioClip shooting1;
     
     public Hero(float x, float y, GameState gameState) {
-        super(x, y, 70, 90, 0.1f, 100, gameState);
+        super(x, y, 70, 90, 0.3f, 100, gameState);
         
         shooting1 = DataLoader.getInstance().getSound("bluefireshooting");
         hurtingSound = DataLoader.getInstance().getSound("megamanhurt");
@@ -90,6 +92,15 @@ public class Hero extends HumanoidObject{
     public void Update() {
 
         super.Update();
+        
+        int[][] mapClone = getGameState().physicalMap.getPhys_map();
+        int tileSize = getGameState().physicalMap.getTileSize();
+        
+        if(getPosX() < 0 || getPosX() > mapClone[0].length * tileSize || getPosY() < 0 || getPosY() > mapClone.length * tileSize ) {
+        	setState(DEATH);
+        	setPosX(400);
+        	setPosY(400);
+        }
         
         if(isShooting){
             if(System.nanoTime() - lastShootingTime > 500*1000000){
@@ -249,8 +260,8 @@ public class Hero extends HumanoidObject{
     @Override
     public void run() {
         if(getDirection() == LEFT_DIR)
-            setSpeedX(-3);
-        else setSpeedX(3);
+            setSpeedX(- RUNSPEED);
+        else setSpeedX(RUNSPEED);
     }
 
     @Override
@@ -258,7 +269,7 @@ public class Hero extends HumanoidObject{
 
         if(!getIsJumping()){
             setIsJumping(true);
-            setSpeedY(-5.0f);           
+            setSpeedY(- JUMPSPEED);           
             flyBackAnim.reset();
             flyForwardAnim.reset();
         }
@@ -270,13 +281,13 @@ public class Hero extends HumanoidObject{
             rectLeftWall.x -= 1;
             
             if(getGameState().physicalMap.haveCollisionWithRightWall(rectRightWall)!=null && getSpeedX() > 0){
-                setSpeedY(-5.0f);
+                setSpeedY(- JUMPSPEED);
                 //setSpeedX(-1);
                 flyBackAnim.reset();
                 flyForwardAnim.reset();
                 //setDirection(LEFT_DIR);
             }else if(getGameState().physicalMap.haveCollisionWithLeftWall(rectLeftWall)!=null && getSpeedX() < 0){
-                setSpeedY(-5.0f);
+                setSpeedY(- JUMPSPEED);
                 //setSpeedX(1);
                 flyBackAnim.reset();
                 flyForwardAnim.reset();
