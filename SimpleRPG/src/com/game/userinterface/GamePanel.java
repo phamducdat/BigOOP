@@ -27,6 +27,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 	public GamePanel() {
 		
 		gameState = new MenuState(this);
+		
 		keyEventManager = new KeyEventManager(gameState);
 		
 	}
@@ -37,6 +38,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 //		g.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
 		
 		g.drawImage(gameState.getBufferedImage(), 0, 0, this);
+
 //		g.drawImage(DataLoader.getInstance().getFrameImage("background").getImage(), 0, 0, this);
 	}
 	
@@ -81,6 +83,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 		long currentTime;
 		
 		while(isRunning) {
+			
 			gameState.Update();
 			gameState.Render();
 			

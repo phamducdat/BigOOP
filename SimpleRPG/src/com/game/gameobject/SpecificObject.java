@@ -12,7 +12,7 @@ import com.game.state.GameState;
 // Done
 
 public abstract class SpecificObject extends GameObject implements Profile, Vulnerable  {
-
+	
 	private int state = ALIVE;
 	private int teamType;
 	private int direction;
@@ -241,6 +241,20 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
     }
 
     public abstract Rectangle getBoundForCollisionWithEnemy();
+    
+    @Override
+    public void draw(Graphics2D g){
+    	if(getState() != DEATH) {
+    		
+    		int bloodLength = (int) (getBlood() / 100.0f * 50);
+    		
+    		g.setColor(Color.GRAY);
+    		g.fillRect((int) (getPosX() - 50 / 2 - 1 - getGameState().camera.getPosX()), (int) (getPosY() - getHeight() / 2 - 10 - 1 - getGameState().camera.getPosY()), 52, 5);
+    		g.setColor(Color.RED);
+    		g.fillRect((int) (getPosX() - 50 / 2 - getGameState().camera.getPosX()), (int) (getPosY() - getHeight() / 2 - 10 - getGameState().camera.getPosY()), bloodLength, 3);
+
+    	}
+    }
     
     public void hurtingCallback(){};
 }

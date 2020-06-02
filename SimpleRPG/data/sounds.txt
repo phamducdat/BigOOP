@@ -1,7 +1,10 @@
-5
+8
 
 bluefireshooting data/bluefireshooting.wav
 redeyeshooting data/redeyeshooting.wav
 bgmusic data/bgmusic.wav
 robotRshooting data/robotRshooting.wav
 megamanhurt data/megamanhurt.wav
+lucianshooting1 data/lucianshootingsound.wav
+lucianshooting2 data/lucianshootingsound.wav
+galiohurt data/galiodying.wav

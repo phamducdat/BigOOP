@@ -1,9 +1,13 @@
 package com.game.gameobject;
 
+import java.applet.Applet;
 import java.applet.AudioClip;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.sound.midi.SysexMessage;
 import javax.xml.crypto.Data;
@@ -32,16 +36,20 @@ public class Hero extends HumanoidObject{
     private boolean isShooting = false;
     
     private AudioClip hurtingSound;
-    private AudioClip shooting1;
+    private AudioClip shooting1, shooting2;
+    private boolean shootFlag; 
     
     public Hero(float x, float y, GameState gameState) {
         super(x, y, 70, 90, 0.3f, 100, gameState);
         
-        shooting1 = DataLoader.getInstance().getSound("bluefireshooting");
-        hurtingSound = DataLoader.getInstance().getSound("megamanhurt");
+        shooting1 = DataLoader.getInstance().getSound("lucianshooting1");
+        shooting2 = DataLoader.getInstance().getSound("lucianshooting2");
+        hurtingSound = DataLoader.getInstance().getSound("galiohurt");
         
         setTeamType(HERO_TEAM);
 
+        shootFlag = false;
+        
         setTimeForNoBehurt(2000*1000000);
         
         runForwardAnim = DataLoader.getInstance().getAnimation("run");
@@ -142,12 +150,14 @@ public class Hero extends HumanoidObject{
 
     @Override
     public void draw(Graphics2D g2) {
-        
+    	
         switch(getState()){
         
             case ALIVE:
             case CANTBEHURT:
                 if(getState() == CANTBEHURT && (System.nanoTime()/10000000)%2!=1)
+                	
+                	
                 {
                     System.out.println("Plash...");
                 }else{
@@ -259,9 +269,14 @@ public class Hero extends HumanoidObject{
 
     @Override
     public void run() {
-        if(getDirection() == LEFT_DIR)
-            setSpeedX(- RUNSPEED);
-        else setSpeedX(RUNSPEED);
+    	if(!getIsDicking()) {
+    		if(getDirection() == LEFT_DIR)
+                setSpeedX(- RUNSPEED);
+            else setSpeedX(RUNSPEED);
+    	}
+    	
+    	
+    	
     }
 
     @Override
@@ -301,6 +316,7 @@ public class Hero extends HumanoidObject{
     public void dick() {
         if(!getIsJumping())
             setIsDicking(true);
+            if(getSpeedX() != 0) setSpeedX(0);
     }
 
     @Override
@@ -324,9 +340,20 @@ public class Hero extends HumanoidObject{
     @Override
     public void attack() {
     
+    	// DDung trong truong hop ban dan nhanh
         if(!isShooting && !getIsDicking()){
-            
-            shooting1.play();
+            if(shootFlag) {
+            	System.out.println("Shoot 1");
+            	shooting1.play();
+            	shootFlag = false;
+            }else {
+            	System.out.println("Shoot 2");
+            	shooting2.play();
+            	shootFlag = true;
+            	
+            	
+            	
+            }
             
             Bullet bullet = new BlueFire(getPosX(), getPosY(), getGameState());
             if(getDirection() == LEFT_DIR) {

@@ -74,6 +74,9 @@ public class SmallRedGun extends SpecificObject{
 
     @Override
     public void draw(Graphics2D g2) {
+    	
+    	super.draw(g2);
+    	
         if(!isObjectOutOfCameraView()){
             if(getState() == CANTBEHURT && (System.nanoTime()/10000000)%2!=1){
                 // plash...

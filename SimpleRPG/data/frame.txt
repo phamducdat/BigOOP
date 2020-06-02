@@ -1,5 +1,5 @@
 
-185
+187
 
 openscene
 image data/openscene.png
@@ -1335,9 +1335,23 @@ y 1388
 w 30
 h 30
 
-gamewin
+gamewin1
 image data/textgame.png
 x 80
 y 60
 w 440
 h 60
+
+gamewin2
+image data/gamewin.png
+x 147
+y 383
+w 1000
+h 750
+
+gamelose
+image data/gamelose.png
+x 165
+y 384
+w 1000
+h 750

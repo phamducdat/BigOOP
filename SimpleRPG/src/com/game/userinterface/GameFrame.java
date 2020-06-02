@@ -19,22 +19,25 @@ public class GameFrame extends JFrame {
 	
 	public GameFrame() {
 		
-		 super("Mega Man java game");
-	        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	        Toolkit toolkit = this.getToolkit();
-	        Dimension solution = toolkit.getScreenSize();
+		super("BKMan: An unknown adventure");
+	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    
+	    // Lay kich thuoc man hinh
+        Toolkit toolkit = this.getToolkit();
+        Dimension solution = toolkit.getScreenSize();
 
-	        try {
-	        	DataLoader.getInstance().LoadData();
-	        } catch (IOException ex) {
-	            ex.printStackTrace();
-	        }
+        try {
+        	DataLoader.getInstance().LoadData();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
-	        this.setBounds((solution.width - SCREEN_WIDTH)/2, (solution.height - SCREEN_HEIGHT)/2, SCREEN_WIDTH, SCREEN_HEIGHT);
+        // Dat kich thuoc Frame
+        this.setBounds((solution.width - SCREEN_WIDTH)/2, (solution.height - SCREEN_HEIGHT)/2, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-	        gamePanel = new GamePanel();
-	        addKeyListener(gamePanel);
-	        add(gamePanel);
+        gamePanel = new GamePanel();
+        addKeyListener(gamePanel);
+        add(gamePanel);
 		
 	}
 	

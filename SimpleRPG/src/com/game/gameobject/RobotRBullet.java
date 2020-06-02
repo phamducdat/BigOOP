@@ -30,6 +30,7 @@ public class RobotRBullet extends Bullet {
     @Override
     public void draw(Graphics2D g2) {
             // TODO Auto-generated method stub
+    	
         if(getSpeedX() > 0){          
             forwardBulletAnim.Update(System.nanoTime());
             forwardBulletAnim.draw((int) (getPosX() - getGameState().camera.getPosX()), (int) getPosY() - (int) getGameState().camera.getPosY(), g2);

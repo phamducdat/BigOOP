@@ -40,15 +40,6 @@ public class GameState extends State implements GameWorldState {
     public PhysicalMap physicalMap;
     public BackgroundMap backgroundMap;
     public Camera camera;
-
-    public static final int finalBossX = 3600;
-    
-    public static final int INIT_GAME = 0;
-    public static final int TUTORIAL = 1;
-    public static final int GAMEPLAY = 2;
-    public static final int GAMEOVER = 3;
-    public static final int GAMEWIN = 4;
-    public static final int PAUSEGAME = 5;
     
     public static final int INTROGAME = 0;
     public static final int MEETFINALBOSS = 1;
@@ -59,7 +50,7 @@ public class GameState extends State implements GameWorldState {
     public int tutorialState = INTROGAME;
     
     public int storyTutorial = 0;
-    public String[] texts1 = new String[4];
+    public String[] texts = new String[4];
 
     public String textTutorial;
     public int currentSize = 1;
@@ -77,12 +68,12 @@ public class GameState extends State implements GameWorldState {
     public GameState(GamePanel gamePanel){
             super(gamePanel);
         
-        texts1[0] = "We are heros, and our mission is protecting our Home\nEarth....";
-        texts1[1] = "There was a Monster from University on Earth in 10 years\n"
+        texts[0] = "We are heros, and our mission is protecting our Home\nEarth....";
+        texts[1] = "There was a Monster from University on Earth in 10 years\n"
                 + "and we lived in the scare in that 10 years....";
-        texts1[2] = "Now is the time for us, kill it and get freedom!....";
-        texts1[3] = "      LET'S GO!.....";
-        textTutorial = texts1[0];
+        texts[2] = "Now is the time for us, kill it and get freedom!....";
+        texts[3] = "      LET'S GO!.....";
+        textTutorial = texts[0];
 
         
         bufferedImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
@@ -154,7 +145,6 @@ public class GameState extends State implements GameWorldState {
         specificObjectManager.addObject(robotR3);
         
         
-        
         SpecificObject smallRedGun2 = new SmallRedGun(1700, 980, this);
         smallRedGun2.setDirection(Profile.LEFT_DIR);
         smallRedGun2.setTeamType(Profile.ENEMY_TEAM);
@@ -172,7 +162,7 @@ public class GameState extends State implements GameWorldState {
                 
                 if(storyTutorial == 0){
                     if(openIntroGameY < 450) {
-                        openIntroGameY+=4;
+                        openIntroGameY += 10;
                     }else storyTutorial ++;
                     
                 }else{
@@ -307,7 +297,7 @@ public class GameState extends State implements GameWorldState {
                 
                 break;
             case GAMEOVER:
-                
+               
                 break;
             case GAMEWIN:
                 
@@ -338,7 +328,7 @@ public class GameState extends State implements GameWorldState {
                     g2.setColor(Color.WHITE);
                     g2.drawString("PRESS ENTER TO CONTINUE", 400, 300);
                     break;
-                case PAUSEGAME:
+                case GAMEPAUSE:
                     g2.setColor(Color.BLACK);
                     g2.fillRect(300, 260, 500, 70);
                     g2.setColor(Color.WHITE);
@@ -369,15 +359,18 @@ public class GameState extends State implements GameWorldState {
                     
                     
                     if(state == GAMEWIN){
-                        g2.drawImage(DataLoader.getInstance().getFrameImage("gamewin").getImage(), 300, 300, null);
+                        g2.drawImage(DataLoader.getInstance().getFrameImage("gamewin2").getImage(), 0, 0, null);
                     }
                     
                     break;
                 case GAMEOVER:
-                    g2.setColor(Color.BLACK);
-                    g2.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
-                    g2.setColor(Color.WHITE);
-                    g2.drawString("GAME OVER!", 450, 300);
+//                    g2.setColor(Color.BLACK);
+//                    g2.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
+//                    g2.setColor(Color.WHITE);
+//                    g2.drawString("GAME OVER!", 450, 300);
+                	
+                	g2.drawImage(DataLoader.getInstance().getFrameImage("gamelose").getImage(), 0, 0, null);
+                	
                     break;
 
             }
@@ -422,7 +415,7 @@ public class GameState extends State implements GameWorldState {
                     if(storyTutorial<=3){
                         storyTutorial ++;
                         currentSize = 1;
-                        textTutorial = texts1[storyTutorial-1];
+                        textTutorial = texts[storyTutorial-1];
                     }else{
                         switchState(GameWorldState.GAMEPLAY);
                     }
@@ -432,7 +425,7 @@ public class GameState extends State implements GameWorldState {
                         switchState(GameWorldState.GAMEPLAY);
                     }
                 }
-                if(state == PAUSEGAME) {
+                if(state == GAMEPAUSE) {
                 	state = GAMEPLAY;
                 }
                 break;
@@ -441,11 +434,13 @@ public class GameState extends State implements GameWorldState {
                 megaMan.jump();
                 break;
                 
-            case KeyEvent.VK_A:
+            case KeyEvent.VK_Q:
                 megaMan.attack();
                 break;
+               
                 
-        }}
+        }
+    }
 
     @Override
     public void processReleaseButton(int code) {
@@ -472,21 +467,21 @@ public class GameState extends State implements GameWorldState {
             case KeyEvent.VK_ENTER:
                 if(state == GAMEOVER || state == GAMEWIN) {
                     gamePanel.setState(new MenuState(gamePanel));
-                } else if(state == PAUSEGAME) {
+                } else if(state == GAMEPAUSE) {
                     state = lastState;
                 }
                 break;
                 
             case KeyEvent.VK_SPACE:
-                
+            
                 break;
                 
-            case KeyEvent.VK_A:
+            case KeyEvent.VK_Q:
                 
                 break;
             case KeyEvent.VK_ESCAPE:
                 lastState = state;
-                state = PAUSEGAME;
+                state = GAMEPAUSE;
                 break;
                 
         }
