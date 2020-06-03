@@ -1,5 +1,6 @@
 package com.game.gameobject;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class Boss extends HumanoidObject {
 	protected int a;
 
 	public Boss(float x, float y, float width, float height, float mass, int blood, GameState GameState) {
-		super(x, y, 110, 150, 0.1f, 100,  GameState);
+		super(x, y, 110, 150, 0.1f, blood,  GameState);
 		idleback = DataLoader.getInstance().getAnimation("boss_idle");
 		idleforward = DataLoader.getInstance().getAnimation("boss_idle");
 		idleforward.flipAllImage();
@@ -233,6 +234,7 @@ public class Boss extends HumanoidObject {
 
 	@Override
 	public void draw(Graphics2D g2) {
+		
 		if (getState() == CANTBEHURT && (System.nanoTime() / 10000000) % 2 != 1) {
 
 		} else if (!attackType.get(attackIndex).equals("slide")) {

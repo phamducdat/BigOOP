@@ -23,6 +23,7 @@ import com.game.objectmanager.SpecificObjectManager;
 import com.game.userinterface.GameFrame;
 import com.game.userinterface.GamePanel;
 import com.game.gameobject.DarkRaise;
+import com.game.gameobject.FinalBoss;
 import com.game.gameobject.FinalBossHard;
 import com.game.gameobject.RobotR;
 
@@ -32,6 +33,8 @@ public class GameState extends State implements GameWorldState {
 	
     private BufferedImage bufferedImage;
     private int lastState;
+    
+    public int difficulty;
 
     public SpecificObjectManager specificObjectManager;
     public BulletManager bulletManager;
@@ -41,9 +44,6 @@ public class GameState extends State implements GameWorldState {
     public PhysicalMap physicalMap;
     public BackgroundMap backgroundMap;
     public Camera camera;
-    
-    public static final int INTROGAME = 0;
-    public static final int MEETFINALBOSS = 1;
     
     public int openIntroGameY = 0;
     public int state = INIT_GAME;
@@ -66,7 +66,7 @@ public class GameState extends State implements GameWorldState {
     
     public AudioClip bgMusic;
     
-    public GameState(GamePanel gamePanel){
+    public GameState(GamePanel gamePanel, int difficulty){
             super(gamePanel);
         
         texts[0] = "We are heros, and our mission is protecting our Home\nEarth....";
@@ -86,18 +86,20 @@ public class GameState extends State implements GameWorldState {
         
         specificObjectManager = new SpecificObjectManager(this);
         specificObjectManager.addObject(megaMan);
-        
-        initDifficultEnemies();
 
         bgMusic = DataLoader.getInstance().getSound("bgmusic");
+        this.difficulty = difficulty;
         
+        if(difficulty == EASY) {
+        	initEasyEnemies();
+        }else initDifficultEnemies();
     }
     
     private void initEasyEnemies(){
-        SpecificObject redeye = new RedEyeDevil(627, 474, this);
-        redeye.setDirection(Profile.LEFT_DIR);
-        redeye.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(redeye);
+//        SpecificObject redeye = new RedEyeDevil(627, 474, this);
+//        redeye.setDirection(Profile.LEFT_DIR);
+//        redeye.setTeamType(Profile.ENEMY_TEAM);
+//        specificObjectManager.addObject(redeye);
         
         SpecificObject smallRedGun = new SmallRedGun(1600, 180, this);
         smallRedGun.setDirection(Profile.LEFT_DIR);
@@ -230,13 +232,13 @@ public class GameState extends State implements GameWorldState {
                     if(currentSize < textTutorial.length()) currentSize++;
                 }
                 break;
-            case MEETFINALBOSS:
+            case MEET_FINAL_BOSS:
                 if(storyTutorial == 0){
                     if(openIntroGameY >= 450) {
-                        openIntroGameY-=1;
+                        openIntroGameY -= 10;
                     }
                     if(camera.getPosX() < finalBossX){
-                        camera.setPosX(camera.getPosX() + 2);
+                        camera.setPosX(camera.getPosX() + 10);
                     }
                     
                     if(megaMan.getPosX() < finalBossX + 150){
@@ -248,18 +250,22 @@ public class GameState extends State implements GameWorldState {
                     }
                     
                     if(openIntroGameY < 450 && camera.getPosX() >= finalBossX && megaMan.getPosX() >= finalBossX + 150){ 
-                        camera.lock();
+                        camera.lockBoss();
                         storyTutorial++;
                         megaMan.stopRun();
-//                        physicalMap.phys_map[14][120] = 1;
-//                        physicalMap.phys_map[15][120] = 1;
-//                        physicalMap.phys_map[16][120] = 1;
-//                        physicalMap.phys_map[17][120] = 1;
-//                        
-//                        backgroundMap.backgroundMap[14][120] = 17;
-//                        backgroundMap.backgroundMap[15][120] = 17;
-//                        backgroundMap.backgroundMap[16][120] = 17;
-//                        backgroundMap.backgroundMap[17][120] = 17;
+                        physicalMap.phys_map[4][22] = 1;
+                        physicalMap.phys_map[4][23] = 1;
+                        physicalMap.phys_map[5][22] = 1;
+                        physicalMap.phys_map[5][23] = 1;
+                        
+                        backgroundMap.map[3][22] = 4;
+                        backgroundMap.map[4][22] = 4;
+                        backgroundMap.map[5][22] = 4;
+                        backgroundMap.map[3][23] = 6;
+                        backgroundMap.map[4][23] = 6;
+                        backgroundMap.map[5][23] = 10;
+                        backgroundMap.map[5][24] = 11;
+                        
                     }
                     
                 }else{
@@ -296,7 +302,7 @@ public class GameState extends State implements GameWorldState {
                 }
                 
                 break;
-            case MEETFINALBOSS:
+            case MEET_FINAL_BOSS:
                 yMid = GameFrame.SCREEN_HEIGHT/2 - 15;
                 y1 = yMid - GameFrame.SCREEN_HEIGHT/2 - openIntroGameY/2;
                 y2 = yMid + openIntroGameY/2;
@@ -329,11 +335,16 @@ public class GameState extends State implements GameWorldState {
                 if(megaMan.getPosX() > finalBossX && finalbossTrigger){
                     finalbossTrigger = false;
                     switchState(TUTORIAL);
-                    tutorialState = MEETFINALBOSS;
+                    tutorialState = MEET_FINAL_BOSS;
                     storyTutorial = 0;
                     openIntroGameY = 550;
                     
-                    boss = new FinalBossHard(finalBossX + 700, 560, this);
+                    
+                    if(difficulty == EASY) {
+                    	boss = new FinalBoss(finalBossX + 700, 560, this);
+                    } else 
+                    	boss = new FinalBossHard(finalBossX + 700, 560, this);
+                    
                     boss.setTeamType(Profile.ENEMY_TEAM);
                     boss.setDirection(Profile.LEFT_DIR);
                     specificObjectManager.addObject(boss);
@@ -396,7 +407,7 @@ public class GameState extends State implements GameWorldState {
                     break;
                 case TUTORIAL:
                     backgroundMap.draw(g2);
-                    if(tutorialState == MEETFINALBOSS){
+                    if(tutorialState == MEET_FINAL_BOSS){
                     	specificObjectManager.draw(g2);
                     }
                     TutorialRender(g2);
@@ -417,6 +428,12 @@ public class GameState extends State implements GameWorldState {
                         g2.drawImage(DataLoader.getInstance().getFrameImage("hearth").getImage(), 20 + i*40, 18, null);
                     }
                     
+                    if(tutorialState == MEET_FINAL_BOSS) {
+                    	g2.setColor(Color.GRAY);
+                        g2.fillRect(GameFrame.SCREEN_WIDTH - 400, 59, 302, 22);
+                        g2.setColor(Color.red);
+                        g2.fillRect(GameFrame.SCREEN_WIDTH - 400 + 1, 60, boss.getBlood(), 20);
+                    }
                     
                     if(state == GAMEWIN){
                         g2.drawImage(DataLoader.getInstance().getFrameImage("gamewin2").getImage(), 0, 0, null);

@@ -18,5 +18,8 @@ public interface GameWorldState {
 	public static final int INTROGAME = 0;
 	public static final int MEET_FINAL_BOSS = 1;
 	
+	// Difficult
+	public static final int EASY = 0;
+	public static final int DIFFICULT = 1;
 
 }
