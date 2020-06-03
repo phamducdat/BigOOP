@@ -24,7 +24,7 @@ public class FinalBossHard extends Boss {
 		timeAttack.put("shooting", shootingback.time());
 		timeAttack.put("transfiguration", transfigurationback.time()); // bug
 		timeAttack.put("ready", readyback.time());
-		timeAttack.put("slide", new Long(5000));
+		timeAttack.put("slide", new Long(8000));
 		timeAttack.put("standup", (transfigurationback.time()));
 		timeAttack.put("ultifirst", ultifirstback.time());
 		timeAttack.put("ultilast", ultilastback.time());

@@ -7,6 +7,7 @@ import java.util.Hashtable;
 
 import com.game.effect.Animation;
 import com.game.effect.DataLoader;
+import com.game.gameinteface.GameWorldState;
 import com.game.state.GameState;
 
 
@@ -112,7 +113,7 @@ public class Boss extends HumanoidObject {
 			} else if (attackType.get(attackIndex).equals("slide")) {
 
 				if (a == 1) {
-					if ((getPosX() - 3600) % 100 == 0) {
+					if ((getPosX() - GameWorldState.finalBossX) % 100 == 0) {
 						BulletSlide bullet = new BulletSlide(getPosX(), getPosY() + 50, getGameState());
 						if (getSpeedX() < 0) {
 							bullet.setDirection(RIGHT_DIR);

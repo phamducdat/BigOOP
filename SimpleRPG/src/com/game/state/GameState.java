@@ -23,6 +23,7 @@ import com.game.objectmanager.SpecificObjectManager;
 import com.game.userinterface.GameFrame;
 import com.game.userinterface.GamePanel;
 import com.game.gameobject.DarkRaise;
+import com.game.gameobject.FinalBossHard;
 import com.game.gameobject.RobotR;
 
 // Done
@@ -86,14 +87,14 @@ public class GameState extends State implements GameWorldState {
         specificObjectManager = new SpecificObjectManager(this);
         specificObjectManager.addObject(megaMan);
         
-        initEnemies();
+        initDifficultEnemies();
 
         bgMusic = DataLoader.getInstance().getSound("bgmusic");
         
     }
     
-    private void initEnemies(){
-        SpecificObject redeye = new RedEyeDevil(1250, 410, this);
+    private void initEasyEnemies(){
+        SpecificObject redeye = new RedEyeDevil(627, 474, this);
         redeye.setDirection(Profile.LEFT_DIR);
         redeye.setTeamType(Profile.ENEMY_TEAM);
         specificObjectManager.addObject(redeye);
@@ -146,6 +147,65 @@ public class GameState extends State implements GameWorldState {
         
         
         SpecificObject smallRedGun2 = new SmallRedGun(1700, 980, this);
+        smallRedGun2.setDirection(Profile.LEFT_DIR);
+        smallRedGun2.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(smallRedGun2);
+    }
+    
+    private void initDifficultEnemies(){
+        SpecificObject redeye = new RedEyeDevil(627, 474, this);
+        redeye.setDirection(Profile.LEFT_DIR);
+        redeye.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(redeye);
+        
+        SpecificObject smallRedGun = new SmallRedGun(237, 291, this);
+        smallRedGun.setDirection(Profile.LEFT_DIR);
+        smallRedGun.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(smallRedGun);
+        
+        SpecificObject darkraise = new DarkRaise(1223, 855, this);
+        darkraise.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(darkraise);
+        
+        SpecificObject darkraise2 = new DarkRaise(279, 1362, this);
+        darkraise2.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(darkraise2);
+        
+        SpecificObject robotR = new RobotR(542, 1112, this);
+        robotR.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(robotR);
+        
+        SpecificObject robotR2 = new RobotR(1985, 744, this);
+        robotR2.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(robotR2);
+        
+        
+        SpecificObject redeye2 = new RedEyeDevil(1763, 1370, this);
+        redeye2.setDirection(Profile.LEFT_DIR);
+        redeye2.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(redeye2);
+        
+        SpecificObject redeye3 = new RedEyeDevil(1105, 213, this);
+        redeye3.setDirection(Profile.LEFT_DIR);
+        redeye3.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(redeye3);
+        
+        SpecificObject redeye4 = new RedEyeDevil(2664, 1627, this);
+        redeye4.setDirection(Profile.LEFT_DIR);
+        redeye4.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(redeye4);
+        
+
+        SpecificObject darkraise3 = new DarkRaise(2561, 1058, this);
+        darkraise3.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(darkraise3);
+        
+        SpecificObject robotR3 = new RobotR(1250, 1688, this);
+        robotR3.setTeamType(Profile.ENEMY_TEAM);
+        specificObjectManager.addObject(robotR3);
+        
+        
+        SpecificObject smallRedGun2 = new SmallRedGun(2254, 1433, this);
         smallRedGun2.setDirection(Profile.LEFT_DIR);
         smallRedGun2.setTeamType(Profile.ENEMY_TEAM);
         specificObjectManager.addObject(smallRedGun2);
@@ -273,7 +333,7 @@ public class GameState extends State implements GameWorldState {
                     storyTutorial = 0;
                     openIntroGameY = 550;
                     
-//                    boss = new FinalBoss(finalBossX + 700, 460, this);
+                    boss = new FinalBossHard(finalBossX + 700, 560, this);
                     boss.setTeamType(Profile.ENEMY_TEAM);
                     boss.setDirection(Profile.LEFT_DIR);
                     specificObjectManager.addObject(boss);

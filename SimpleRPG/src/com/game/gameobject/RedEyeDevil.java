@@ -1,18 +1,14 @@
+
 package com.game.gameobject;
-//thieu  bullet nen phan attack t comment lai
+
+import com.game.state.GameState;
+import com.game.effect.Animation;
+import com.game.effect.DataLoader;
 import java.applet.AudioClip;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import com.game.effect.Animation;
-import com.game.effect.DataLoader;
-import com.game.state.GameState;
-
-// Done
-
-public class RedEyeDevil extends SpecificObject{
-	
+public class RedEyeDevil extends SpecificObject {
 
     private Animation forwardAnim, backAnim;
     
@@ -40,7 +36,7 @@ public class RedEyeDevil extends SpecificObject{
         else bullet.setSpeedX(8);
         bullet.setTeamType(getTeamType());
         getGameState().bulletManager.addObject(bullet);
-    
+            
     }
 
     
@@ -64,9 +60,6 @@ public class RedEyeDevil extends SpecificObject{
 
     @Override
     public void draw(Graphics2D g2) {
-    	
-    	super.draw(g2);
-    	
         if(!isObjectOutOfCameraView()){
             if(getState() == CANTBEHURT && (System.nanoTime()/10000000)%2!=1){
                 // plash...
@@ -82,6 +75,7 @@ public class RedEyeDevil extends SpecificObject{
                 }
             }
         }
+        //drawBoundForCollisionWithEnemy(g2);
     }
     
 }
