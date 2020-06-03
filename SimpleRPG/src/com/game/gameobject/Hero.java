@@ -340,7 +340,7 @@ public class Hero extends HumanoidObject{
     @Override
     public void attack() {
     
-    	// DDung trong truong hop ban dan nhanh
+    	// Dung trong truong hop ban dan nhanh
         if(!isShooting && !getIsDicking()){
             if(shootFlag) {
             	System.out.println("Shoot 1");
