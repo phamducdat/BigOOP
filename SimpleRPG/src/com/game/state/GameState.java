@@ -96,101 +96,102 @@ public class GameState extends State implements GameWorldState {
     }
     
     private void initEasyEnemies(){
+    	 SpecificObject redeye = new RedEyeDevil(627, 474, this);
+         redeye.setDirection(Profile.LEFT_DIR);
+         redeye.setTeamType(Profile.ENEMY_TEAM);
+         specificObjectManager.addObject(redeye);
+         
+         SpecificObject smallRedGun = new SmallRedGun(237, 291, this);
+         smallRedGun.setDirection(Profile.LEFT_DIR);
+         smallRedGun.setTeamType(Profile.ENEMY_TEAM);
+         specificObjectManager.addObject(smallRedGun);
+         
+         SpecificObject darkraise = new DarkRaise(1223, 855, this);
+         darkraise.setTeamType(Profile.ENEMY_TEAM);
+         specificObjectManager.addObject(darkraise);
+         
+//         SpecificObject darkraise2 = new DarkRaise(279, 1362, this);
+//         darkraise2.setTeamType(Profile.ENEMY_TEAM);
+//         specificObjectManager.addObject(darkraise2);
+         
+         SpecificObject robotR = new RobotR(542, 1112, this);
+         robotR.setTeamType(Profile.ENEMY_TEAM);
+         specificObjectManager.addObject(robotR);
+         
+         SpecificObject robotR2 = new RobotR(1985, 744, this);
+         robotR2.setTeamType(Profile.ENEMY_TEAM);
+         specificObjectManager.addObject(robotR2);
+         
+         
+//         SpecificObject redeye2 = new RedEyeDevil(1763, 1370, this);
+//         redeye2.setDirection(Profile.LEFT_DIR);
+//         redeye2.setTeamType(Profile.ENEMY_TEAM);
+//         specificObjectManager.addObject(redeye2);
+         
+         SpecificObject redeye3 = new RedEyeDevil(1105, 213, this);
+         redeye3.setDirection(Profile.LEFT_DIR);
+         redeye3.setTeamType(Profile.ENEMY_TEAM);
+         specificObjectManager.addObject(redeye3);
+         
+//         SpecificObject redeye4 = new RedEyeDevil(2664, 1627, this);
+//         redeye4.setDirection(Profile.LEFT_DIR);
+//         redeye4.setTeamType(Profile.ENEMY_TEAM);
+//         specificObjectManager.addObject(redeye4);
+         
+
+         SpecificObject darkraise3 = new DarkRaise(2561, 1058, this);
+         darkraise3.setTeamType(Profile.ENEMY_TEAM);
+         specificObjectManager.addObject(darkraise3);
+         
+         SpecificObject robotR3 = new RobotR(1250, 1688, this);
+         robotR3.setTeamType(Profile.ENEMY_TEAM);
+         specificObjectManager.addObject(robotR3);
+         
+         
+//         SpecificObject smallRedGun2 = new SmallRedGun(2254, 1433, this);
+//         smallRedGun2.setDirection(Profile.LEFT_DIR);
+//         smallRedGun2.setTeamType(Profile.ENEMY_TEAM);
+//         specificObjectManager.addObject(smallRedGun2);
+    }
+    
+    private void initDifficultEnemies(){
+    	initEasyEnemies();
 //        SpecificObject redeye = new RedEyeDevil(627, 474, this);
 //        redeye.setDirection(Profile.LEFT_DIR);
 //        redeye.setTeamType(Profile.ENEMY_TEAM);
 //        specificObjectManager.addObject(redeye);
-        
-        SpecificObject smallRedGun = new SmallRedGun(1600, 180, this);
-        smallRedGun.setDirection(Profile.LEFT_DIR);
-        smallRedGun.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(smallRedGun);
-        
-        SpecificObject darkraise = new DarkRaise(2000, 200, this);
-        darkraise.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(darkraise);
-        
-        SpecificObject darkraise2 = new DarkRaise(2800, 350, this);
-        darkraise2.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(darkraise2);
-        
-        SpecificObject robotR = new RobotR(900, 400, this);
-        robotR.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(robotR);
-        
-        SpecificObject robotR2 = new RobotR(3400, 350, this);
-        robotR2.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(robotR2);
-        
-        
-        SpecificObject redeye2 = new RedEyeDevil(2500, 500, this);
-        redeye2.setDirection(Profile.LEFT_DIR);
-        redeye2.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(redeye2);
-        
-        SpecificObject redeye3 = new RedEyeDevil(3450, 500, this);
-        redeye3.setDirection(Profile.LEFT_DIR);
-        redeye3.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(redeye3);
-        
-        SpecificObject redeye4 = new RedEyeDevil(500, 1190, this);
-        redeye4.setDirection(Profile.RIGHT_DIR);
-        redeye4.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(redeye4);
-        
-
-        SpecificObject darkraise3 = new DarkRaise(750, 650, this);
-        darkraise3.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(darkraise3);
-        
-        SpecificObject robotR3 = new RobotR(1500, 1150, this);
-        robotR3.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(robotR3);
-        
-        
-        SpecificObject smallRedGun2 = new SmallRedGun(1700, 980, this);
-        smallRedGun2.setDirection(Profile.LEFT_DIR);
-        smallRedGun2.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(smallRedGun2);
-    }
-    
-    private void initDifficultEnemies(){
-        SpecificObject redeye = new RedEyeDevil(627, 474, this);
-        redeye.setDirection(Profile.LEFT_DIR);
-        redeye.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(redeye);
-        
-        SpecificObject smallRedGun = new SmallRedGun(237, 291, this);
-        smallRedGun.setDirection(Profile.LEFT_DIR);
-        smallRedGun.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(smallRedGun);
-        
-        SpecificObject darkraise = new DarkRaise(1223, 855, this);
-        darkraise.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(darkraise);
+//        
+//        SpecificObject smallRedGun = new SmallRedGun(237, 291, this);
+//        smallRedGun.setDirection(Profile.LEFT_DIR);
+//        smallRedGun.setTeamType(Profile.ENEMY_TEAM);
+//        specificObjectManager.addObject(smallRedGun);
+//        
+//        SpecificObject darkraise = new DarkRaise(1223, 855, this);
+//        darkraise.setTeamType(Profile.ENEMY_TEAM);
+//        specificObjectManager.addObject(darkraise);
         
         SpecificObject darkraise2 = new DarkRaise(279, 1362, this);
         darkraise2.setTeamType(Profile.ENEMY_TEAM);
         specificObjectManager.addObject(darkraise2);
         
-        SpecificObject robotR = new RobotR(542, 1112, this);
-        robotR.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(robotR);
-        
-        SpecificObject robotR2 = new RobotR(1985, 744, this);
-        robotR2.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(robotR2);
-        
+//        SpecificObject robotR = new RobotR(542, 1112, this);
+//        robotR.setTeamType(Profile.ENEMY_TEAM);
+//        specificObjectManager.addObject(robotR);
+//        
+//        SpecificObject robotR2 = new RobotR(1985, 744, this);
+//        robotR2.setTeamType(Profile.ENEMY_TEAM);
+//        specificObjectManager.addObject(robotR2);
+//        
         
         SpecificObject redeye2 = new RedEyeDevil(1763, 1370, this);
         redeye2.setDirection(Profile.LEFT_DIR);
         redeye2.setTeamType(Profile.ENEMY_TEAM);
         specificObjectManager.addObject(redeye2);
         
-        SpecificObject redeye3 = new RedEyeDevil(1105, 213, this);
-        redeye3.setDirection(Profile.LEFT_DIR);
-        redeye3.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(redeye3);
+//        SpecificObject redeye3 = new RedEyeDevil(1105, 213, this);
+//        redeye3.setDirection(Profile.LEFT_DIR);
+//        redeye3.setTeamType(Profile.ENEMY_TEAM);
+//        specificObjectManager.addObject(redeye3);
         
         SpecificObject redeye4 = new RedEyeDevil(2664, 1627, this);
         redeye4.setDirection(Profile.LEFT_DIR);
@@ -198,13 +199,13 @@ public class GameState extends State implements GameWorldState {
         specificObjectManager.addObject(redeye4);
         
 
-        SpecificObject darkraise3 = new DarkRaise(2561, 1058, this);
-        darkraise3.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(darkraise3);
-        
-        SpecificObject robotR3 = new RobotR(1250, 1688, this);
-        robotR3.setTeamType(Profile.ENEMY_TEAM);
-        specificObjectManager.addObject(robotR3);
+//        SpecificObject darkraise3 = new DarkRaise(2561, 1058, this);
+//        darkraise3.setTeamType(Profile.ENEMY_TEAM);
+//        specificObjectManager.addObject(darkraise3);
+//        
+//        SpecificObject robotR3 = new RobotR(1250, 1688, this);
+//        robotR3.setTeamType(Profile.ENEMY_TEAM);
+//        specificObjectManager.addObject(robotR3);
         
         
         SpecificObject smallRedGun2 = new SmallRedGun(2254, 1433, this);
