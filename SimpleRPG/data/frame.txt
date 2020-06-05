@@ -1,5 +1,284 @@
 
-205
+243
+
+
+
+herobar
+image data/HPBar.png
+x 0
+y 0
+w 200
+h 50
+
+herohp
+image data/HPBar.png
+x 200
+y 0
+w 136
+h 11
+
+heromana
+image data/HPBar.png
+x 200
+y 11
+w 120
+h 6
+
+bossbar
+image data/HPBar.png
+x 340
+y 0
+w 200
+h 33
+
+bosshp
+image data/HPBar.png
+x 540
+y 0
+w 130
+h 12
+
+bossarmor
+image data/HPBar.png
+x 540
+y 12
+w 58
+h 7
+
+
+
+buttonQ
+image data/ButtonImage.png
+x 0
+y 0
+w 60
+h 60
+
+buttonLEFT
+image data/ButtonImage.png
+x 60
+y 0
+w 60
+h 60
+
+buttonRIGHT
+image data/ButtonImage.png
+x 120
+y 0
+w 60
+h 60
+
+buttonDOWN
+image data/ButtonImage.png
+x 180
+y 0
+w 60
+h 60
+
+buttonUP
+image data/ButtonImage.png
+x 240
+y 0
+w 60
+h 60
+
+buttonW
+image data/ButtonImage.png
+x 300
+y 0
+w 60
+h 60
+
+buttonE
+image data/ButtonImage.png
+x 360
+y 0
+w 60
+h 60
+
+buttonR
+image data/ButtonImage.png
+x 420
+y 0
+w 60
+h 60
+
+buttonD
+image data/ButtonImage.png
+x 480
+y 0
+w 60
+h 60
+
+buttonF
+image data/ButtonImage.png
+x 540
+y 0
+w 60
+h 60
+
+buttonSPACE
+image data/ButtonImage.png
+x 600
+y 0
+w 120
+h 60
+
+
+
+difficultwindow
+image data/Window1.png
+x 1015
+y 2023
+w 728
+h 583
+
+tutorialwindow
+image data/Window.png
+x 2745
+y 1661
+w 685
+h 379
+
+
+
+startbutton_none
+image data/StartButton.png
+x 179
+y 435
+w 300
+h 150
+
+startbutton_hover
+image data/StartButton.png
+x 635
+y 435
+w 300
+h 150
+
+startbutton_press
+image data/StartButton.png
+x 1098
+y 435
+w 300
+h 150
+
+
+
+exitbutton_none
+image data/ExitButton.png
+x 179
+y 435
+w 300
+h 150
+
+exitbutton_hover
+image data/ExitButton.png
+x 635
+y 435
+w 300
+h 150
+
+exitbutton_press
+image data/ExitButton.png
+x 1098
+y 435
+w 300
+h 150
+
+
+
+easybutton_none
+image data/EasyButton.png
+x 179
+y 435
+w 300
+h 150
+
+easybutton_hover
+image data/EasyButton.png
+x 635
+y 435
+w 300
+h 150
+
+easybutton_press
+image data/EasyButton.png
+x 1098
+y 435
+w 300
+h 150
+
+
+
+difficultbutton_none
+image data/DifficultButton.png
+x 179
+y 435
+w 300
+h 150
+
+difficultbutton_hover
+image data/DifficultButton.png
+x 635
+y 435
+w 300
+h 150
+
+difficultbutton_press
+image data/DifficultButton.png
+x 1098
+y 435
+w 300
+h 150
+
+
+
+menubutton_none
+image data/MenuButton.png
+x 179
+y 435
+w 300
+h 150
+
+menubutton_hover
+image data/MenuButton.png
+x 635
+y 435
+w 300
+h 150
+
+menubutton_press
+image data/MenuButton.png
+x 1098
+y 435
+w 300
+h 150
+
+
+
+tryagainbutton_none
+image data/TryAgainButton.png
+x 179
+y 435
+w 300
+h 150
+
+tryagainbutton_hover
+image data/TryAgainButton.png
+x 635
+y 435
+w 300
+h 150
+
+tryagainbutton_press
+image data/TryAgainButton.png
+x 1098
+y 435
+w 300
+h 150
+
+
 
 openscene
 image data/openscene.png
@@ -192,6 +471,12 @@ y 0
 w 1000
 h 750
 
+background2
+image data/BG2.png
+x 0
+y 0
+w 1000
+h 750
 
 
 idle1

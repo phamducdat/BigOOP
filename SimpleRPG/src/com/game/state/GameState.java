@@ -2,6 +2,7 @@ package com.game.state;
 
 import java.applet.AudioClip;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -12,6 +13,7 @@ import com.game.effect.FrameImage;
 import com.game.gameinteface.GameWorldState;
 import com.game.gameinteface.Profile;
 import com.game.gameobject.BackgroundMap;
+import com.game.gameobject.Boss;
 import com.game.gameobject.Camera;
 import com.game.gameobject.Hero;
 import com.game.gameobject.PhysicalMap;
@@ -61,20 +63,39 @@ public class GameState extends State implements GameWorldState {
     
     FrameImage avatar = DataLoader.getInstance().getFrameImage("avatar");
     
+    FrameImage tutorialWindow = DataLoader.getInstance().getFrameImage("tutorialwindow");
+    FrameImage buttonQ = DataLoader.getInstance().getFrameImage("buttonQ");
+    FrameImage buttonW = DataLoader.getInstance().getFrameImage("buttonW");
+    FrameImage buttonE = DataLoader.getInstance().getFrameImage("buttonE");
+    FrameImage buttonR = DataLoader.getInstance().getFrameImage("buttonR");
+    FrameImage buttonRIGHT = DataLoader.getInstance().getFrameImage("buttonRIGHT");
+    FrameImage buttonLEFT = DataLoader.getInstance().getFrameImage("buttonLEFT");
+    FrameImage buttonD = DataLoader.getInstance().getFrameImage("buttonD");
+    FrameImage buttonF = DataLoader.getInstance().getFrameImage("buttonF");
+    FrameImage buttonSPACE = DataLoader.getInstance().getFrameImage("buttonSPACE");
+    
+    FrameImage herobar = DataLoader.getInstance().getFrameImage("herobar");
+    FrameImage herohp = DataLoader.getInstance().getFrameImage("herohp");
+    FrameImage heromana = DataLoader.getInstance().getFrameImage("heromana");
+    FrameImage bossbar = DataLoader.getInstance().getFrameImage("bossbar");
+    FrameImage bosshp = DataLoader.getInstance().getFrameImage("bosshp");
+    FrameImage bossarmor = DataLoader.getInstance().getFrameImage("bossarmor");
+    
     
     private int numberOfLife = 3;
     
-    public AudioClip bgMusic;
+    public AudioClip bgMusic = DataLoader.getInstance().getSound("bgmusic");
+    public AudioClip bgMusic2 = DataLoader.getInstance().getSound("bgmusic");
+    public AudioClip welcome = DataLoader.getInstance().getSound("welcome");
     
     public GameState(GamePanel gamePanel, int difficulty){
             super(gamePanel);
         
-        texts[0] = "We are heros, and our mission is protecting our Home\nEarth....";
-        texts[1] = "There was a Monster from University on Earth in 10 years\n"
-                + "and we lived in the scare in that 10 years....";
-        texts[2] = "Now is the time for us, kill it and get freedom!....";
-        texts[3] = "      LET'S GO!.....";
-        textTutorial = texts[0];
+            texts[0] = "Our Earth is being threatened by aliens ... \nIt's time for us to save our planet ... \nHere're some advice for a beginner...  ";
+            texts[1] = "Press \n\nto control your character to move ... \n\nPress                     to jump ... \n\nPress             to shoot ...";
+            texts[2] = "Here is some of your special skills ... \n\nDash \n\n\n Smite \n\n\nAnd others ";
+            texts[3] = "I think you've been ready. \n\nLET'S GO !!!!!";
+            textTutorial = texts[0];
 
         
         bufferedImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
@@ -278,6 +299,39 @@ public class GameState extends State implements GameWorldState {
     }
     
     private void drawString(Graphics2D g2, String text, int x, int y){
+    	
+    	if(storyTutorial == 2) {
+    		if(currentSize >= 6) {
+        		g2.drawImage(buttonRIGHT.getImage(), 390, 180, null);
+        		g2.drawImage(buttonLEFT.getImage(), 300, 180, null);	
+        	}
+    		
+    		if(currentSize >= 50) {
+        		g2.drawImage(buttonSPACE.getImage(), 280, 310, null);
+        	}
+    		
+    		if(currentSize >= 90) {
+        		g2.drawImage(buttonQ.getImage(), 280, 380, null);
+        	}
+    	}else if(storyTutorial == 3) {
+    		
+    		if(currentSize >= 40)
+    			g2.drawImage(buttonD.getImage(), 350, 260, null);
+    		
+    		if(currentSize >= 50)
+    			g2.drawImage(buttonF.getImage(), 350, 350, null);
+    		
+    		if(currentSize >= 60) {
+    			g2.drawImage(buttonW.getImage(), 350, 440, null);
+    			g2.drawImage(buttonE.getImage(), 440, 440, null);
+    			g2.drawImage(buttonR.getImage(), 530, 440, null);
+    		}
+    		
+    	}
+    	
+    	g2.setColor(Color.BLACK);
+    	g2.setFont(new Font("BK", Font.BOLD, 24));
+    	
         for(String str : text.split("\n"))
             g2.drawString(str, x, y+=g2.getFontMetrics().getHeight());
     }
@@ -294,12 +348,11 @@ public class GameState extends State implements GameWorldState {
                 g2.fillRect(0, y2, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT/2);
                 
                 if(storyTutorial >= 1){
-                    g2.drawImage(avatar.getImage(), 600, 350, null);
-                    g2.setColor(Color.BLUE);
-                    g2.fillRect(280, 450, 350, 80);
-                    g2.setColor(Color.WHITE);
+                	g2.drawImage(tutorialWindow.getImage(), 150, 150, null);
+                    g2.drawImage(avatar.getImage(), 600, 450, null);
+                    
                     String text = textTutorial.substring(0, currentSize - 1);
-                    drawString(g2, text, 290, 480);
+                    drawString(g2, text, 200, 200);
                 }
                 
                 break;
@@ -315,7 +368,7 @@ public class GameState extends State implements GameWorldState {
         }
     }
     
-    public void Update(){
+public void Update(){
         
         switch(state){
             case INIT_GAME:
@@ -355,7 +408,7 @@ public class GameState extends State implements GameWorldState {
                 if(megaMan.getState() == Profile.DEATH){
                     numberOfLife --;
                     if(numberOfLife >= 0){
-                        megaMan.setBlood(100);
+                        megaMan.setBlood(Hero.MAXHP);
                         megaMan.setPosY(megaMan.getPosY() - 50);
                         megaMan.setState(Profile.CANTBEHURT);
                         specificObjectManager.addObject(megaMan);
@@ -368,8 +421,12 @@ public class GameState extends State implements GameWorldState {
                     switchState(GAMEWIN);
                 
                 break;
+                
+            case GAMEPAUSE:
+            	
+            	break;
             case GAMEOVER:
-               
+            	
                 break;
             case GAMEWIN:
                 
@@ -379,84 +436,105 @@ public class GameState extends State implements GameWorldState {
 
     }
 
-    public void Render(){
+public void Render(){
 
-        Graphics2D g2 = (Graphics2D) bufferedImage.getGraphics();
+    Graphics2D g2 = (Graphics2D) bufferedImage.getGraphics();
 
-        if(g2!=null){
+    if(g2!=null){
 
-            // NOTE: two lines below make the error splash white screen....
-            // need to remove this line
-            //g2.setColor(Color.WHITE);
-            //g2.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
-            
-            
-            //physicalMap.draw(g2);
-            
-            switch(state){
-                case INIT_GAME:
-                    g2.setColor(Color.BLACK);
-                    g2.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
-                    g2.setColor(Color.WHITE);
-                    g2.drawString("PRESS ENTER TO CONTINUE", 400, 300);
-                    break;
-                case GAMEPAUSE:
-                    g2.setColor(Color.BLACK);
-                    g2.fillRect(300, 260, 500, 70);
-                    g2.setColor(Color.WHITE);
-                    g2.drawString("PRESS ENTER TO CONTINUE", 400, 300);
-                    break;
-                case TUTORIAL:
-                    backgroundMap.draw(g2);
-                    if(tutorialState == MEET_FINAL_BOSS){
-                    	specificObjectManager.draw(g2);
+        // NOTE: two lines below make the error splash white screen....
+        // need to remove this line
+        //g2.setColor(Color.WHITE);
+        //g2.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
+        
+        
+        //physicalMap.draw(g2);
+        
+        switch(state){
+            case INIT_GAME:
+                g2.setColor(Color.BLACK);
+                g2.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
+                g2.setColor(Color.WHITE);
+                g2.drawString("PRESS ENTER TO CONTINUE", 400, 350);
+                break;
+            case GAMEPAUSE:
+                g2.setColor(Color.BLACK);
+                g2.fillRect(200, 300, 600, 100);
+                g2.setColor(Color.WHITE);
+                g2.drawString("PRESS ENTER TO CONTINUE", 400, 350);
+                break;
+            case TUTORIAL:
+                backgroundMap.draw(g2);
+                if(tutorialState == MEET_FINAL_BOSS){
+                	specificObjectManager.draw(g2);
+                }
+                TutorialRender(g2);
+                
+                break;
+            case GAMEWIN:
+            	
+                g2.drawImage(DataLoader.getInstance().getFrameImage("gamewin1").getImage(), 300, 300, null);
+                
+            	break;
+            case GAMEPLAY:
+                backgroundMap.draw(g2);
+                specificObjectManager.draw(g2);  
+                bulletManager.draw(g2);
+                
+                g2.drawImage(herobar.getImage(), 20, 20, null);
+                int bloodBar = (int) (megaMan.getBlood() / (float) Hero.MAXHP * herohp.getWidthImage()); 
+                int manaBar = (int) ((float) megaMan.getMana() / Hero.MAX_MANA_POINT * heromana.getWidthImage());
+                
+                if(bloodBar != 0) {
+                	BufferedImage currentBlood = herohp.getImage().getSubimage(0, 0, bloodBar, herohp.getHeightImage());
+                    g2.drawImage(currentBlood, 77, 32, null);
+                }
+                
+                if(manaBar != 0) {
+                	BufferedImage currentMana = heromana.getImage().getSubimage(0, 0, manaBar, 6);
+                    g2.drawImage(currentMana, 77, 48, null);
+                }
+                
+//                g2.fillRect(20, 60, megaMan.getBlood(), 20);
+                
+//                for(int i = 0; i < numberOfLife; i++){
+//                    g2.drawImage(DataLoader.getInstance().getFrameImage("hearth").getImage(), 20 + i*40, 18, null);
+//                }
+                
+                if(tutorialState == MEET_FINAL_BOSS) {
+                	g2.drawImage(bossbar.getImage(), 750, 20, null);
+                    int bloodBarB = (int) ((float) boss.getBlood() / Boss.MAXHP * bosshp.getWidthImage()); 
+                    int armorBarB = (int) ((float) boss.getArmor() / Boss.MAXARMOR * bossarmor.getWidthImage());
+                    
+                    if(bloodBarB != 0) {
+                    	BufferedImage currentBossBlood = bosshp.getImage().getSubimage(0, 0, bloodBarB, bosshp.getHeightImage());
+                        g2.drawImage(currentBossBlood, 764 + bosshp.getWidthImage() - bloodBarB, 37, null);
                     }
-                    TutorialRender(g2);
                     
-                    break;
-                case GAMEWIN:
-                case GAMEPLAY:
-                    backgroundMap.draw(g2);
-                    specificObjectManager.draw(g2);  
-                    bulletManager.draw(g2);
-                    
-                    g2.setColor(Color.GRAY);
-                    g2.fillRect(19, 59, 102, 22);
-                    g2.setColor(Color.red);
-                    g2.fillRect(20, 60, megaMan.getBlood(), 20);
-                    
-                    for(int i = 0; i < numberOfLife; i++){
-                        g2.drawImage(DataLoader.getInstance().getFrameImage("hearth").getImage(), 20 + i*40, 18, null);
+                    if(armorBarB != 0) {
+                    	BufferedImage currentBossArmor = bossarmor.getImage().getSubimage(0, 0, armorBarB, bossarmor.getHeightImage());
+                        g2.drawImage(currentBossArmor, 834 + bossarmor.getWidthImage() - armorBarB, 25, null);
                     }
                     
-                    if(tutorialState == MEET_FINAL_BOSS) {
-                    	g2.setColor(Color.GRAY);
-                        g2.fillRect(GameFrame.SCREEN_WIDTH - 400, 59, 302, 22);
-                        g2.setColor(Color.red);
-                        g2.fillRect(GameFrame.SCREEN_WIDTH - 400 + 1, 60, boss.getBlood(), 20);
-                    }
-                    
-                    if(state == GAMEWIN){
-                        g2.drawImage(DataLoader.getInstance().getFrameImage("gamewin2").getImage(), 0, 0, null);
-                    }
-                    
-                    break;
-                case GAMEOVER:
-//                    g2.setColor(Color.BLACK);
-//                    g2.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
-//                    g2.setColor(Color.WHITE);
-//                    g2.drawString("GAME OVER!", 450, 300);
-                	
-                	g2.drawImage(DataLoader.getInstance().getFrameImage("gamelose").getImage(), 0, 0, null);
-                	
-                    break;
-
-            }
-            
+                }
+                
+                break;
+            case GAMEOVER:
+//                g2.setColor(Color.BLACK);
+//                g2.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
+//                g2.setColor(Color.WHITE);
+//                g2.drawString("GAME OVER!", 450, 300);
+            	
+            	g2.drawImage(DataLoader.getInstance().getFrameImage("gamelose").getImage(), 0, 0, null);
+            	
+                break;
 
         }
+        
 
     }
+
+}
 
     public BufferedImage getBufferedImage(){
         return bufferedImage;
@@ -464,61 +542,61 @@ public class GameState extends State implements GameWorldState {
 
     @Override
     public void processPressButton(int code) {
-       switch(code){
-            
-            case KeyEvent.VK_DOWN:
-                megaMan.dick();
-                break;
+        switch(code){
+             
+             case KeyEvent.VK_DOWN:
+                 megaMan.dick();
+                 break;
+                 
+             case KeyEvent.VK_RIGHT:
+                 megaMan.setDirection(megaMan.RIGHT_DIR);
+                 megaMan.run();
+                 break;
+                 
+             case KeyEvent.VK_LEFT:
+                 megaMan.setDirection(megaMan.LEFT_DIR);
+                 megaMan.run();
+                 break;
+                 
+             case KeyEvent.VK_ENTER:
+                 if(state == GameWorldState.INIT_GAME){
+                     if(previousState == GameWorldState.GAMEPLAY)
+                         switchState(GameWorldState.GAMEPLAY);
+                     else switchState(GameWorldState.TUTORIAL);
+                     
+                     welcome.play();
+                     bgMusic2.play();
+                 }
+                 if(state == GameWorldState.TUTORIAL && storyTutorial >= 1){
+                     if(storyTutorial<=3){
+                         storyTutorial ++;
+                         currentSize = 1;
+                         textTutorial = texts[storyTutorial-1];
+                     }else{
+                         switchState(GameWorldState.GAMEPLAY);
+                     }
+                     
+                     // for meeting boss tutorial
+                     if(tutorialState == GameWorldState.MEET_FINAL_BOSS){
+                         switchState(GameWorldState.GAMEPLAY);
+                     }
+                 }
+                 if(state == GAMEPAUSE) {
+                 	state = GAMEPLAY;
+                 }
+                 break;
+                 
+             case KeyEvent.VK_SPACE:
+                 megaMan.jump();
+                 break;
+                 
+             case KeyEvent.VK_Q:
+                 megaMan.attack();
+                 break;
                 
-            case KeyEvent.VK_RIGHT:
-                megaMan.setDirection(megaMan.RIGHT_DIR);
-                megaMan.run();
-                break;
-                
-            case KeyEvent.VK_LEFT:
-                megaMan.setDirection(megaMan.LEFT_DIR);
-                megaMan.run();
-                break;
-                
-            case KeyEvent.VK_ENTER:
-                if(state == GameWorldState.INIT_GAME){
-                    if(previousState == GameWorldState.GAMEPLAY)
-                        switchState(GameWorldState.GAMEPLAY);
-                    else switchState(GameWorldState.TUTORIAL);
-                    
-                    bgMusic.loop();
-                    bgMusic.play();
-                }
-                if(state == GameWorldState.TUTORIAL && storyTutorial >= 1){
-                    if(storyTutorial<=3){
-                        storyTutorial ++;
-                        currentSize = 1;
-                        textTutorial = texts[storyTutorial-1];
-                    }else{
-                        switchState(GameWorldState.GAMEPLAY);
-                    }
-                    
-                    // for meeting boss tutorial
-                    if(tutorialState == GameWorldState.MEET_FINAL_BOSS){
-                        switchState(GameWorldState.GAMEPLAY);
-                    }
-                }
-                if(state == GAMEPAUSE) {
-                	state = GAMEPLAY;
-                }
-                break;
-                
-            case KeyEvent.VK_SPACE:
-                megaMan.jump();
-                break;
-                
-            case KeyEvent.VK_Q:
-                megaMan.attack();
-                break;
-               
-                
-        }
-    }
+                 
+         }
+     }
 
     @Override
     public void processReleaseButton(int code) {
@@ -543,10 +621,13 @@ public class GameState extends State implements GameWorldState {
                 break;
                 
             case KeyEvent.VK_ENTER:
-                if(state == GAMEOVER || state == GAMEWIN) {
-                    gamePanel.setState(new MenuState(gamePanel));
-                } else if(state == GAMEPAUSE) {
-                    state = lastState;
+                if(state == GAMEOVER) {
+                    gamePanel.setState(new LoseState(gamePanel, this.difficulty));
+                } else if(state == GAMEWIN) {
+                	gamePanel.setState(new WinState(gamePanel));
+                    
+                }else if(state == GAMEPAUSE) {
+                	state = lastState;
                 }
                 break;
                 

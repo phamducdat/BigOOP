@@ -2,6 +2,7 @@ package com.game.state;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
@@ -17,29 +18,20 @@ public class MenuState extends State{
 
     public final int NUMBER_OF_BUTTON = 2;
     private BufferedImage bufferedImage;
-    Graphics graphicsPaint;
+    Graphics2D graphicsPaint;
 
     private Button[] buttons;
 	private int buttonSelected = 0;
 	private boolean canContinueGame = false;
         
     public MenuState(GamePanel gamePanel) {
-        super(gamePanel);
+    	super(gamePanel);
         bufferedImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         
         buttons = new Button[NUMBER_OF_BUTTON];
-        buttons[0] = new RectangleButton("NEW GAME", 450, 400, 100, 40, 15, 25, Color.ORANGE);
-		buttons[0].setHoverBgColor(Color.BLUE);
-		buttons[0].setPressedBgColor(Color.GREEN);
-
-//		buttons[1] = new RectangleButton("CONTINUE", 300, 160, 100, 40, 15, 25, Color.ORANGE);
-//		buttons[1].setHoverBgColor(Color.BLUE);
-//		buttons[1].setPressedBgColor(Color.GREEN);
-		
-
-		buttons[1] = new RectangleButton("EXIT", 450, 500, 100, 40, 15, 25, Color.ORANGE);
-		buttons[1].setHoverBgColor(Color.BLUE);
-		buttons[1].setPressedBgColor(Color.GREEN);
+        
+        buttons[0] = new RectangleButton("startbutton", GameFrame.SCREEN_WIDTH/2 - 160, 320);
+		buttons[1] = new RectangleButton("exitbutton", GameFrame.SCREEN_WIDTH/2 - 160, 500);
     }
     
     @Override
@@ -59,9 +51,9 @@ public class MenuState extends State{
             bufferedImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
             return;
         }
-        graphicsPaint = bufferedImage.getGraphics();
+        graphicsPaint = (Graphics2D) bufferedImage.getGraphics();
         if(graphicsPaint == null) {
-            graphicsPaint = bufferedImage.getGraphics();
+            graphicsPaint = (Graphics2D) bufferedImage.getGraphics();
             return;
         }
         graphicsPaint.setColor(Color.CYAN);

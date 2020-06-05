@@ -1,6 +1,6 @@
 package com.game.gameinteface;
 
-import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public interface ButtonState {
 
@@ -10,6 +10,6 @@ public interface ButtonState {
 	
 	public abstract boolean isInButton(int x, int y);
 	
-	public abstract void draw(Graphics g);
+	public abstract void draw(Graphics2D g);
 	
 }

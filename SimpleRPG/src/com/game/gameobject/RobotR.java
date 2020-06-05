@@ -14,6 +14,8 @@ import com.game.state.GameState;
 
 public class RobotR extends SpecificObject{
 	
+	public static final float SPEED = 5.0f;
+	
     private Animation forwardAnim, backAnim;
     
     private long startTimeToShoot;
@@ -35,8 +37,8 @@ public class RobotR extends SpecificObject{
         y1 = y - 50;
         y2 = y + 50;
         
-        setSpeedX(1);
-        setSpeedY(1);
+        setSpeedX(SPEED);
+        setSpeedY(SPEED);
         
         shooting = DataLoader.getInstance().getSound("robotRshooting");
     }
@@ -48,8 +50,8 @@ public class RobotR extends SpecificObject{
         Bullet bullet = new RobotRBullet(getPosX(), getPosY(), getGameState());
         
         if(getDirection()==LEFT_DIR)
-            bullet.setSpeedX(5);
-        else bullet.setSpeedX(-5);
+            bullet.setSpeedX(10);
+        else bullet.setSpeedX(-10);
         bullet.setTeamType(getTeamType());
         getGameState().bulletManager.addObject(bullet);
 
@@ -64,15 +66,15 @@ public class RobotR extends SpecificObject{
         else setDirection(SpecificObject.LEFT_DIR);
         
         if(getPosX()-getGameState().megaMan.getPosX() < 5)   
-            setSpeedX(1);
+            setSpeedX(SPEED);
         else if(getPosX()-getGameState().megaMan.getPosX() > 5)
-            setSpeedX(-1);
+            setSpeedX(-SPEED);
         setPosX(getPosX() + getSpeedX());
         
         if(getPosY()-getGameState().megaMan.getPosY() < 5)
-            setSpeedY(1);
+            setSpeedY(SPEED);
         else if(getPosY()-getGameState().megaMan.getPosY()  > 5)
-            setSpeedY(-1);
+            setSpeedY(-SPEED);
         setPosY(getPosY() + getSpeedY());
         
         if(System.nanoTime() - startTimeToShoot > 1000*10000000*1.5){

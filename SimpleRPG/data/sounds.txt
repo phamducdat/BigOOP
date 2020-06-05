@@ -1,4 +1,4 @@
-8
+11
 
 bluefireshooting data/bluefireshooting.wav
 redeyeshooting data/redeyeshooting.wav
@@ -8,3 +8,6 @@ megamanhurt data/megamanhurt.wav
 lucianshooting1 data/lucianshootingsound.wav
 lucianshooting2 data/lucianshootingsound.wav
 galiohurt data/galiodying.wav
+welcome data/welcome.wav
+turretsound data/turret_mark.wav
+towershooting data/towershooting.wav

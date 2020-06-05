@@ -21,7 +21,7 @@ public abstract class Bullet extends SpecificObject {
 	    setPosY(getPosY() + getSpeedY());
 	    SpecificObject object = getGameState().specificObjectManager.getCollisionWidthEnemyObject(this);
 	    if(object!=null && object.getState() == ALIVE){
-	        setBlood(0);
+	        setState(DEATH);;
 	        object.beHurt(getDamage());
 	        System.out.println("Bullet set behurt for enemy");
     }

@@ -1,6 +1,7 @@
 package com.game.gameobject;
 //thieu  bullet nen phan attack t comment lai
-import java.awt.Graphics;
+
+import java.applet.AudioClip;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
@@ -14,10 +15,15 @@ import com.game.effect.DataLoader;
 // Done
 
 public class DarkRaise extends SpecificObject implements Profile, Vulnerable{
-    private Animation forwardAnim, backAnim;
+    
+	public static final float BULLETSPEED = 20.0f;
+	
+	private Animation forwardAnim, backAnim;
     
     private long startTimeToShoot;
     private float x1, x2;
+    
+    private AudioClip attackSound = DataLoader.getInstance().getSound("turretsound");
     
     public DarkRaise(float x, float y, GameState gameState) {
         super(x, y, 127, 89, 0, 100, gameState);
@@ -37,13 +43,14 @@ public class DarkRaise extends SpecificObject implements Profile, Vulnerable{
     @Override
     public void attack() {
     
+    	attackSound.play();
         float megaManX = getGameState().megaMan.getPosX();
         float megaManY = getGameState().megaMan.getPosY();
         
         float deltaX = megaManX - getPosX();
         float deltaY = megaManY - getPosY();
         
-        float speed = 3;
+        float speed = BULLETSPEED;
         float a = Math.abs(deltaX/deltaY);
         
         float speedX = (float) Math.sqrt(speed*speed*a*a/(a*a + 1));
@@ -54,7 +61,7 @@ public class DarkRaise extends SpecificObject implements Profile, Vulnerable{
         Bullet bullet = new DarkRaiseBullet(getPosX(), getPosY(), getGameState());
         
         if(deltaX < 0)
-            bullet.setSpeedX(-speedX);
+            bullet.setSpeedX(- speedX);
         else bullet.setSpeedX(speedX);
         bullet.setSpeedY(speedY);
         bullet.setTeamType(getTeamType());
@@ -71,7 +78,7 @@ public class DarkRaise extends SpecificObject implements Profile, Vulnerable{
             setSpeedX(-1);
         setPosX(getPosX() + getSpeedX());
         
-        if(System.nanoTime() - startTimeToShoot > 1000*10000000*1.5){
+        if(System.nanoTime() - startTimeToShoot > 3000){
             attack();
             startTimeToShoot = System.nanoTime();
         }

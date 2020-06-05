@@ -2,37 +2,39 @@ package com.game.control;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
+import com.game.effect.DataLoader;
 import com.game.gameinteface.ButtonState;
 
 // Done
 
 public abstract class Button implements ButtonState{
 
-	protected String text;
+	protected String name;
 	protected int posX;
 	protected int posY;
 	protected int width;
 	protected int height;
-	protected int paddingTextX;
-	protected int paddingTextY;
 	protected boolean enabled;
 	
 	protected int state;
-	protected Color bgColor;
-	protected Color pressedBgColor;
-	protected Color hoverBgColor;
+	protected BufferedImage none;
+	protected BufferedImage press;
+	protected BufferedImage hover;
 	
-	public Button(String text, int posX, int posY, int width, int height, int paddingTextX, int paddingTextY,
-			Color bgColor) {
-		this.text = text;
+	public Button(String name, int posX, int posY) {
+		this.name = name;
 		this.posX = posX;
 		this.posY = posY;
-		this.width = width;
-		this.height = height;
-		this.paddingTextX = paddingTextX;
-		this.paddingTextY = paddingTextY;
-		this.bgColor = bgColor;
+		
+		none = DataLoader.getInstance().getFrameImage(name + "_none").getImage();
+		hover = DataLoader.getInstance().getFrameImage(name + "_hover").getImage();
+		none = DataLoader.getInstance().getFrameImage(name + "_press").getImage();
+		
+		this.width = none.getWidth();
+		this.height = none.getHeight();
+		
 		enabled = true;
 	}
 	
@@ -42,16 +44,5 @@ public abstract class Button implements ButtonState{
 	
 	public void setState(int state) {
 		this.state = state;
-	}
-	
-	public void setBgColor(Color color) {
-		bgColor = color;
-	}
-
-	public void setHoverBgColor(Color color) {
-		hoverBgColor = color;
-	}
-	public void setPressedBgColor(Color color) {
-		pressedBgColor = color;
 	}
 }

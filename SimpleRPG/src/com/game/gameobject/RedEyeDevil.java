@@ -10,6 +10,8 @@ import java.awt.Rectangle;
 
 public class RedEyeDevil extends SpecificObject {
 
+	public static final float BULLETSPEED = 12.0f;
+	
     private Animation forwardAnim, backAnim;
     
     private long startTimeToShoot;
@@ -32,8 +34,8 @@ public class RedEyeDevil extends SpecificObject {
     
         shooting.play();
         Bullet bullet = new RedEyeBullet(getPosX(), getPosY(), getGameState());
-        if(getDirection() == LEFT_DIR) bullet.setSpeedX(-8);
-        else bullet.setSpeedX(8);
+        if(getDirection() == LEFT_DIR) bullet.setSpeedX(- BULLETSPEED);
+        else bullet.setSpeedX(BULLETSPEED);
         bullet.setTeamType(getTeamType());
         getGameState().bulletManager.addObject(bullet);
             
@@ -78,7 +80,6 @@ public class RedEyeDevil extends SpecificObject {
                 }
             }
         }
-        //drawBoundForCollisionWithEnemy(g2);
     }
     
 }
