@@ -100,8 +100,14 @@ public class Boss extends HumanoidObject {
 
 		if (!attackType.get(attackIndex).equals("NONE")) {
 			if (attackType.get(attackIndex).equals("shooting")) {
-
-				Bullet bullet = new RocketBullet(getPosX(), getPosY() - 50, getGameState());
+				int b = 0;
+				if(a ==1 ) {
+					b = 5;
+				}else {
+					b = 10;
+				}
+				Bullet bullet = new RocketBullet(getPosX(), getPosY() - 50, getGameState(), b);
+				
 				if (getDirection() == RIGHT_DIR) {
 					bullet.setSpeedX(4);
 				} else
@@ -109,6 +115,7 @@ public class Boss extends HumanoidObject {
 
 				bullet.setTeamType(getTeamType());
 				getGameState().bulletManager.addObject(bullet);
+				
 
 			} else if (attackType.get(attackIndex).equals("slide")) {
 

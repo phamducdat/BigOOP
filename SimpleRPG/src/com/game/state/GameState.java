@@ -23,6 +23,7 @@ import com.game.objectmanager.SpecificObjectManager;
 import com.game.userinterface.GameFrame;
 import com.game.userinterface.GamePanel;
 import com.game.gameobject.DarkRaise;
+import com.game.gameobject.FinalBoss;
 import com.game.gameobject.FinalBossHard;
 import com.game.gameobject.RobotR;
 
@@ -333,7 +334,7 @@ public class GameState extends State implements GameWorldState {
                     storyTutorial = 0;
                     openIntroGameY = 550;
                     
-                    boss = new FinalBossHard(finalBossX + 700, 560, this);
+                    boss = new FinalBoss(finalBossX + 700, 560, this);
                     boss.setTeamType(Profile.ENEMY_TEAM);
                     boss.setDirection(Profile.LEFT_DIR);
                     specificObjectManager.addObject(boss);

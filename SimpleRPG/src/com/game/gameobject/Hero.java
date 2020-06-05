@@ -21,7 +21,7 @@ import com.game.userinterface.GameFrame;
 
 public class Hero extends HumanoidObject{
 
-    public static final float RUNSPEED = 5.0f;
+    public static final float RUNSPEED = 10.0f;
     public static final float JUMPSPEED = 10.0f;
     
     private Animation runForwardAnim, runBackAnim, runShootingForwarAnim, runShootingBackAnim;
