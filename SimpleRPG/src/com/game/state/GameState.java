@@ -340,16 +340,13 @@ public class GameState extends State implements GameWorldState {
                     storyTutorial = 0;
                     openIntroGameY = 550;
                     
-<<<<<<< HEAD
                     boss = new FinalBoss(finalBossX + 700, 560, this);
-=======
                     
                     if(difficulty == EASY) {
                     	boss = new FinalBoss(finalBossX + 700, 560, this);
                     } else 
                     	boss = new FinalBossHard(finalBossX + 700, 560, this);
                     
->>>>>>> 287f17c606482b2ab57de133b27028e31aa288f2
                     boss.setTeamType(Profile.ENEMY_TEAM);
                     boss.setDirection(Profile.LEFT_DIR);
                     specificObjectManager.addObject(boss);

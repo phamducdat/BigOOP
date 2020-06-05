@@ -103,16 +103,16 @@ public class Boss extends HumanoidObject {
 			if (attackType.get(attackIndex).equals("shooting")) {
 				int b = 0;
 				if(a ==1 ) {
-					b = 5;
+					b = 2;
 				}else {
 					b = 10;
 				}
 				Bullet bullet = new RocketBullet(getPosX(), getPosY() - 50, getGameState(), b);
 				
 				if (getDirection() == RIGHT_DIR) {
-					bullet.setSpeedX(4);
+					bullet.setSpeedX(8);
 				} else
-					bullet.setSpeedX(-4);
+					bullet.setSpeedX(-8);
 
 				bullet.setTeamType(getTeamType());
 				getGameState().bulletManager.addObject(bullet);
@@ -125,7 +125,7 @@ public class Boss extends HumanoidObject {
 						BulletSlide bullet = new BulletSlide(getPosX(), getPosY() + 50, getGameState());
 						if (getSpeedX() < 0) {
 							bullet.setDirection(RIGHT_DIR);
-							bullet.setSpeedX(-10);
+							bullet.setSpeedX(-20);
 							bullet.setPosX(bullet.getPosX() - 40);
 							if (getSpeedX() != 0 && getSpeedY() == 0) {
 								bullet.setPosX(bullet.getPosX() - 10);
@@ -133,7 +133,7 @@ public class Boss extends HumanoidObject {
 							}
 						} else {
 							bullet.setDirection(LEFT_DIR);
-							bullet.setSpeedX(10);
+							bullet.setSpeedX(20);
 							bullet.setPosX(bullet.getPosX() + 40);
 							if (getSpeedX() != 0 && getSpeedY() == 0) {
 								bullet.setPosX(bullet.getPosX() + 10);
@@ -145,6 +145,14 @@ public class Boss extends HumanoidObject {
 						getGameState().bulletManager.addObject(bullet);
 
 					}
+					
+					if (getGameState().physicalMap.haveCollisionWithLeftWall(getBoundForCollisionWithMap()) != null) {
+						setSpeedX(100);
+					}
+					if (getGameState().physicalMap.haveCollisionWithRightWall(getBoundForCollisionWithMap()) != null) {
+						setSpeedX(-100);
+					}
+					setPosX(getPosX() + getSpeedX());
 				}
 
 				if (getGameState().physicalMap.haveCollisionWithLeftWall(getBoundForCollisionWithMap()) != null) {
@@ -154,6 +162,7 @@ public class Boss extends HumanoidObject {
 					setSpeedX(-5);
 				}
 				setPosX(getPosX() + getSpeedX());
+				
 
 			} else if (attackType.get(attackIndex).equals("ultilast")) {
 
@@ -215,9 +224,9 @@ public class Boss extends HumanoidObject {
 			if (attackType.get(attackIndex).equals("ultilast")) {
 				Bullet bullet = new BossBullet(getPosX(), getPosY() - 50, getGameState());
 				if (getDirection() == RIGHT_DIR) {
-					bullet.setSpeedX(4);
+					bullet.setSpeedX(10);
 				} else {
-					bullet.setSpeedX(-4);
+					bullet.setSpeedX(-10);
 				}
 				bullet.setTeamType(getTeamType());
 				getGameState().bulletManager.addObject(bullet);
