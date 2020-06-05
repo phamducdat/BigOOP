@@ -26,6 +26,7 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	private int blood; 			// Mau
 	private int mana;			// Nang luong
 	private int damage;
+	private int armor;
 	
 	private long beginTimeToNoBeHurt;
 	private long timeForNoBeHurt;
@@ -256,5 +257,21 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
     	}
     }
     
-    public void hurtingCallback(){};
+    public void hurtingCallback(){}
+
+	public int getMana() {
+		return mana;
+	}
+
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+
+	public int getArmor() {
+		return armor;
+	}
+
+	public void setArmor(int armor) {
+		this.armor = armor;
+	}
 }

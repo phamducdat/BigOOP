@@ -2,6 +2,7 @@ package com.game.state;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
@@ -16,7 +17,7 @@ public class DifficultyState extends State{
 
 	private final int NUMBER_OF_BUTTON = 2;
 	BufferedImage bufferedImage;
-	Graphics graphicsPaint;
+	Graphics2D graphicsPaint;
 	
 	Button[] buttons;
 	int buttonSelected = 0;
@@ -28,13 +29,8 @@ public class DifficultyState extends State{
 		
 		bufferedImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_WIDTH, BufferedImage.TYPE_INT_ARGB);
 		
-		buttons[0] = new RectangleButton("EASY", 450, 400, 100, 40, 15, 25, Color.ORANGE);
-		buttons[0].setHoverBgColor(Color.BLUE);
-		buttons[0].setPressedBgColor(Color.GREEN);
-		
-		buttons[1] = new RectangleButton("DIFFICULT", 450, 500, 100, 40, 15, 25, Color.ORANGE);
-		buttons[1].setHoverBgColor(Color.BLUE);
-		buttons[1].setPressedBgColor(Color.GREEN);
+		buttons[0] = new RectangleButton("easybutton", GameFrame.SCREEN_WIDTH/2 - 150, 290);
+		buttons[1] = new RectangleButton("difficultbutton", GameFrame.SCREEN_WIDTH/2 - 150, 460);
 		
 	}
 
@@ -56,17 +52,17 @@ public class DifficultyState extends State{
             bufferedImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
             return;
         }
-        graphicsPaint = bufferedImage.getGraphics();
+        graphicsPaint = (Graphics2D) bufferedImage.getGraphics();
         if(graphicsPaint == null) {
-            graphicsPaint = bufferedImage.getGraphics();
+            graphicsPaint = (Graphics2D) bufferedImage.getGraphics();
             return;
         }
         graphicsPaint.setColor(Color.CYAN);
-		graphicsPaint.drawImage(DataLoader.getInstance().getFrameImage("openscene").getImage(), 0, 0, null);
+		graphicsPaint.drawImage(DataLoader.getInstance().getFrameImage("background2").getImage(), 0, 0, null);
+		graphicsPaint.drawImage(DataLoader.getInstance().getFrameImage("difficultwindow").getImage(), GameFrame.SCREEN_WIDTH/2 - 364, 100, null);
 		for (Button bt : buttons) {
 			bt.draw(graphicsPaint);
 		}
-		
 	}
 
 	@Override

@@ -21,9 +21,13 @@ import com.game.userinterface.GameFrame;
 
 public class Hero extends HumanoidObject{
 
+	public static final float BULLET_ACCELARATION = 20.0f;
+	public static final float BULLET_SPEED = 3.0f;
     public static final float RUNSPEED = 10.0f;
-    public static final float JUMPSPEED = 10.0f;
-    public static final float MASS = 0.3f;
+    public static final float JUMPSPEED = 15.0f;
+    public static final float MASS = 0.4f;
+    public static final int MAXHP = 100;
+    public static final int MAX_MANA_POINT = 1000;
     
     private Animation runForwardAnim, runBackAnim, runShootingForwarAnim, runShootingBackAnim;
     private Animation idleForwardAnim, idleBackAnim, idleShootingForwardAnim, idleShootingBackAnim;
@@ -41,7 +45,7 @@ public class Hero extends HumanoidObject{
     private boolean shootFlag; 
     
     public Hero(float x, float y, GameState gameState) {
-        super(x, y, 70, 90, MASS, 100, gameState);
+        super(x, y, 70, 90, MASS, MAXHP, gameState);
         
         shooting1 = DataLoader.getInstance().getSound("lucianshooting1");
         shooting2 = DataLoader.getInstance().getSound("lucianshooting2");
@@ -50,6 +54,7 @@ public class Hero extends HumanoidObject{
         setTeamType(HERO_TEAM);
 
         shootFlag = false;
+        setMana(MAX_MANA_POINT);
         
         setTimeForNoBehurt(2000*1000000);
         
@@ -340,7 +345,7 @@ public class Hero extends HumanoidObject{
 
     @Override
     public void attack() {
-    
+        
     	// Dung trong truong hop ban dan nhanh
         if(!isShooting && !getIsDicking()){
             if(shootFlag) {
@@ -356,16 +361,18 @@ public class Hero extends HumanoidObject{
             	
             }
             
-            Bullet bullet = new BlueFire(getPosX(), getPosY(), getGameState());
+            BlueFire bullet = new BlueFire(getPosX(), getPosY(), getGameState());
             if(getDirection() == LEFT_DIR) {
-                bullet.setSpeedX(-10);
+                bullet.setSpeedX(- BULLET_SPEED);
+                bullet.setAccelaration(- BULLET_ACCELARATION);
                 bullet.setPosX(bullet.getPosX() - 40);
                 if(getSpeedX() != 0 && getSpeedY() == 0){
                     bullet.setPosX(bullet.getPosX() - 10);
                     bullet.setPosY(bullet.getPosY() - 5);
                 }
             }else {
-                bullet.setSpeedX(10);
+                bullet.setSpeedX(BULLET_SPEED);
+                bullet.setAccelaration(BULLET_ACCELARATION);
                 bullet.setPosX(bullet.getPosX() + 40);
                 if(getSpeedX() != 0 && getSpeedY() == 0){
                     bullet.setPosX(bullet.getPosX() + 10);

@@ -8,15 +8,19 @@ import com.game.effect.Animation;
 import com.game.effect.DataLoader;
 import com.game.state.GameState;
 
+
 public class BlueFire extends Bullet {
 	
-private Animation forwardBulletAnim, backBulletAnim;
+	private float accelaration;
+	
+	private Animation forwardBulletAnim, backBulletAnim;
     
     public BlueFire(float x, float y, GameState gameWorld) {
         super(x, y, 60, 30, 1.0f, 10, gameWorld);
         forwardBulletAnim = DataLoader.getInstance().getAnimation("bluefire");
         backBulletAnim = DataLoader.getInstance().getAnimation("bluefire");
         backBulletAnim.flipAllImage();
+        
     }
 
     
@@ -55,10 +59,11 @@ private Animation forwardBulletAnim, backBulletAnim;
     public void Update() {
             // TODO Auto-generated method stub
         if(forwardBulletAnim.isIgnoreFrame(0) || backBulletAnim.isIgnoreFrame(0))
+        	setSpeedX(getSpeedX() + getAccelaration());
             setPosX(getPosX() + getSpeedX());
         SpecificObject object = getGameState().specificObjectManager.getCollisionWidthEnemyObject(this);
         if(object!=null && object.getState() == ALIVE){
-            setBlood(0);
+            setState(DEATH);
             object.setBlood(object.getBlood() - getDamage());
             object.setState(BEHURT);
             System.out.println("Bullet set behurt for enemy");
@@ -69,4 +74,14 @@ private Animation forwardBulletAnim, backBulletAnim;
     public void attack() {}
 
 
+
+	public float getAccelaration() {
+		return accelaration;
+	}
+
+	public void setAccelaration(float accelaration) {
+		this.accelaration = accelaration;
+	}
+
+    
 }

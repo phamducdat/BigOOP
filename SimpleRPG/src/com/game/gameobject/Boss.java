@@ -15,6 +15,9 @@ import com.game.state.GameState;
 
 public class Boss extends HumanoidObject {
 
+	public static final int MAXHP = 300;
+	public static final int MAXARMOR = 300;
+	
 	protected Animation idleforward, idleback;
 	protected Animation shootingforward, shootingback;
 	protected Animation slideforward, slideback;
@@ -86,6 +89,7 @@ public class Boss extends HumanoidObject {
 
 		setTimeForNoBehurt(500 * 1000000);
 		setDamage(10);
+		setArmor(MAXARMOR);
 
 	}
 
