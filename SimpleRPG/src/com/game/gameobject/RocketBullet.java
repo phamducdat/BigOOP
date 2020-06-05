@@ -11,14 +11,24 @@ import com.game.state.GameState;
 // Done
 
 public class RocketBullet extends Bullet {
+	private int a;
+	public int getA() {
+		return a;
+	}
+
+	public void setA(int a) {
+		this.a = a;
+	}
+
 	private Animation forwardBulletAnimUp, forwardBulletAnimDown, forwardBulletAnim;
     private Animation backBulletAnimUp, backBulletAnimDown, backBulletAnim;
 
     private long startTimeForChangeSpeedY;
     
-    public RocketBullet(float x, float y, GameState gameWorld) {
+    public RocketBullet(float x, float y, GameState gameWorld, int a) {
         
             super(x, y, 30, 30, 1.0f, 10, gameWorld);
+            this.a = a;
             
             backBulletAnimUp = DataLoader.getInstance().getAnimation("rocketUp");
             backBulletAnimDown = DataLoader.getInstance().getAnimation("rocketDown");
@@ -32,6 +42,7 @@ public class RocketBullet extends Bullet {
             forwardBulletAnim.flipAllImage();
 
     }
+   
   
     @Override
     public Rectangle getBoundForCollisionWithEnemy() {
@@ -61,9 +72,9 @@ public class RocketBullet extends Bullet {
     }
 
     private void changeSpeedY(){
-        if(System.currentTimeMillis() % 3 == 0){
+        if(System.currentTimeMillis() % a == 0){
             setSpeedY(getSpeedX());
-        }else if(System.currentTimeMillis() % 3 == 1){
+        }else if(System.currentTimeMillis() % a == 1){
             setSpeedY(-getSpeedX());
         }else {
             setSpeedY(0);
