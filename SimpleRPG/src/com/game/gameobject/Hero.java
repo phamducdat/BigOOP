@@ -23,6 +23,7 @@ public class Hero extends HumanoidObject{
 
     public static final float RUNSPEED = 10.0f;
     public static final float JUMPSPEED = 10.0f;
+    public static final float MASS = 0.3f;
     
     private Animation runForwardAnim, runBackAnim, runShootingForwarAnim, runShootingBackAnim;
     private Animation idleForwardAnim, idleBackAnim, idleShootingForwardAnim, idleShootingBackAnim;
@@ -40,7 +41,7 @@ public class Hero extends HumanoidObject{
     private boolean shootFlag; 
     
     public Hero(float x, float y, GameState gameState) {
-        super(x, y, 70, 90, 0.3f, 100, gameState);
+        super(x, y, 70, 90, MASS, 100, gameState);
         
         shooting1 = DataLoader.getInstance().getSound("lucianshooting1");
         shooting2 = DataLoader.getInstance().getSound("lucianshooting2");
@@ -340,7 +341,7 @@ public class Hero extends HumanoidObject{
     @Override
     public void attack() {
     
-    	// DDung trong truong hop ban dan nhanh
+    	// Dung trong truong hop ban dan nhanh
         if(!isShooting && !getIsDicking()){
             if(shootFlag) {
             	System.out.println("Shoot 1");

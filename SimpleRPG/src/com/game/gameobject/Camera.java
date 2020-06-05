@@ -22,8 +22,21 @@ public class Camera extends GameObject{
         this.heightView = heightView;
     }
 
+    public void lockBoss() {
+    	int[][] map = getGameState().physicalMap.getPhys_map();
+    	int tileSize = getGameState().physicalMap.getTileSize();
+    	
+    	setPosX((int) (map[0].length * tileSize - GameFrame.SCREEN_WIDTH));
+    	setPosY(tileSize);
+    	lock();
+    }
+    
     public void lock(){
         isLocked = true;
+        
+        
+        
+        
     }
     
     public void unlock(){

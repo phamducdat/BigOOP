@@ -103,7 +103,7 @@ public class MenuState extends State{
     private void actionMenu() {
         switch(buttonSelected) {
             case 0:
-                gamePanel.setState(new GameState(gamePanel));
+                gamePanel.setState(new DifficultyState(gamePanel));
                 break;
            
             case 1:

@@ -7,7 +7,7 @@ import com.game.state.GameState;
 
 public class FinalBossHard extends Boss {
 	public FinalBossHard(float x, float y, GameState gameWorld) {
-		super(x, y, 110, 150, 0.1f, 100, gameWorld);
+		super(x, y, 110, 150, 0.1f, 300, gameWorld);
 		a = 1;
 		attackType.add("NONE");
 		attackType.add("ready");
