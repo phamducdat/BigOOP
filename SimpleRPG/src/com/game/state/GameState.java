@@ -503,18 +503,18 @@ public void Render(){
 //                }
                 
                 if(tutorialState == MEET_FINAL_BOSS) {
-                	g2.drawImage(bossbar.getImage(), 750, 20, null);
+                	g2.drawImage(bossbar.getImage(), 550, 20, null);
                     int bloodBarB = (int) ((float) boss.getBlood() / Boss.MAXHP * bosshp.getWidthImage()); 
                     int armorBarB = (int) ((float) boss.getArmor() / Boss.MAXARMOR * bossarmor.getWidthImage());
                     
                     if(bloodBarB != 0) {
                     	BufferedImage currentBossBlood = bosshp.getImage().getSubimage(0, 0, bloodBarB, bosshp.getHeightImage());
-                        g2.drawImage(currentBossBlood, 764 + bosshp.getWidthImage() - bloodBarB, 37, null);
+                        g2.drawImage(currentBossBlood, 566 + bosshp.getWidthImage() - bloodBarB, 74, null);
                     }
                     
                     if(armorBarB != 0) {
                     	BufferedImage currentBossArmor = bossarmor.getImage().getSubimage(0, 0, armorBarB, bossarmor.getHeightImage());
-                        g2.drawImage(currentBossArmor, 834 + bossarmor.getWidthImage() - armorBarB, 25, null);
+                        g2.drawImage(currentBossArmor, 664 + bossarmor.getWidthImage() - armorBarB, 32, null);
                     }
                     
                 }

@@ -25,25 +25,25 @@ w 120
 h 6
 
 bossbar
-image data/HPBar.png
-x 340
+image data/BossBar.png
+x 0
 y 0
-w 200
-h 33
+w 400
+h 120
 
 bosshp
-image data/HPBar.png
-x 540
+image data/BossBar.png
+x 400
 y 0
-w 130
-h 12
+w 244
+h 44
 
 bossarmor
-image data/HPBar.png
-x 540
-y 12
-w 58
-h 7
+image data/BossBar.png
+x 400
+y 44
+w 146
+h 26
 
 
 
