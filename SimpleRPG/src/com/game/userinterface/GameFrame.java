@@ -10,6 +10,8 @@ import com.game.effect.DataLoader;
 
 // Done
 
+// Da chinh sua
+
 public class GameFrame extends JFrame {
 	
 	public static final int SCREEN_WIDTH = 1000;
