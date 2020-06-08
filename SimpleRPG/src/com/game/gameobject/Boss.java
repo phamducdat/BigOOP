@@ -192,7 +192,7 @@ public class Boss extends HumanoidObject {
 	}
 
 	@Override
-	public void dick() {
+	public void kneel() {
 		// TODO Auto-generated method stub
 
 	}

@@ -31,7 +31,7 @@ public class Hero extends HumanoidObject{
     
     private Animation runForwardAnim, runBackAnim, runShootingForwarAnim, runShootingBackAnim;
     private Animation idleForwardAnim, idleBackAnim, idleShootingForwardAnim, idleShootingBackAnim;
-    private Animation dickForwardAnim, dickBackAnim;
+    private Animation kneelForwardAnim, kneelBackAnim;
     private Animation flyForwardAnim, flyBackAnim, flyShootingForwardAnim, flyShootingBackAnim;
     private Animation landingForwardAnim, landingBackAnim;
     
@@ -66,9 +66,9 @@ public class Hero extends HumanoidObject{
         idleBackAnim = DataLoader.getInstance().getAnimation("idle");
         idleBackAnim.flipAllImage();
         
-        dickForwardAnim = DataLoader.getInstance().getAnimation("dick");
-        dickBackAnim = DataLoader.getInstance().getAnimation("dick");
-        dickBackAnim.flipAllImage();
+        kneelForwardAnim = DataLoader.getInstance().getAnimation("kneel");
+        kneelBackAnim = DataLoader.getInstance().getAnimation("kneel");
+        kneelBackAnim.flipAllImage();
         
         flyForwardAnim = DataLoader.getInstance().getAnimation("flyingup");
         flyForwardAnim.setIsRepeated(false);
@@ -139,7 +139,7 @@ public class Hero extends HumanoidObject{
         // TODO Auto-generated method stub
         Rectangle rect = getBoundForCollisionWithMap();
         
-        if(getIsDicking()){
+        if(getIsKneeling()){
             rect.x = (int) getPosX() - 22;
             rect.y = (int) getPosY() - 20;
             rect.width = 44;
@@ -199,17 +199,17 @@ public class Hero extends HumanoidObject{
                             flyBackAnim.draw((int) (getPosX() - getGameState().camera.getPosX()), (int) getPosY() - (int) getGameState().camera.getPosY(), g2);
                         }
 
-                    }else if(getIsDicking()){
+                    }else if(getIsKneeling()){
 
                         if(getDirection() == RIGHT_DIR){
-                            dickForwardAnim.Update(System.nanoTime());
-                            dickForwardAnim.draw((int) (getPosX() - getGameState().camera.getPosX()), 
-                                    (int) getPosY() - (int) getGameState().camera.getPosY() + (getBoundForCollisionWithMap().height/2 - dickForwardAnim.getCurrentImage().getHeight()/2),
+                        	kneelForwardAnim.Update(System.nanoTime());
+                        	kneelForwardAnim.draw((int) (getPosX() - getGameState().camera.getPosX()), 
+                                    (int) getPosY() - (int) getGameState().camera.getPosY() + (getBoundForCollisionWithMap().height/2 - kneelForwardAnim.getCurrentImage().getHeight()/2),
                                     g2);
                         }else{
-                            dickBackAnim.Update(System.nanoTime());
-                            dickBackAnim.draw((int) (getPosX() - getGameState().camera.getPosX()), 
-                                    (int) getPosY() - (int) getGameState().camera.getPosY() + (getBoundForCollisionWithMap().height/2 - dickBackAnim.getCurrentImage().getHeight()/2),
+                            kneelBackAnim.Update(System.nanoTime());
+                            kneelBackAnim.draw((int) (getPosX() - getGameState().camera.getPosX()), 
+                                    (int) getPosY() - (int) getGameState().camera.getPosY() + (getBoundForCollisionWithMap().height/2 - kneelBackAnim.getCurrentImage().getHeight()/2),
                                     g2);
                         }
 
@@ -275,7 +275,7 @@ public class Hero extends HumanoidObject{
 
     @Override
     public void run() {
-    	if(!getIsDicking()) {
+    	if(!getIsKneeling()) {
     		if(getDirection() == LEFT_DIR)
                 setSpeedX(- RUNSPEED);
             else setSpeedX(RUNSPEED);
@@ -319,19 +319,20 @@ public class Hero extends HumanoidObject{
     }
 
     @Override
-    public void dick() {
-        if(!getIsJumping())
-            setIsDicking(true);
+	public void kneel() {
+		if(!getIsJumping())
+            setIsKneeling(true);
             if(getSpeedX() != 0) setSpeedX(0);
-    }
+		
+	}
 
     @Override
     public void standUp() {
-        setIsDicking(false);
+    	setIsKneeling(false);
         idleForwardAnim.reset();
         idleBackAnim.reset();
-        dickForwardAnim.reset();
-        dickBackAnim.reset();
+        kneelForwardAnim.reset();
+        kneelBackAnim.reset();
     }
 
     @Override
@@ -347,7 +348,7 @@ public class Hero extends HumanoidObject{
     public void attack() {
         
     	// Dung trong truong hop ban dan nhanh
-        if(!isShooting && !getIsDicking()){
+        if(!isShooting && !getIsKneeling()){
             if(shootFlag) {
             	System.out.println("Shoot 1");
             	shooting1.play();
@@ -396,5 +397,7 @@ public class Hero extends HumanoidObject{
         System.out.println("Call back hurting");
         hurtingSound.play();
     }
+
+	
 
 }

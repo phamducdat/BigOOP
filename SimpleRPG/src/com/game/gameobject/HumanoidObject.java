@@ -13,23 +13,13 @@ import com.game.state.GameState;
 public abstract class HumanoidObject extends SpecificObject implements Actable{
 
 	private boolean isJumping;
-    private boolean isDicking;
+    private boolean isKneeling;
     private boolean isLanding;
 
     public HumanoidObject(float x, float y, float width, float height, float mass, int blood, GameState gameState) {
         super(x, y, width, height, mass, blood, gameState);
         setState(ALIVE);
     }
-
-    public abstract void run();
-    
-    public abstract void jump();
-    
-    public abstract void dick();
-    
-    public abstract void standUp();
-    
-    public abstract void stopRun();
 
     public boolean getIsJumping() {
         return isJumping;
@@ -46,16 +36,16 @@ public abstract class HumanoidObject extends SpecificObject implements Actable{
     public void setIsJumping(boolean isJumping) {
         this.isJumping = isJumping;
     }
-
-    public boolean getIsDicking() {
-        return isDicking;
-    }
-
-    public void setIsDicking(boolean isDicking) {
-        this.isDicking = isDicking;
-    }
     
-    @Override
+    public boolean getIsKneeling() {
+		return isKneeling;
+	}
+
+	public void setIsKneeling(boolean isKneeling) {
+		this.isKneeling = isKneeling;
+	}
+
+	@Override
     public void Update(){
         
         super.Update();

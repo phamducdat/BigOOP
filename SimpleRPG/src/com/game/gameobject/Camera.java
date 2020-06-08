@@ -34,9 +34,7 @@ public class Camera extends GameObject{
     public void lock(){
         isLocked = true;
         
-        
-        
-        
+          
     }
     
     public void unlock(){

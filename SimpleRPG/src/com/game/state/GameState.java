@@ -427,10 +427,28 @@ public void Update(){
             	
             	break;
             case GAMEOVER:
-            	
+            	physicalMap.phys_map[4][22] = 0;
+                physicalMap.phys_map[4][23] = 0;
+                
+                backgroundMap.map[3][22] = 12;
+                backgroundMap.map[4][22] = 20;
+                backgroundMap.map[5][22] = 1;
+                backgroundMap.map[3][23] = 16;
+                backgroundMap.map[4][23] = 0;
+                backgroundMap.map[5][23] = 2;
+                backgroundMap.map[5][24] = 2;
                 break;
             case GAMEWIN:
+            	physicalMap.phys_map[4][22] = 0;
+                physicalMap.phys_map[4][23] = 0;
                 
+                backgroundMap.map[3][22] = 12;
+                backgroundMap.map[4][22] = 20;
+                backgroundMap.map[5][22] = 1;
+                backgroundMap.map[3][23] = 16;
+                backgroundMap.map[4][23] = 0;
+                backgroundMap.map[5][23] = 2;
+                backgroundMap.map[5][24] = 2;
                 break;
         }
         
@@ -546,7 +564,7 @@ public void Render(){
         switch(code){
              
              case KeyEvent.VK_DOWN:
-                 megaMan.dick();
+                 megaMan.kneel();
                  break;
                  
              case KeyEvent.VK_RIGHT:
