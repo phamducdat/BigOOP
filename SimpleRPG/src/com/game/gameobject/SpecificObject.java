@@ -13,7 +13,7 @@ import com.game.state.GameState;
 
 public abstract class SpecificObject extends GameObject implements Profile, Vulnerable  {
 	
-	private int state = ALIVE;
+	private int state;
 	private int teamType;
 	private int direction;
 	
@@ -28,8 +28,8 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	private int damage;
 	private int armor;
 	
-	private long beginTimeToNoBeHurt;
-	private long timeForNoBeHurt;
+	private long beginTimeForCantBeHurt;
+	private long timeForCantBeHurt;
 	
 	protected Animation beHurtForward, beHurtBackward;;
 	
@@ -42,19 +42,20 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
         setMass(mass);
         setBlood(blood);
         
+        state = ALIVE;
         direction = RIGHT_DIR;
 
     }
     
-    public void setTimeForNoBehurt(long time){
-        timeForNoBeHurt = time;
-    }
-    
-    public long getTimeForNoBeHurt(){
-        return timeForNoBeHurt;
-    }
-    
-    public void setState(int state){
+    public long getTimeForCantBeHurt() {
+		return timeForCantBeHurt;
+	}
+
+	public void setTimeForCantBeHurt(long timeForCantBeHurt) {
+		this.timeForCantBeHurt = timeForCantBeHurt;
+	}
+
+	public void setState(int state){
         this.state = state;
     }
     
@@ -70,7 +71,6 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
             return damage;
     }
 
-    
     public void setTeamType(int team){
         teamType = team;
     }
@@ -158,44 +158,35 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
         return bound;
     }
 
-    public void beHurt(int damgeEat){
-        setBlood(getBlood() - damgeEat);
+    public void beHurt(int damage){
+        setBlood(getBlood() - damage);
         state = BEHURT;
         hurtingCallback();
+    }
+    
+    public void hurtingCallback() {
+    	// Phuong thuc se duoc hoan thien o lop con
     }
 
     @Override
     public void Update(){
         switch(state){
-            case ALIVE:
-                
-                // note: SET DAMAGE FOR OBJECT NO DAMAGE
-                SpecificObject object = getGameState().specificObjectManager.getCollisionWidthEnemyObject(this);
+            case ALIVE: 
+                SpecificObject object = getGameState().specificObjectManager.getEnemyObjectCollideWith(this);
                 if(object!=null){
-                    
-                    
                     if(object.getDamage() > 0){
-
-                        // switch state to fey if object die
-                        
-                        
                         System.out.println("eat damage.... from collision with enemy........ "+object.getDamage());
-                        beHurt(object.getDamage());
+                        beHurt(object.getDamage());	// phuong thuc beHurt chuyen trang thai nhan vat sang BEHURT
                     }
-                    
-                }
-                
-                
-                
+                } 
                 break;
                 
             case BEHURT:
                 if(beHurtBackward == null){
                     state = CANTBEHURT;
-                    beginTimeToNoBeHurt = System.nanoTime();
+                    beginTimeForCantBeHurt = System.nanoTime();
                     if(getBlood() == 0)
                             state = FEY;
-                    
                 } else {
                     beHurtForward.Update(System.nanoTime());
                     if(beHurtForward.isLastFrame()){
@@ -203,45 +194,26 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
                         state = CANTBEHURT;
                         if(getBlood() == 0)
                             state = FEY;
-                        beginTimeToNoBeHurt = System.nanoTime();
+                        beginTimeForCantBeHurt = System.nanoTime();
                     }
-                }
-                
+                } 
                 break;
                 
             case FEY:
-                
                 state = DEATH;
-                
                 break;
             
             case DEATH:
-                
-                
                 break;
                 
             case CANTBEHURT:
-                System.out.println("state = nobehurt");
-                if(System.nanoTime() - beginTimeToNoBeHurt > timeForNoBeHurt)
+                System.out.println("state = cantbehurt");
+                if(System.nanoTime() - beginTimeForCantBeHurt > timeForCantBeHurt)
                     state = ALIVE;
                 break;
         }
         
     }
-
-    public void drawBoundForCollisionWithMap(Graphics2D g2){
-        Rectangle rect = getBoundForCollisionWithMap();
-        g2.setColor(Color.BLUE);
-        g2.drawRect(rect.x - (int) getGameState().camera.getPosX(), rect.y - (int) getGameState().camera.getPosY(), rect.width, rect.height);
-    }
-
-    public void drawBoundForCollisionWithEnemy(Graphics2D g2){
-        Rectangle rect = getBoundForCollisionWithEnemy();
-        g2.setColor(Color.RED);
-        g2.drawRect(rect.x - (int) getGameState().camera.getPosX(), rect.y - (int) getGameState().camera.getPosY(), rect.width, rect.height);
-    }
-
-    public abstract Rectangle getBoundForCollisionWithEnemy();
     
     @Override
     public void draw(Graphics2D g){
@@ -256,8 +228,6 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 
     	}
     }
-    
-    public void hurtingCallback(){}
 
 	public int getMana() {
 		return mana;

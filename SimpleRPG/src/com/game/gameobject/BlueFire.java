@@ -16,7 +16,7 @@ public class BlueFire extends Bullet {
 	private Animation forwardBulletAnim, backBulletAnim;
     
     public BlueFire(float x, float y, GameState gameWorld) {
-        super(x, y, 60, 30, 1.0f, 10, gameWorld);
+        super(x, y, 60, 30, 1.0f, 20, gameWorld);
         forwardBulletAnim = DataLoader.getInstance().getAnimation("bluefire");
         backBulletAnim = DataLoader.getInstance().getAnimation("bluefire");
         backBulletAnim.flipAllImage();
@@ -52,7 +52,6 @@ public class BlueFire extends Bullet {
             backBulletAnim.Update(System.nanoTime());
             backBulletAnim.draw((int) (getPosX() - getGameState().camera.getPosX()), (int) getPosY() - (int) getGameState().camera.getPosY(), g2);
         }
-        //drawBoundForCollisionWithEnemy(g2);
     }
 
     @Override
@@ -61,7 +60,7 @@ public class BlueFire extends Bullet {
         if(forwardBulletAnim.isIgnoreFrame(0) || backBulletAnim.isIgnoreFrame(0))
         	setSpeedX(getSpeedX() + getAccelaration());
             setPosX(getPosX() + getSpeedX());
-        SpecificObject object = getGameState().specificObjectManager.getCollisionWidthEnemyObject(this);
+        SpecificObject object = getGameState().specificObjectManager.getEnemyObjectCollideWith(this);
         if(object!=null && object.getState() == ALIVE){
             setState(DEATH);
             object.setBlood(object.getBlood() - getDamage());

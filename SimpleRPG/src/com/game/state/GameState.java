@@ -61,6 +61,8 @@ public class GameState extends State implements GameWorldState {
     private boolean finalbossTrigger = true;
     SpecificObject boss;
     
+    Font font = new Font("BK", Font.BOLD, 24);
+    
     FrameImage avatar = DataLoader.getInstance().getFrameImage("avatar");
     
     FrameImage tutorialWindow = DataLoader.getInstance().getFrameImage("tutorialwindow");
@@ -330,7 +332,7 @@ public class GameState extends State implements GameWorldState {
     	}
     	
     	g2.setColor(Color.BLACK);
-    	g2.setFont(new Font("BK", Font.BOLD, 24));
+    	g2.setFont(font);
     	
         for(String str : text.split("\n"))
             g2.drawString(str, x, y+=g2.getFontMetrics().getHeight());
@@ -368,7 +370,7 @@ public class GameState extends State implements GameWorldState {
         }
     }
     
-public void Update(){
+    public void Update(){
         
         switch(state){
             case INIT_GAME:
@@ -514,11 +516,12 @@ public void Render(){
                     g2.drawImage(currentMana, 77, 48, null);
                 }
                 
-//                g2.fillRect(20, 60, megaMan.getBlood(), 20);
-                
-//                for(int i = 0; i < numberOfLife; i++){
-//                    g2.drawImage(DataLoader.getInstance().getFrameImage("hearth").getImage(), 20 + i*40, 18, null);
-//                }
+               
+               
+                g2.drawImage(DataLoader.getInstance().getFrameImage("hearth").getImage(), 30, 80, null);
+                g2.setFont(font);
+                g2.setColor(Color.BLACK);
+                g2.drawString(" x " + numberOfLife, 60, 100);
                 
                 if(tutorialState == MEET_FINAL_BOSS) {
                 	g2.drawImage(bossbar.getImage(), 550, 20, null);
@@ -539,11 +542,6 @@ public void Render(){
                 
                 break;
             case GAMEOVER:
-//                g2.setColor(Color.BLACK);
-//                g2.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
-//                g2.setColor(Color.WHITE);
-//                g2.drawString("GAME OVER!", 450, 300);
-            	
             	g2.drawImage(DataLoader.getInstance().getFrameImage("gamelose").getImage(), 0, 0, null);
             	
                 break;

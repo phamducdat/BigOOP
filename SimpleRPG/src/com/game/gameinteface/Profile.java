@@ -14,5 +14,5 @@ public interface Profile {
 	public static final int CANTBEHURT = 4;
 	public static final int DEATH = 5;
 	
-	public static final int MAX_MANA_POINT = 100;
+	public static final int MAX_MANA_POINT = 1000;
 }

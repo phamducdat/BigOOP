@@ -1,7 +1,5 @@
 package com.game.gameinteface;
 
-import com.game.gameobject.BackgroundMap;
-
 public interface GameWorldState {
 
 	public static final int finalBossX = 3000; 

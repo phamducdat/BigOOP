@@ -24,5 +24,4 @@ public class KeyEventManager {
 	public void setState(State state) {
 		this.gameState = state;
 	}
-	
 }

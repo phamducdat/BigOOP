@@ -87,7 +87,7 @@ public class Boss extends HumanoidObject {
 		noMoveRight.put("ultifirst", ultifirstforward);
 		noMoveRight.put("ultilast", ultilastforward);
 
-		setTimeForNoBehurt(500 * 1000000);
+		setTimeForCantBeHurt(500 * 1000000);
 		setDamage(10);
 		setArmor(MAXARMOR);
 

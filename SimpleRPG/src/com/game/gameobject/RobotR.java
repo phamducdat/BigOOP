@@ -29,7 +29,7 @@ public class RobotR extends SpecificObject{
         forwardAnim = DataLoader.getInstance().getAnimation("robotR");
         forwardAnim.flipAllImage();
         startTimeToShoot = 0;
-        setTimeForNoBehurt(300000000);
+        setTimeForCantBeHurt(300000000);
         setDamage(10);
         
         x1 = x - 100;

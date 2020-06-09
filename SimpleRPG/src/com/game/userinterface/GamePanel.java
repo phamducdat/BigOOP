@@ -2,6 +2,7 @@ package com.game.userinterface;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -27,19 +28,14 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 	public GamePanel() {
 		
 		gameState = new MenuState(this);
-		
 		keyEventManager = new KeyEventManager(gameState);
 		
 	}
 
 	@Override
 	public void paint(Graphics g) {
-//		g.setColor(Color.RED);
-//		g.fillRect(0, 0, GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT);
-		
-		g.drawImage(gameState.getBufferedImage(), 0, 0, this);
-
-//		g.drawImage(DataLoader.getInstance().getFrameImage("background").getImage(), 0, 0, this);
+		Graphics2D g2 = (Graphics2D) g;
+		g2.drawImage(gameState.getBufferedImage(), 0, 0, this);
 	}
 	
 	public void startGame() {
@@ -74,7 +70,6 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		long FPS = 60;
 		long period = 1000000000 / FPS;
 		
@@ -97,7 +92,7 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 					thread.sleep(sleepTime/1000000);
 				else thread.sleep(period/2000000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
+				// Xu ly ngoai le
 				e.printStackTrace();
 			}
 		}

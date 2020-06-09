@@ -31,7 +31,7 @@ public class DarkRaise extends SpecificObject implements Profile, Vulnerable{
         forwardAnim = DataLoader.getInstance().getAnimation("darkraise");
         forwardAnim.flipAllImage();
         startTimeToShoot = 0;
-        setTimeForNoBehurt(300000000);
+        setTimeForCantBeHurt(300000000);
         
         x1 = x - 100;
         x2 = x + 100;

@@ -19,7 +19,6 @@ public class WinState extends State{
 
     private Button[] buttons;
 	private int buttonSelected = 0;
-	private boolean canContinueGame = false;
 	
 	public WinState(GamePanel gamePanel) {
 		super(gamePanel);

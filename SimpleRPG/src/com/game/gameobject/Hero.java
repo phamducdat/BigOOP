@@ -56,7 +56,7 @@ public class Hero extends HumanoidObject{
         shootFlag = false;
         setMana(MAX_MANA_POINT);
         
-        setTimeForNoBehurt(2000*1000000);
+        setTimeForCantBeHurt(2000*1000000);
         
         runForwardAnim = DataLoader.getInstance().getAnimation("run");
         runBackAnim = DataLoader.getInstance().getAnimation("run");
@@ -392,6 +392,7 @@ public class Hero extends HumanoidObject{
         }
     
     }
+   
     @Override
     public void hurtingCallback(){
         System.out.println("Call back hurting");

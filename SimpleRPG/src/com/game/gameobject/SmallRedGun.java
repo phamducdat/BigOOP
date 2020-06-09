@@ -29,7 +29,7 @@ public class SmallRedGun extends SpecificObject{
         forwardAnim = DataLoader.getInstance().getAnimation("smallredgun");
         forwardAnim.flipAllImage();
         startTimeToShoot = 0;
-        setTimeForNoBehurt(300000000);
+        setTimeForCantBeHurt(300000000);
         
         x1 = x - 20;
         x2 = x + 20;

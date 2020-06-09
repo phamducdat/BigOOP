@@ -52,7 +52,7 @@ public class SpecificObjectManager {
         }
     }
     
-    public SpecificObject getCollisionWidthEnemyObject(SpecificObject object){
+    public SpecificObject getEnemyObjectCollideWith(SpecificObject object){
         synchronized(specificObjects){
             for(int id = 0; id < specificObjects.size(); id++){
                 
@@ -82,8 +82,6 @@ public class SpecificObjectManager {
                 }
             }
         }
-
-        //System.out.println("Camerawidth  = "+camera.getWidth());
         
     }
     

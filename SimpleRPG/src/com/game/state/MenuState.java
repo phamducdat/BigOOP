@@ -1,7 +1,6 @@
 package com.game.state;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -22,7 +21,6 @@ public class MenuState extends State{
 
     private Button[] buttons;
 	private int buttonSelected = 0;
-	private boolean canContinueGame = false;
         
     public MenuState(GamePanel gamePanel) {
     	super(gamePanel);

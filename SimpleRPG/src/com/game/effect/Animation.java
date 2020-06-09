@@ -1,6 +1,5 @@
 package com.game.effect;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
@@ -23,8 +22,6 @@ public class Animation {
     
     private ArrayList<Double> delayFrames;
     private long beginTime;
-
-    private boolean drawRectFrame;
     
     public Animation(){
         delayFrames = new ArrayList<Double>();
@@ -32,11 +29,7 @@ public class Animation {
         currentFrame = 0;
 
         ignoreFrames = new ArrayList<Boolean>();
-        
-        frameImages = new ArrayList<FrameImage>();
-        
-        drawRectFrame = false;
-        
+        frameImages = new ArrayList<FrameImage>();        
         isRepeated = true;
     }
     
@@ -44,7 +37,6 @@ public class Animation {
         
         beginTime = animation.beginTime;
         currentFrame = animation.currentFrame;
-        drawRectFrame = animation.drawRectFrame;
         isRepeated = animation.isRepeated;
         
         delayFrames = new ArrayList<Double>();
@@ -114,11 +106,6 @@ public class Animation {
         
     }
     
-    public void setDrawRectFrame(boolean b){
-        drawRectFrame = b;
-    }
-
-    
     public BufferedImage getCurrentImage(){
         return frameImages.get(currentFrame).getImage();
     }
@@ -176,7 +163,7 @@ public class Animation {
         
     }
     
-    public long time() { // tính thời gian animation
+    public long time() { // tinh thoi gian animation
 		long a = 0;
 		for (int i = 0; i < delayFrames.size(); i++) {
 			a = (long) (a + delayFrames.get(i));
@@ -187,7 +174,7 @@ public class Animation {
     
     
     
-    public void reverse() { // Đảo đầu cuối vị trí ảnh
+    public void reverse() { // dao thu tu cac anh trong animation
 
 		ArrayList<FrameImage> a = new ArrayList<FrameImage>();
 
@@ -207,8 +194,6 @@ public class Animation {
         BufferedImage image = getCurrentImage();
         
         g2.drawImage(image, x - image.getWidth()/2, y - image.getHeight()/2, null);
-        if(drawRectFrame)
-            g2.drawRect(x - image.getWidth()/2, x - image.getWidth()/2, image.getWidth(), image.getHeight());
         
     }
     

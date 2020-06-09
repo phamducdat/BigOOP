@@ -13,11 +13,6 @@ public class RectangleButton extends Button{
 	}
 
 	@Override
-	public boolean isInButton(int x, int y) {
-		return (enabled && x >= posX && x <= posX + width && y >= posY && y <= posY + height);
-	}
-
-	@Override
 	public void draw(Graphics2D g) {
 		if(enabled) {
 			switch (state) {

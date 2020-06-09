@@ -25,7 +25,7 @@ public class RedEyeDevil extends SpecificObject {
         forwardAnim.flipAllImage();
         startTimeToShoot = 0;
         setDamage(10);
-        setTimeForNoBehurt(300000000);
+        setTimeForCantBeHurt(300000000);
         shooting = DataLoader.getInstance().getSound("redeyeshooting");
     }
 

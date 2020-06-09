@@ -19,7 +19,7 @@ public abstract class Bullet extends SpecificObject {
 	    super.Update();
 	    setPosX(getPosX() + getSpeedX());
 	    setPosY(getPosY() + getSpeedY());
-	    SpecificObject object = getGameState().specificObjectManager.getCollisionWidthEnemyObject(this);
+	    SpecificObject object = getGameState().specificObjectManager.getEnemyObjectCollideWith(this);
 	    if(object!=null && object.getState() == ALIVE){
 	        setState(DEATH);;
 	        object.beHurt(getDamage());

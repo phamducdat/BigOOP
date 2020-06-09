@@ -1,7 +1,5 @@
 package com.game.control;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import com.game.effect.DataLoader;
@@ -19,6 +17,7 @@ public abstract class Button implements ButtonState{
 	protected boolean enabled;
 	
 	protected int state;
+	
 	protected BufferedImage none;
 	protected BufferedImage press;
 	protected BufferedImage hover;
