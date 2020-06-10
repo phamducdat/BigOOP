@@ -1,5 +1,6 @@
 package com.game.gameinteface;
 
+// Hanh dong cua nhung doi tuong dang nguoi
 public interface Actable {
 
 	public abstract void run();

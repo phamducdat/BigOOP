@@ -4,13 +4,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-// Done
-
+// Hinh anh + ten
 public class FrameImage {
 
 	private String name;
     private BufferedImage image;
     
+    // phuong thuc khoi tao
     public FrameImage(String name, BufferedImage image){
         this.name = name;
         this.image = image;
@@ -35,6 +35,7 @@ public class FrameImage {
         image = null;
     }
     
+    // getter va setter
     public int getWidthImage(){
         return image.getWidth();
     }

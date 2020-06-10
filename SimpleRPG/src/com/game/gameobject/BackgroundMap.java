@@ -7,8 +7,7 @@ import com.game.effect.DataLoader;
 import com.game.state.GameState;
 import com.game.userinterface.GameFrame;
 
-// Done
-
+// Ban do hien thi chi co tac dung hien thi chu khong anh huong den hoat dong cua he thong
 public class BackgroundMap extends GameObject{
 
     public int[][] map;
@@ -23,6 +22,7 @@ public class BackgroundMap extends GameObject{
     @Override
     public void Update() {}
     
+    // ve ban do
     public void draw(Graphics2D g2){
         
         Camera camera = getGameState().camera;

@@ -11,13 +11,17 @@ import com.game.effect.DataLoader;
 import com.game.userinterface.GameFrame;
 import com.game.userinterface.GamePanel;
 
+// Trang thai chien thang
 public class WinState extends State{
 
-	public final int NUMBER_OF_BUTTON = 2;
-    private BufferedImage bufferedImage;
-    Graphics2D graphicsPaint;
+	public final int NUMBER_OF_BUTTON = 2;	
 
-    private Button[] buttons;
+	// Hinh anh cua trang thai
+    private BufferedImage bufferedImage;	
+    Graphics2D graphicsPaint;				
+
+    // Mang cac nut
+    private Button[] buttons;				
 	private int buttonSelected = 0;
 	
 	public WinState(GamePanel gamePanel) {
@@ -30,6 +34,7 @@ public class WinState extends State{
 	     buttons[1] = new RectangleButton("exitbutton", GameFrame.SCREEN_WIDTH/2 - 160, 500);
 	}
 
+	// Phuong thuc cap nhat va ve
 	@Override
 	public void Update() {
 		for(int i = 0;i<NUMBER_OF_BUTTON;i++) {
@@ -53,13 +58,13 @@ public class WinState extends State{
             return;
         }
         graphicsPaint.setColor(Color.CYAN);
-		graphicsPaint.drawImage(DataLoader.getInstance().getFrameImage("openscene").getImage(), 0, 0, null);
+		graphicsPaint.drawImage(DataLoader.getInstance().getFrameImage("gamewin2").getImage(), 0, 0, null);
 		for (Button bt : buttons) {
 			bt.draw(graphicsPaint);
 		}
-		
 	}
 
+	// Xu ly tin hieu tu ban phim
 	@Override
 	public void processPressButton(int keyEvent) {
         switch(keyEvent) {
@@ -84,12 +89,6 @@ public class WinState extends State{
 	@Override
 	public void processReleaseButton(int keyEvent) {}
 
-	@Override
-	public BufferedImage getBufferedImage() {
-		// TODO Auto-generated method stub
-		return bufferedImage;
-	}
-
 	public void actionMenu() {
 		switch(buttonSelected) {
         case 0:
@@ -100,5 +99,11 @@ public class WinState extends State{
             System.exit(0);
             break;
 		}
+	}
+	
+	@Override
+	public BufferedImage getBufferedImage() {
+		// TODO Auto-generated method stub
+		return bufferedImage;
 	}
 }

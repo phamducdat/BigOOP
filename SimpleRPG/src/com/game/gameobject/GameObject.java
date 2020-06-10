@@ -9,10 +9,11 @@ import com.game.state.GameState;
 
 public abstract class GameObject implements Changeable {
 
-	
+	// vi tri
 	private float posX;
 	private float posY;
 	
+	// tro ve GameState so huu no
 	private GameState gameState;
 	
 	public GameObject(float x, float y, GameState gameState){
@@ -21,6 +22,7 @@ public abstract class GameObject implements Changeable {
 		this.gameState = gameState;
 	}
 	
+	// getter va setter
 	public void setPosX(float x){
 		posX = x;
 	}

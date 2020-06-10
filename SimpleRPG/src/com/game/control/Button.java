@@ -5,8 +5,7 @@ import java.awt.image.BufferedImage;
 import com.game.effect.DataLoader;
 import com.game.gameinteface.ButtonState;
 
-// Done
-
+// Nguoi dung thong qua nut de ra yeu cau cho he thong
 public abstract class Button implements ButtonState{
 
 	protected String name;
@@ -16,8 +15,10 @@ public abstract class Button implements ButtonState{
 	protected int height;
 	protected boolean enabled;
 	
+	// trang thai nut
 	protected int state;
 	
+	// hinh anh nut
 	protected BufferedImage none;
 	protected BufferedImage press;
 	protected BufferedImage hover;

@@ -12,12 +12,16 @@ import com.game.gameinteface.GameWorldState;
 import com.game.userinterface.GameFrame;
 import com.game.userinterface.GamePanel;
 
+// Trang thai chon do kho
 public class DifficultyState extends State{
 
 	private final int NUMBER_OF_BUTTON = 2;
+	
+	// hinh anh
 	BufferedImage bufferedImage;
 	Graphics2D graphicsPaint;
 	
+	// Nut
 	Button[] buttons;
 	int buttonSelected = 0;
 	
@@ -33,6 +37,7 @@ public class DifficultyState extends State{
 		
 	}
 
+	// Cap nhat
 	@Override
 	public void Update() {
 		for(int i = 0;i<NUMBER_OF_BUTTON;i++) {
@@ -45,6 +50,7 @@ public class DifficultyState extends State{
 		
 	}
 
+	// Ve
 	@Override
 	public void Render() {
 		if(bufferedImage == null) {
@@ -64,6 +70,7 @@ public class DifficultyState extends State{
 		}
 	}
 
+	// Xuu ly su kien tren ban phim
 	@Override
 	public void processPressButton(int keyEvent) {
 		switch(keyEvent) {
@@ -82,18 +89,12 @@ public class DifficultyState extends State{
         case KeyEvent.VK_ENTER:
             actionMenu();
             break;
-    }
+		}
 	}
 
 	@Override
 	public void processReleaseButton(int keyEvent) {}
 
-	@Override
-	public BufferedImage getBufferedImage() {
-		// TODO Auto-generated method stub
-		return bufferedImage;
-	}
-	
 	public void actionMenu() {
 		switch(buttonSelected) {
 		
@@ -107,5 +108,10 @@ public class DifficultyState extends State{
 		
 		}
 	}
-
+	
+	@Override
+	public BufferedImage getBufferedImage() {
+		// TODO Auto-generated method stub
+		return bufferedImage;
+	}
 }

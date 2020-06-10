@@ -11,30 +11,34 @@ import com.game.effect.DataLoader;
 import com.game.userinterface.GameFrame;
 import com.game.userinterface.GamePanel;
 
+// Trang thai thua cuoc
 public class LoseState extends State {
 
 	public final int NUMBER_OF_BUTTON = 2;
+	
+	// Hinh anh
     private BufferedImage bufferedImage;
     Graphics2D graphicsPaint;
 
+    // Do kho
     private int difficulty;
     
+    // Danh sach nut
     private Button[] buttons;
 	private int buttonSelected = 0;
-	private boolean canContinueGame = false;
 	
 	public LoseState(GamePanel gamePanel, int difficulty) {
 		super(gamePanel);
 		
-		 bufferedImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+		bufferedImage = new BufferedImage(GameFrame.SCREEN_WIDTH, GameFrame.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 	        
-	     buttons = new Button[NUMBER_OF_BUTTON];
-	        
-	     buttons[0] = new RectangleButton("tryagainbutton", GameFrame.SCREEN_WIDTH/2 - 160, 320);
-	     buttons[1] = new RectangleButton("menubutton", GameFrame.SCREEN_WIDTH/2 - 160, 500);
+	    buttons = new Button[NUMBER_OF_BUTTON];    
+	    buttons[0] = new RectangleButton("tryagainbutton", GameFrame.SCREEN_WIDTH/2 - 160, 320);
+	    buttons[1] = new RectangleButton("menubutton", GameFrame.SCREEN_WIDTH/2 - 160, 500);
 		
 	}
 
+	// Cap nhat
 	@Override
 	public void Update() {
 		for(int i = 0;i<NUMBER_OF_BUTTON;i++) {
@@ -47,6 +51,7 @@ public class LoseState extends State {
 		
 	}
 
+	// Ve
 	@Override
 	public void Render() {
 		if(bufferedImage == null) {
@@ -65,7 +70,8 @@ public class LoseState extends State {
 		}
 		
 	}
-
+	
+	// Xu ly su kien tu ban phim
 	@Override
 	public void processPressButton(int keyEvent) {
 		switch(keyEvent) {
@@ -90,12 +96,6 @@ public class LoseState extends State {
 	@Override
 	public void processReleaseButton(int keyEvent) {}
 
-	@Override
-	public BufferedImage getBufferedImage() {
-		// TODO Auto-generated method stub
-		return bufferedImage;
-	}
-
 	public void actionMenu() {
 		switch(buttonSelected) {
         case 0:
@@ -105,7 +105,12 @@ public class LoseState extends State {
         case 1:
         	gamePanel.setState(new MenuState(gamePanel));
             break;
-    }
+		}
 	}
 	
+	@Override
+	public BufferedImage getBufferedImage() {
+		// TODO Auto-generated method stub
+		return bufferedImage;
+	}
 }

@@ -2,6 +2,7 @@ package com.game.gameinteface;
 
 import java.awt.Graphics2D;
 
+// Trang thai cua cac nut
 public interface ButtonState {
 
 	public static final int NONE = 0;

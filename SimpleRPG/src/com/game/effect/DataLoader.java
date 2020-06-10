@@ -13,9 +13,10 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
-// Done
-
-// Singletone
+// Mo hinh thiet ke Singleton pattern
+// Mo hinh nay se han che su khoi tao doi tuong cua lop bang cach private Construction, tao mot doi tuong private static duy nhat
+// va cung cap cach truy cap toan cau toi doi tuong do thong qua public static method getInstance
+// Rat phu hop voi lop chi can mot the hien va the hien do hoat dong thong suot chuong trinh
 public class DataLoader {
 
     private static DataLoader instance = null;
@@ -26,6 +27,7 @@ public class DataLoader {
     private String backgroundmapfile = "data/background_map.txt";
     private String soundfile = "data/sounds.txt";
     
+    //
     private Hashtable<String, FrameImage> frameImages; 
     private Hashtable<String, Animation> animations;
     private Hashtable<String, AudioClip> sounds;
@@ -85,7 +87,7 @@ public class DataLoader {
         
         String line = null;
         
-        if(br.readLine()==null) { // no line = "" or something like that
+        if(br.readLine()==null) {
             System.out.println("No data");
             throw new IOException();
         }

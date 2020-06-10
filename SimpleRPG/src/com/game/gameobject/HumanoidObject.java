@@ -8,8 +8,7 @@ import org.w3c.dom.css.Rect;
 import com.game.gameinteface.Actable;
 import com.game.state.GameState;
 
-// Done
-
+// Lop nhan cat giong nguoi
 public abstract class HumanoidObject extends SpecificObject implements Actable{
 
 	private boolean isJumping;
@@ -45,6 +44,7 @@ public abstract class HumanoidObject extends SpecificObject implements Actable{
 		this.isKneeling = isKneeling;
 	}
 
+	// Cap nhat
 	@Override
     public void Update(){
         
@@ -53,10 +53,9 @@ public abstract class HumanoidObject extends SpecificObject implements Actable{
         if(getState() == ALIVE || getState() == CANTBEHURT){
         
             if(!isLanding){
-
                 setPosX(getPosX() + getSpeedX());
 
-
+                // Kiem tra va cham hai ben
                 if(getDirection() == LEFT_DIR && 
                         getGameState().physicalMap.haveCollisionWithLeftWall(getBoundForCollisionWithMap())!=null){
 
@@ -72,7 +71,7 @@ public abstract class HumanoidObject extends SpecificObject implements Actable{
 
                 }
                 
-                // plus (+2) because we must check below the character when he's speedY = 0
+                // kiem tra va cham voi tran va dat
 
                 Rectangle boundForCollisionWithMapFuture = getBoundForCollisionWithMap();
                 boundForCollisionWithMapFuture.y += (getSpeedY()!=0?getSpeedY(): 2);

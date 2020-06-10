@@ -1,6 +1,5 @@
 package com.game.gameobject;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -11,8 +10,7 @@ import com.game.effect.DataLoader;
 import com.game.gameinteface.GameWorldState;
 import com.game.state.GameState;
 
-
-
+// Lop Boss
 public class Boss extends HumanoidObject {
 
 	public static final int MAXHP = 300;

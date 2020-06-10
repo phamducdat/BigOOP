@@ -2,6 +2,7 @@ package com.game.gameinteface;
 
 public interface GameWorldState {
 
+	// Vi tri Boss
 	public static final int finalBossX = 3000; 
 	
 	// Game State

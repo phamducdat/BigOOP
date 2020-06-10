@@ -5,8 +5,7 @@ import java.awt.Graphics2D;
 import com.game.state.GameState;
 import com.game.userinterface.GameFrame;
 
-// Done
-
+// Lop lam khung hinh cua tro choi chuyen dong theo nhan vat
 public class Camera extends GameObject{
 
 	// Doi tuong de cac doi tuong khac lay lam he quy chieu de xac dinh vi tri

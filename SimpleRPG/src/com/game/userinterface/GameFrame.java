@@ -8,15 +8,14 @@ import javax.swing.JFrame;
 
 import com.game.effect.DataLoader;
 
-// Done
-
-// Da chinh sua
-
+// Khung hinh
 public class GameFrame extends JFrame {
 	
+	// Kich thuoc khung hinh
 	public static final int SCREEN_WIDTH = 1000;
 	public static final int SCREEN_HEIGHT = 750;
 	
+	// Bang ve cua khung hinh
 	GamePanel gamePanel;
 	
 	public GameFrame() {
@@ -29,6 +28,7 @@ public class GameFrame extends JFrame {
         Dimension solution = toolkit.getScreenSize();
 
         try {
+        	// Load du lieu
         	DataLoader.getInstance().LoadData();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -43,11 +43,13 @@ public class GameFrame extends JFrame {
 		
 	}
 	
+	// Phuong thuc khoi dong game
 	public void startGame() {
 		gamePanel.startGame();
 		this.setVisible(true);
 	}
 	
+	// Thread-0
 	public static void main(String[] args) {
 		GameFrame gameFrame = new GameFrame();
 		gameFrame.startGame();

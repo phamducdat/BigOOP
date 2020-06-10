@@ -1,6 +1,5 @@
 package com.game.userinterface;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -8,36 +7,38 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JPanel;
 
-import com.game.effect.DataLoader;
-import com.game.gameobject.BackgroundMap;
-import com.game.state.GameState;
 import com.game.state.MenuState;
 import com.game.state.State;
 
-// Done
-
+// Bang ve
 public class GamePanel extends JPanel implements KeyListener, Runnable {
 	
+	// Trang thai hien tai cua tro choi
 	State gameState;
 	
+	// Bo xu ly su kien tren ban phim
 	KeyEventManager keyEventManager;
 	
+	// Thread-1
 	private Thread thread;
-	private boolean isRunning;
+	private boolean isRunning;	// tro  choi dang chay???
 	
 	public GamePanel() {
 		
+		// Khi duoc khoi dong thi tro choi se co trang thai la Menu
 		gameState = new MenuState(this);
 		keyEventManager = new KeyEventManager(gameState);
 		
 	}
 
+	// Phuong thuc ve cua GamePanel
 	@Override
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.drawImage(gameState.getBufferedImage(), 0, 0, this);
 	}
 	
+	// Khoi chay tro choi
 	public void startGame() {
 		if(thread == null) {
 			thread = new Thread(this);
@@ -46,11 +47,13 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 		}
 	}
 	
+	// Chuyen trang thai cua tro choi, trang thai moi se duoc hien thi len khung hinh
 	public void setState(State state) {
 		this.gameState = state;
 		keyEventManager.setState(state);
 	}
 	
+	// Xu ly su kien tu ban phim
 	@Override
 	public void keyTyped(KeyEvent e) {}
 
@@ -68,8 +71,11 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 		keyEventManager.processKeyReleased(e.getKeyCode());
 	}
 
+	// Than cua Thread-1
 	@Override
 	public void run() {
+		
+		// Tinh thoi gian 1 chu ky
 		long FPS = 60;
 		long period = 1000000000 / FPS;
 		
@@ -77,14 +83,14 @@ public class GamePanel extends JPanel implements KeyListener, Runnable {
 		long sleepTime;
 		long currentTime;
 		
+		// GameLoop
 		while(isRunning) {
 			
 			gameState.Update();
 			gameState.Render();
-			
 			repaint();
-			currentTime = System.nanoTime();
 			
+			currentTime = System.nanoTime();
 			sleepTime = period - (currentTime - previousTime);
 			
 			try {

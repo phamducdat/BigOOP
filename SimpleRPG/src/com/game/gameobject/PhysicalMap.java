@@ -1,15 +1,12 @@
 package com.game.gameobject;
 
-
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import com.game.effect.DataLoader;
 import com.game.state.GameState;
 
-// Done
-
+// Ban do vat ly phu trach viec kiem tra va cham cua doi tuong voi dia hinh
 public class PhysicalMap extends GameObject {
 
     public int[][] phys_map;
@@ -28,7 +25,7 @@ public class PhysicalMap extends GameObject {
     @Override
     public void Update() {}
 
-    
+    // kiem tra va cham voi tran
     public Rectangle haveCollisionWithTop(Rectangle rect){
 
         int posX1 = rect.x/tileSize;
@@ -36,7 +33,6 @@ public class PhysicalMap extends GameObject {
         int posX2 = (rect.x + rect.width)/tileSize;
         posX2 += 2;
 
-        //int posY = (rect.y + rect.height)/tileSize;
         int posY = rect.y/tileSize;
 
         if(posX1 < 0) posX1 = 0;
@@ -56,7 +52,7 @@ public class PhysicalMap extends GameObject {
         return null;
     }
     
-    
+    // kiem tra va cham voi dat
     public Rectangle haveCollisionWithLand(Rectangle rect){
 
         int posX1 = rect.x/tileSize;
@@ -82,6 +78,7 @@ public class PhysicalMap extends GameObject {
         return null;
     }
     
+    // kiem tra va cham voi hai ben tuong
     public Rectangle haveCollisionWithRightWall(Rectangle rect){
    
         
@@ -112,9 +109,7 @@ public class PhysicalMap extends GameObject {
     }
     
     public Rectangle haveCollisionWithLeftWall(Rectangle rect){
-        
-   
-        
+
         int posY1 = rect.y/tileSize;
         posY1-=2;
         int posY2 = (rect.y + rect.height)/tileSize;

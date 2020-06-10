@@ -9,13 +9,12 @@ import com.game.gameinteface.Profile;
 import com.game.gameinteface.Vulnerable;
 import com.game.state.GameState;
 
-// Done
-
+// Lop doi tuong cu the
 public abstract class SpecificObject extends GameObject implements Profile, Vulnerable  {
 	
-	private int state;
-	private int teamType;
-	private int direction;
+	private int state;			// trang thai
+	private int teamType;		// team
+	private int direction;		// huong
 	
 	private float width;
 	private float height;
@@ -25,8 +24,8 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	
 	private int blood; 			// Mau
 	private int mana;			// Nang luong
-	private int damage;
-	private int armor;
+	private int damage;			// sat thuong
+	private int armor;			// giap
 	
 	private long beginTimeForCantBeHurt;
 	private long timeForCantBeHurt;
@@ -35,7 +34,7 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	
 	public SpecificObject(float x, float y, float width, float height, float mass, int blood, GameState gameState){
 
-        // posX and posY are the middle coordinate of the object
+		// vi tri cua doi tuong nam o chinh giua
         super(x, y, gameState);
         setWidth(width);
         setHeight(height);
@@ -47,6 +46,7 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 
     }
     
+	// getter va setter
     public long getTimeForCantBeHurt() {
 		return timeForCantBeHurt;
 	}
@@ -139,7 +139,6 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
     
     public abstract void attack();
     
-    
     public boolean isObjectOutOfCameraView(){
         if(getPosX() - getGameState().camera.getPosX() > getGameState().camera.getWidthView() ||
                 getPosX() - getGameState().camera.getPosX() < -50
@@ -149,6 +148,7 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
         else return false;
     }
     
+    // tra ve khung de kiem tra va cham
     public Rectangle getBoundForCollisionWithMap(){
         Rectangle bound = new Rectangle();
         bound.x = (int) (getPosX() - (getWidth()/2));
@@ -160,7 +160,6 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 
     public void beHurt(int damage){
         setBlood(getBlood() - damage);
-        state = BEHURT;
         hurtingCallback();
     }
     
@@ -168,6 +167,7 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
     	// Phuong thuc se duoc hoan thien o lop con
     }
 
+    // cap nhat trang thai cua nhan vat
     @Override
     public void Update(){
         switch(state){
@@ -176,7 +176,9 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
                 if(object!=null){
                     if(object.getDamage() > 0){
                         System.out.println("eat damage.... from collision with enemy........ "+object.getDamage());
-                        beHurt(object.getDamage());	// phuong thuc beHurt chuyen trang thai nhan vat sang BEHURT
+                        beHurt(object.getDamage());	
+                        state = BEHURT;
+                        
                     }
                 } 
                 break;
@@ -215,8 +217,11 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
         
     }
     
+    // ve
     @Override
     public void draw(Graphics2D g){
+    	
+    	// ve thanh mau cua doi tuong
     	if(getState() != DEATH) {
     		
     		int bloodLength = (int) (getBlood() / 100.0f * 50);

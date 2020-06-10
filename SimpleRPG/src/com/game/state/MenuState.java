@@ -11,14 +11,16 @@ import com.game.effect.DataLoader;
 import com.game.userinterface.GameFrame;
 import com.game.userinterface.GamePanel;
 
-// Done
-
+// Trang thai Menu
 public class MenuState extends State{
 
     public final int NUMBER_OF_BUTTON = 2;
+    
+    // Hinh anh cua trang thai
     private BufferedImage bufferedImage;
     Graphics2D graphicsPaint;
 
+    // Danh sach nut
     private Button[] buttons;
 	private int buttonSelected = 0;
         
@@ -32,6 +34,7 @@ public class MenuState extends State{
 		buttons[1] = new RectangleButton("exitbutton", GameFrame.SCREEN_WIDTH/2 - 160, 500);
     }
     
+    // Cap nhat
     @Override
     public void Update() {
         for(int i = 0;i<NUMBER_OF_BUTTON;i++) {
@@ -43,6 +46,7 @@ public class MenuState extends State{
         }
     }
 
+    // Ve
     @Override
     public void Render() {
         if(bufferedImage == null) {
@@ -61,11 +65,7 @@ public class MenuState extends State{
 		}
     }
 
-    @Override
-    public BufferedImage getBufferedImage() {
-        return bufferedImage;
-    }
-
+    // Xu ly su kien tu ban phim
     @Override
     public void processPressButton(int code) {
         switch(code) {
@@ -100,5 +100,10 @@ public class MenuState extends State{
                 System.exit(0);
                 break;
         }
+    }
+    
+    @Override
+    public BufferedImage getBufferedImage() {
+        return bufferedImage;
     }
 }

@@ -1,5 +1,6 @@
 package com.game.gameinteface;
 
+// Thong so nhan vat
 public interface Profile {
 
 	public static final int HERO_TEAM = 1;

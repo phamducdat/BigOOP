@@ -4,23 +4,21 @@ import java.awt.image.BufferedImage;
 
 import com.game.userinterface.GamePanel;
 
-//  Done
-
+// Trang thai cua tro choi
 public abstract class State {
 
-	GamePanel gamePanel;
+	GamePanel gamePanel;	// Bang ve
 	
 	public State(GamePanel gamePanel) {
-		// TODO Auto-generated constructor stub
 		this.gamePanel = gamePanel;
 	}
 	
-	public abstract void Update();
+	public abstract void Update();		// Cap nhat cac doi tuong trong trang thai
 	
-	public abstract void Render();
+	public abstract void Render();		// Ve cac doi tuong trong trang thai
 	
-	public abstract void processPressButton(int keyEvent);
-	
+	// Xu ly tin hieu tu ban phim
+	public abstract void processPressButton(int keyEvent);		
 	public abstract void processReleaseButton(int keyEvent);
 	
 	public abstract BufferedImage getBufferedImage();

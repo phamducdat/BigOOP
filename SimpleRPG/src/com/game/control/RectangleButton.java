@@ -3,8 +3,7 @@ package com.game.control;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-// Done
-
+// Nut hinh chu nhat
 public class RectangleButton extends Button{
 
 	public RectangleButton(String text, int posX, int posY) {

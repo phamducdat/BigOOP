@@ -6,22 +6,17 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-
-// Done
-
 public class Animation {
     
-    private String name;
-    
+    private String name;		// ten animation
+    private int currentFrame;	// index cua frame hien tai
     private boolean isRepeated;
+    private long beginTime;		// thoi gian bat dau cua animation
     
-    private ArrayList<FrameImage> frameImages;
-    private int currentFrame;
-    
-    private ArrayList<Boolean> ignoreFrames;
-    
-    private ArrayList<Double> delayFrames;
-    private long beginTime;
+    // Danh sach Animation, su dung ArrayList de dam bao thu tu cua cac Frame
+    private ArrayList<FrameImage> frameImages;	// danh sach frame
+    private ArrayList<Boolean> ignoreFrames;	// thoi gian cho giua cac frame
+    private ArrayList<Double> delayFrames;		// co bo qua frame trong luc chay hay khong?
     
     public Animation(){
         delayFrames = new ArrayList<Double>();
@@ -33,6 +28,7 @@ public class Animation {
         isRepeated = true;
     }
     
+    // Copy-constructor
     public Animation(Animation animation){
         
         beginTime = animation.beginTime;
@@ -55,6 +51,7 @@ public class Animation {
         }
     }
     
+    // getter va setter
     public void setIsRepeated(boolean isRepeated){
         this.isRepeated = isRepeated;
     }
@@ -98,6 +95,7 @@ public class Animation {
         beginTime = 0;
     }
     
+    // Them frame vao animation
     public void add(FrameImage frameImage, double timeToNextFrame){
 
         ignoreFrames.add(false);
@@ -110,6 +108,7 @@ public class Animation {
         return frameImages.get(currentFrame).getImage();
     }
     
+    // cap nhat Animation
     public void Update(long deltaTime){
         
         if(beginTime == 0) beginTime = deltaTime;
@@ -123,13 +122,13 @@ public class Animation {
         
     }
 
-    
     public boolean isLastFrame(){
         if(currentFrame == frameImages.size() - 1)
             return true;
         else return false;
     }
     
+    // nhay sang frame tiep theo
     private void nextFrame(){
         
         if(currentFrame >= frameImages.size() - 1){
@@ -142,8 +141,7 @@ public class Animation {
         
     }
     
-    
-    
+    // Lat toan bo Animation
     public void flipAllImage(){
         
         for(int i = 0;i < frameImages.size(); i++){
@@ -189,6 +187,7 @@ public class Animation {
 
 	}
     
+    // ve
     public void draw(int x, int y, Graphics2D g2){
         
         BufferedImage image = getCurrentImage();
