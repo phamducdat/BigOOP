@@ -43,9 +43,7 @@ public class Camera extends GameObject{
     @Override
     public void Update() {
     
-        // NOTE: WHEN SEE FINAL BOSS, THE CAMERA WON'T CHANGE THE POSITION,
-        // AFTER THE TUTORIAL, CAMERA WILL SET THE NEW POS
-        
+       // Khoa lai khi gap Final Boss
         if(!isLocked){
         
             Hero mainCharacter = getGameState().megaMan;
