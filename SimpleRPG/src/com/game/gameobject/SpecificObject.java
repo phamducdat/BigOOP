@@ -239,7 +239,9 @@ public abstract class SpecificObject extends GameObject implements Profile, Vuln
 	}
 
 	public void setMana(int mana) {
-		this.mana = mana;
+		if(mana <= 0) this.mana = 0;
+		else if(mana >= MAX_MANA_POINT) this.mana = MAX_MANA_POINT;
+		else this.mana = mana;
 	}
 
 	public int getArmor() {

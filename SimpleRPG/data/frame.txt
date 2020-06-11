@@ -1,5 +1,93 @@
 
-243
+255
+
+firearrow1
+image data/naruto.png
+x 39
+y 14610
+w 170
+h 48
+
+firearrow2
+image data/naruto.png
+x 230
+y 14612
+w 183
+h 48
+
+firearrow3
+image data/naruto.png
+x 440
+y 14612
+w 194
+h 48
+
+
+
+susano1
+image data/naruto.png
+x 31
+y 14096
+w 242
+h 200
+
+susano2
+image data/naruto.png
+x 1
+y 14324
+w 232
+h 200
+
+susano3
+image data/naruto.png
+x 262
+y 14337
+w 240
+h 200
+
+susano4
+image data/naruto.png
+x 31
+y 14096
+w 242
+h 200
+
+susano5
+image data/naruto.png
+x 531
+y 14337
+w 242
+h 200
+
+
+
+smite1
+image data/naruto.png
+x 10
+y 9108
+w 176
+h 181
+
+smite2
+image data/naruto.png
+x 231
+y 9114
+w 173
+h 225
+
+smite3
+image data/naruto.png
+x 445
+y 9095
+w 169
+h 342
+
+smite4
+image data/naruto.png
+x 638
+y 9099
+w 206
+h 338
 
 
 

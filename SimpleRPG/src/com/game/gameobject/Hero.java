@@ -9,9 +9,6 @@ import java.awt.Rectangle;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.sound.midi.SysexMessage;
-import javax.xml.crypto.Data;
-
 import com.game.effect.Animation;
 import com.game.effect.DataLoader;
 import com.game.state.GameState;
@@ -28,6 +25,8 @@ public class Hero extends HumanoidObject{
     public static final float MASS = 0.4f;
     public static final int MAXHP = 100;
     public static final int MAX_MANA_POINT = 1000;
+    public static final float DASHSPEED = 40.0f;
+    public static final double SMITERANGE = 300;
     
     private Animation runForwardAnim, runBackAnim, runShootingForwarAnim, runShootingBackAnim;
     private Animation idleForwardAnim, idleBackAnim, idleShootingForwardAnim, idleShootingBackAnim;
@@ -37,10 +36,18 @@ public class Hero extends HumanoidObject{
     
     private Animation climWallForward, climWallBack;
     
+    private Animation smiteAnim;
+    
     private long lastShootingTime;
     private boolean isShooting = false;
     
+    private long beginTimeToDash;
+    private boolean isDashing = false;
+    
+    public boolean smiteFLag = false;
+    
     private AudioClip hurtingSound;
+    private AudioClip smiteSound;
     private AudioClip shooting1, shooting2;
     private boolean shootFlag; 
     
@@ -50,6 +57,7 @@ public class Hero extends HumanoidObject{
         shooting1 = DataLoader.getInstance().getSound("lucianshooting1");
         shooting2 = DataLoader.getInstance().getSound("lucianshooting2");
         hurtingSound = DataLoader.getInstance().getSound("galiohurt");
+        smiteSound = DataLoader.getInstance().getSound("smitesound");
         
         setTeamType(HERO_TEAM);
 
@@ -57,6 +65,8 @@ public class Hero extends HumanoidObject{
         setMana(MAX_MANA_POINT);
         
         setTimeForCantBeHurt(2000*1000000);
+        
+        smiteAnim = DataLoader.getInstance().getAnimation("smite");
         
         runForwardAnim = DataLoader.getInstance().getAnimation("run");
         runBackAnim = DataLoader.getInstance().getAnimation("run");
@@ -105,33 +115,45 @@ public class Hero extends HumanoidObject{
     @Override
     public void Update() {
 
-        super.Update();
-        
-        int[][] mapClone = getGameState().physicalMap.getPhys_map();
-        int tileSize = getGameState().physicalMap.getTileSize();
-        
-        if(getPosX() < 0 || getPosX() > mapClone[0].length * tileSize || getPosY() < 0 || getPosY() > mapClone.length * tileSize ) {
-        	setState(DEATH);
-        	setPosX(400);
-        	setPosY(400);
-        }
-        
-        if(isShooting){
-            if(System.nanoTime() - lastShootingTime > 500*1000000){
-                isShooting = false;
-            }
-        }
-        
-        if(getIsLanding()){
-            landingBackAnim.Update(System.nanoTime());
-            if(landingBackAnim.isLastFrame()) {
-                setIsLanding(false);
-                landingBackAnim.reset();
-                runForwardAnim.reset();
-                runBackAnim.reset();
-            }
-        }
-        
+    	
+    	 super.Update();
+    	 
+    	// Khi di ra khoi map
+         int[][] mapClone = getGameState().physicalMap.getPhys_map();
+         int tileSize = getGameState().physicalMap.getTileSize();
+         if(getPosX() < 0 || getPosX() > mapClone[0].length * tileSize || getPosY() < 0 || getPosY() > mapClone.length * tileSize ) {
+         	setState(DEATH);
+         	setPosX(400);
+         	setPosY(400);
+         }
+         
+         if(getSpeedX() != 0) setMana(getMana() + 1);
+         
+         if(isDashing) {
+          	if(System.nanoTime() - beginTimeToDash > 500 * 1000000) {	
+          		isDashing = false;
+          		setSpeedX(0);
+          		setSpeedY(DASHSPEED * (float) 1.5);		
+          	}
+          
+         }
+         
+         if(isShooting){
+             if(System.nanoTime() - lastShootingTime > 500 * 1000000){
+                 isShooting = false;
+             }
+         }
+         
+         if(getIsLanding()){
+             landingBackAnim.Update(System.nanoTime());
+             if(landingBackAnim.isLastFrame()) {
+                 setIsLanding(false);
+                 landingBackAnim.reset();
+                 runForwardAnim.reset();
+                 runBackAnim.reset();
+             }
+         }
+             
     }
 
     @Override
@@ -161,13 +183,11 @@ public class Hero extends HumanoidObject{
         
             case ALIVE:
             case CANTBEHURT:
-                if(getState() == CANTBEHURT && (System.nanoTime()/10000000)%2!=1)
-                	
-                	
+                if(getState() == CANTBEHURT && (System.nanoTime()/10000000)%2!=1)	
                 {
                     System.out.println("Plash...");
                 }else{
-                    
+                	
                     if(getIsLanding()){
 
                         if(getDirection() == RIGHT_DIR){
@@ -269,10 +289,55 @@ public class Hero extends HumanoidObject{
 
         }
         
-        //drawBoundForCollisionWithMap(g2);
-        //drawBoundForCollisionWithEnemy(g2);
+        if(smiteFLag == true) {
+        	
+        	SpecificObject object = getGameState().specificObjectManager.getEnemyInRange(this, SMITERANGE);
+        	
+        	if(object != null) {
+        		smiteAnim.Update(System.nanoTime());
+            	smiteAnim.setIsRepeated(false);
+            	smiteAnim.draw((int) (object.getPosX() - getGameState().camera.getPosX()), (int) (object.getPosY() - getGameState().camera.getPosY()), g2);
+            	if(smiteAnim.isLastFrame()) {
+            		smiteFLag = false;
+            		smiteAnim.setCurrentFrame(0);
+            	}
+        		
+        	}
+        }
     }
 
+    public void dash() {
+    	if(!getIsKneeling() && !getIsLanding()) {
+    		if(getMana() >= 200) {
+    			if(getDirection() == RIGHT_DIR)
+        			setSpeedX(DASHSPEED);
+        		else setSpeedX(- DASHSPEED);
+    			setMana(getMana() - 200);
+    			beginTimeToDash = System.nanoTime();
+    			isDashing = true;
+    		}else {
+    			System.out.println("Mana is not enough");
+    		}
+    		
+    	}
+    }
+    
+    public void smite() {
+    	if(getMana() >= 500) {
+    		
+    		SpecificObject object = getGameState().specificObjectManager.getEnemyInRange(this, SMITERANGE);
+    		if(object != null) {
+    			smiteFLag = true;
+    			object.beHurt(50);
+    			object.setState(BEHURT);
+    			
+    			this.heal(20);
+    			smiteSound.play();
+    			setMana(getMana() - 500);
+    		}
+    	}
+    }
+    
     @Override
     public void run() {
     	if(!getIsKneeling()) {
@@ -280,9 +345,6 @@ public class Hero extends HumanoidObject{
                 setSpeedX(- RUNSPEED);
             else setSpeedX(RUNSPEED);
     	}
-    	
-    	
-    	
     }
 
     @Override
@@ -294,7 +356,7 @@ public class Hero extends HumanoidObject{
             flyBackAnim.reset();
             flyForwardAnim.reset();
         }
-        // for clim wall
+        // de leo tuong
         else{
             Rectangle rectRightWall = getBoundForCollisionWithMap();
             rectRightWall.x += 1;
@@ -303,16 +365,12 @@ public class Hero extends HumanoidObject{
             
             if(getGameState().physicalMap.haveCollisionWithRightWall(rectRightWall)!=null && getSpeedX() > 0){
                 setSpeedY(- JUMPSPEED);
-                //setSpeedX(-1);
                 flyBackAnim.reset();
                 flyForwardAnim.reset();
-                //setDirection(LEFT_DIR);
             }else if(getGameState().physicalMap.haveCollisionWithLeftWall(rectLeftWall)!=null && getSpeedX() < 0){
                 setSpeedY(- JUMPSPEED);
-                //setSpeedX(1);
                 flyBackAnim.reset();
                 flyForwardAnim.reset();
-                //setDirection(RIGHT_DIR);
             }
                 
         }
@@ -392,6 +450,29 @@ public class Hero extends HumanoidObject{
         }
     
     }
+    
+    public void attackW() {
+    	if(getMana() >= 200) {
+    		Susano susano;
+        	if(getDirection() == LEFT_DIR) {
+        		susano = new Susano(getPosX() - 40, getPosY() - 40, getGameState());
+        		susano.setDirection(LEFT_DIR);
+        	}else {
+        		susano = new Susano(getPosX() + 40, getPosY() - 40, getGameState());
+        		susano.setDirection(RIGHT_DIR);
+        	}
+        	
+            
+            susano.setTeamType(getTeamType());
+            getGameState().specificObjectManager.addObject(susano);
+            
+            lastShootingTime = System.nanoTime();
+            isShooting = true;
+            
+            setMana(getMana() - 200); 
+    	}
+    	
+    }
    
     @Override
     public void hurtingCallback(){
@@ -399,6 +480,10 @@ public class Hero extends HumanoidObject{
         hurtingSound.play();
     }
 
+    public void heal(int blood) {
+    	if(getBlood() + blood >= MAXHP) setBlood(MAXHP);
+    	else setBlood(blood + getBlood());
+    }
 	
 
 }

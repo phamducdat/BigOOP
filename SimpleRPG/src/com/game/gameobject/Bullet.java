@@ -24,8 +24,8 @@ public abstract class Bullet extends SpecificObject {
 	        setState(DEATH);
 	        object.beHurt(getDamage());
 	        object.setState(BEHURT);
+	    }
     }
-}
 
 	
 }

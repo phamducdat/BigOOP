@@ -64,6 +64,29 @@ public class SpecificObjectManager {
         return null;
     }
     
+    public SpecificObject getEnemyInRange(SpecificObject object, double range){
+        synchronized(specificObjects){
+            for(int id = 0; id < specificObjects.size(); id++){
+                
+            	SpecificObject objectInList = specificObjects.get(id);
+
+                if(object.getTeamType() != objectInList.getTeamType()){
+                	double deltaX = object.getPosX() - objectInList.getPosX();
+                	double deltaY = object.getPosY() - objectInList.getPosY();
+                	
+                	double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                	
+                	if(distance <= range) {
+                		return objectInList;
+                	}
+                }
+            }
+        }
+        
+        return null;
+    }
+
+    
     // Cap nhat toan bo doi tuong trong danh sach
     public void UpdateObjects(){
         

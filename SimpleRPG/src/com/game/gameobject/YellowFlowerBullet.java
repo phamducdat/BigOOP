@@ -36,7 +36,6 @@ public class YellowFlowerBullet extends Bullet {
             backBulletAnim.Update(System.nanoTime());
             backBulletAnim.draw((int) (getPosX() - getGameState().camera.getPosX()), (int) getPosY() - (int) getGameState().camera.getPosY(), g2);
         }
-        //drawBoundForCollisionWithEnemy(g2);
     }
 
     @Override

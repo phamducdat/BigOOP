@@ -1,4 +1,4 @@
-11
+13
 
 bluefireshooting data/bluefireshooting.wav
 redeyeshooting data/redeyeshooting.wav
@@ -11,3 +11,5 @@ galiohurt data/galiodying.wav
 welcome data/welcome.wav
 turretsound data/turret_mark.wav
 towershooting data/towershooting.wav
+smitesound data/smite.wav
+arrowsound data/arrowsound.wav

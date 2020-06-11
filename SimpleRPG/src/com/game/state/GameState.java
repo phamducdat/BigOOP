@@ -581,7 +581,17 @@ public class GameState extends State implements GameWorldState {
              case KeyEvent.VK_Q:
                  megaMan.attack();
                  break;
-                
+                 
+             case KeyEvent.VK_D:
+            	 megaMan.dash();
+            	 break;
+            	 
+             case KeyEvent.VK_F:
+            	 megaMan.smite();
+            	 break;
+             case KeyEvent.VK_W:
+            	 megaMan.attackW();
+            	 break;
                  
          }
      }
